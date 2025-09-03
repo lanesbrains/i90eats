@@ -26,7 +26,6 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.10.1",
     "@types/node": "^20.10.0",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
