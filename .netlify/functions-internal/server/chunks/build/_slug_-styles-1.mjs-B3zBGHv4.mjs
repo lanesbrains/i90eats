@@ -1,0 +1,4 @@
+const _slug__vue_vue_type_style_index_0_scoped_78b3db25_lang = ".prose[data-v-78b3db25]{color:inherit}.prose h1[data-v-78b3db25],.prose h2[data-v-78b3db25],.prose h3[data-v-78b3db25],.prose h4[data-v-78b3db25],.prose h5[data-v-78b3db25],.prose h6[data-v-78b3db25]{color:#1f2937;margin-bottom:.5em;margin-top:1.5em}.prose h1[data-v-78b3db25]:first-child,.prose h2[data-v-78b3db25]:first-child,.prose h3[data-v-78b3db25]:first-child,.prose h4[data-v-78b3db25]:first-child,.prose h5[data-v-78b3db25]:first-child,.prose h6[data-v-78b3db25]:first-child{margin-top:0}.prose p[data-v-78b3db25]{line-height:1.75;margin-bottom:1em}.prose ul[data-v-78b3db25]{margin-bottom:1em;padding-left:1.5em}.prose li[data-v-78b3db25]{margin-bottom:.5em}.prose strong[data-v-78b3db25]{color:#1f2937;font-weight:600}";
+
+export { _slug__vue_vue_type_style_index_0_scoped_78b3db25_lang as _ };
+//# sourceMappingURL=_slug_-styles-1.mjs-B3zBGHv4.mjs.map

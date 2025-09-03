@@ -311,21 +311,6 @@ function joinRelativeURL(..._input) {
   }
   return url;
 }
-function isEqual(a, b, options = {}) {
-  if (!options.trailingSlash) {
-    a = withTrailingSlash(a);
-    b = withTrailingSlash(b);
-  }
-  if (!options.leadingSlash) {
-    a = withLeadingSlash(a);
-    b = withLeadingSlash(b);
-  }
-  if (!options.encoding) {
-    a = decode(a);
-    b = decode(b);
-  }
-  return a === b;
-}
 
 const protocolRelative = Symbol.for("ufo:protocolRelative");
 function parseURL(input = "", defaultProto) {
@@ -811,6 +796,20 @@ function isError(input) {
 function getQuery(event) {
   return getQuery$1(event.path || "");
 }
+function getRouterParams(event, opts = {}) {
+  let params = event.context.params || {};
+  if (opts.decode) {
+    params = { ...params };
+    for (const key in params) {
+      params[key] = decode(params[key]);
+    }
+  }
+  return params;
+}
+function getRouterParam(event, name, opts = {}) {
+  const params = getRouterParams(event, opts);
+  return params[name];
+}
 function isMethod(event, expected, allowHead) {
   if (typeof expected === "string") {
     if (event.method === expected) {
@@ -842,6 +841,7 @@ function getRequestHeader(event, name) {
   const value = headers[name.toLowerCase()];
   return value;
 }
+const getHeader = getRequestHeader;
 function getRequestHost(event, opts = {}) {
   if (opts.xForwardedHost) {
     const _header = event.node.req.headers["x-forwarded-host"];
@@ -869,6 +869,7 @@ function getRequestURL(event, opts = {}) {
 }
 
 const RawBodySymbol = Symbol.for("h3RawBody");
+const ParsedBodySymbol = Symbol.for("h3ParsedBody");
 const PayloadMethods$1 = ["PATCH", "POST", "PUT", "DELETE"];
 function readRawBody(event, encoding = "utf8") {
   assertMethod(event, PayloadMethods$1);
@@ -936,6 +937,26 @@ function readRawBody(event, encoding = "utf8") {
   const result = encoding ? promise.then((buff) => buff.toString(encoding)) : promise;
   return result;
 }
+async function readBody(event, options = {}) {
+  const request = event.node.req;
+  if (hasProp(request, ParsedBodySymbol)) {
+    return request[ParsedBodySymbol];
+  }
+  const contentType = request.headers["content-type"] || "";
+  const body = await readRawBody(event);
+  let parsed;
+  if (contentType === "application/json") {
+    parsed = _parseJSON(body, options.strict ?? true);
+  } else if (contentType.startsWith("application/x-www-form-urlencoded")) {
+    parsed = _parseURLEncodedBody(body);
+  } else if (contentType.startsWith("text/")) {
+    parsed = body;
+  } else {
+    parsed = _parseJSON(body, options.strict ?? false);
+  }
+  request[ParsedBodySymbol] = parsed;
+  return parsed;
+}
 function getRequestWebStream(event) {
   if (!PayloadMethods$1.includes(event.method)) {
     return;
@@ -969,6 +990,35 @@ function getRequestWebStream(event) {
       });
     }
   });
+}
+function _parseJSON(body = "", strict) {
+  if (!body) {
+    return void 0;
+  }
+  try {
+    return destr(body, { strict });
+  } catch {
+    throw createError$1({
+      statusCode: 400,
+      statusMessage: "Bad Request",
+      message: "Invalid JSON body"
+    });
+  }
+}
+function _parseURLEncodedBody(body) {
+  const form = new URLSearchParams(body);
+  const parsedForm = /* @__PURE__ */ Object.create(null);
+  for (const [key, value] of form.entries()) {
+    if (hasProp(parsedForm, key)) {
+      if (!Array.isArray(parsedForm[key])) {
+        parsedForm[key] = [parsedForm[key]];
+      }
+      parsedForm[key].push(value);
+    } else {
+      parsedForm[key] = value;
+    }
+  }
+  return parsedForm;
 }
 
 function handleCacheHeaders(event, opts) {
@@ -4017,7 +4067,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "b0cf51c6-725a-4174-9446-8f80b828088f",
+    "buildId": "cd1a1366-8e8c-4356-8289-dc41d6f8291f",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4046,16 +4096,19 @@ const _inlineRuntimeConfig = {
   },
   "public": {
     "stripe": {
-      "publishableKey": ""
+      "publishableKey": "pk_test_51RxsygFqXu3q4jXwbfNMu9WLoAh82ThUBWeZLPdkX9dJZA0jnYIcVj5ZojBsTbJGQYS67UPfZZtO9MIP67aFs99z009SI9PRRD"
     }
   },
   "stripe": {
-    "secretKey": "",
-    "publishableKey": ""
+    "secretKey": "sk_test_51RxsygFqXu3q4jXwj8aE09FWz5JbJ6TyUVmsnzAhdKt3wodx0m0Qv2wuMAK11EWftZr1PRTJkS3lV9NT2qTbjwG600XdtLkzjv",
+    "publishableKey": "pk_test_51RxsygFqXu3q4jXwbfNMu9WLoAh82ThUBWeZLPdkX9dJZA0jnYIcVj5ZojBsTbJGQYS67UPfZZtO9MIP67aFs99z009SI9PRRD",
+    "webhookSecret": ""
   },
   "resend": {
-    "apiKey": ""
+    "apiKey": "re_YrpWyRkQ_6UVR2wybosERdQKPLsnsGRCE"
   },
+  "jwtSecret": "",
+  "adminEmail": "",
   "ipx": {
     "baseURL": "/_ipx",
     "alias": {},
@@ -4206,6 +4259,28 @@ const defaultNamespace = _globalThis[globalKey] || (_globalThis[globalKey] = cre
 const getContext = (key, opts = {}) => defaultNamespace.get(key, opts);
 const asyncHandlersKey = "__unctx_async_handlers__";
 const asyncHandlers = _globalThis[asyncHandlersKey] || (_globalThis[asyncHandlersKey] = /* @__PURE__ */ new Set());
+function executeAsync(function_) {
+  const restores = [];
+  for (const leaveHandler of asyncHandlers) {
+    const restore2 = leaveHandler();
+    if (restore2) {
+      restores.push(restore2);
+    }
+  }
+  const restore = () => {
+    for (const restore2 of restores) {
+      restore2();
+    }
+  };
+  let awaitable = function_();
+  if (awaitable && typeof awaitable === "object" && "catch" in awaitable) {
+    awaitable = awaitable.catch((error) => {
+      restore();
+      throw error;
+    });
+  }
+  return [awaitable, restore];
+}
 
 getContext("nitro-app", {
   asyncContext: false,
@@ -4525,9 +4600,25 @@ const _5vyVwh = lazyEventHandler(() => {
   return useBase(opts.baseURL, ipxHandler);
 });
 
+const _lazy_gid3vq = () => import('../routes/api/business/deals.post.mjs');
+const _lazy_T8vVVR = () => import('../routes/api/business/deals/_id_.delete.mjs');
+const _lazy_FTHOn9 = () => import('../routes/api/business/deals/_id_.put.mjs');
+const _lazy_UkPuiY = () => import('../routes/api/business/restaurant.put.mjs');
+const _lazy_6BJhDp = () => import('../routes/api/business/signup.post.mjs');
+const _lazy_P_DNKP = () => import('../routes/api/subscription/create.post.mjs');
+const _lazy_L4ESTj = () => import('../routes/api/subscription/status.get.mjs');
+const _lazy_mwwUCw = () => import('../routes/api/webhooks/stripe.post.mjs');
 const _lazy_GNVLi6 = () => import('../routes/renderer.mjs').then(function (n) { return n.r; });
 
 const handlers = [
+  { route: '/api/business/deals', handler: _lazy_gid3vq, lazy: true, middleware: false, method: "post" },
+  { route: '/api/business/deals/:id', handler: _lazy_T8vVVR, lazy: true, middleware: false, method: "delete" },
+  { route: '/api/business/deals/:id', handler: _lazy_FTHOn9, lazy: true, middleware: false, method: "put" },
+  { route: '/api/business/restaurant', handler: _lazy_UkPuiY, lazy: true, middleware: false, method: "put" },
+  { route: '/api/business/signup', handler: _lazy_6BJhDp, lazy: true, middleware: false, method: "post" },
+  { route: '/api/subscription/create', handler: _lazy_P_DNKP, lazy: true, middleware: false, method: "post" },
+  { route: '/api/subscription/status', handler: _lazy_L4ESTj, lazy: true, middleware: false, method: "get" },
+  { route: '/api/webhooks/stripe', handler: _lazy_mwwUCw, lazy: true, middleware: false, method: "post" },
   { route: '/__nuxt_error', handler: _lazy_GNVLi6, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
   { route: '/_ipx/**', handler: _5vyVwh, lazy: false, middleware: false, method: undefined },
@@ -4721,5 +4812,5 @@ function getCacheHeaders(url) {
   return {};
 }
 
-export { $fetch as $, withTrailingSlash as A, withoutTrailingSlash as B, handler as C, getResponseStatus as a, buildAssetsURL as b, getQuery as c, defineRenderHandler as d, createError$1 as e, destr as f, getResponseStatusText as g, getRouteRules as h, useNitroApp as i, hasProtocol as j, isScriptProtocol as k, joinURL as l, getContext as m, baseURL as n, createHooks as o, publicAssetsURL as p, isEqual as q, stringifyParsedURL as r, sanitizeStatusCode as s, stringifyQuery as t, useRuntimeConfig as u, parseQuery as v, withQuery as w, toRouteMatcher as x, createRouter$1 as y, defu as z };
+export { $fetch as $, defu as A, parseQuery as B, withTrailingSlash as C, withoutTrailingSlash as D, handler as E, getHeader as a, getQuery as b, createError$1 as c, defineEventHandler as d, readRawBody as e, buildAssetsURL as f, getRouterParam as g, getResponseStatusText as h, getResponseStatus as i, defineRenderHandler as j, getRouteRules as k, useNitroApp as l, hasProtocol as m, isScriptProtocol as n, joinURL as o, publicAssetsURL as p, getContext as q, readBody as r, sanitizeStatusCode as s, baseURL as t, useRuntimeConfig as u, createHooks as v, withQuery as w, executeAsync as x, toRouteMatcher as y, createRouter$1 as z };
 //# sourceMappingURL=nitro.mjs.map

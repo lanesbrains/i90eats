@@ -1,9 +1,9 @@
 {
-  "date": "2025-09-03T00:51:47.866Z",
+  "date": "2025-09-03T22:00:45.929Z",
   "preset": "netlify",
   "framework": {
     "name": "nuxt",
-    "version": "4.1.0"
+    "version": "3.19.0"
   },
   "versions": {
     "nitro": "2.12.5"

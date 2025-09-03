@@ -1,0 +1,67 @@
+import { d as defineEventHandler, u as useRuntimeConfig, r as readBody, a as getHeader, c as createError } from '../../../nitro/nitro.mjs';
+import Stripe from 'stripe';
+import 'node:http';
+import 'node:https';
+import 'node:events';
+import 'node:buffer';
+import 'node:fs';
+import 'node:path';
+import 'node:crypto';
+import 'node:url';
+import 'ipx';
+
+const create_post = defineEventHandler(async (event) => {
+  const config = useRuntimeConfig();
+  const stripe = new Stripe(config.stripe.secretKey);
+  const body = await readBody(event);
+  const { email, locations, priceId } = body;
+  try {
+    let customer;
+    const existingCustomers = await stripe.customers.list({
+      email,
+      limit: 1
+    });
+    if (existingCustomers.data.length > 0) {
+      customer = existingCustomers.data[0];
+    } else {
+      customer = await stripe.customers.create({
+        email,
+        metadata: {
+          locations: JSON.stringify(locations)
+        }
+      });
+    }
+    const session = await stripe.checkout.sessions.create({
+      customer: customer.id,
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1
+        }
+      ],
+      mode: "subscription",
+      success_url: `${getHeader(event, "origin")}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${getHeader(event, "origin")}/subscribe`,
+      metadata: {
+        locations: JSON.stringify(locations)
+      }
+    });
+    return {
+      success: true,
+      data: {
+        checkout_url: session.url,
+        session_id: session.id
+      }
+    };
+  } catch (error) {
+    console.error("Stripe error:", error);
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Failed to create subscription"
+    });
+  }
+});
+
+export { create_post as default };
+//# sourceMappingURL=create.post.mjs.map
