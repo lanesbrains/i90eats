@@ -1,0 +1,184 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "restaurants"
+    label: "Restaurants"
+    folder: "content/restaurants"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Lowercase letters, numbers, and hyphens only"] }
+      - {
+          label: "Location",
+          name: "location",
+          widget: "select",
+          options:
+            [
+              "Seattle, WA",
+              "Spokane, WA",
+              "Missoula, MT",
+              "Billings, MT",
+              "Rapid City, SD",
+              "Sioux Falls, SD",
+              "Des Moines, IA",
+              "Chicago, IL",
+              "Toledo, OH",
+              "Cleveland, OH",
+              "Buffalo, NY",
+              "Albany, NY",
+              "Boston, MA",
+            ],
+        }
+      - { label: "Cuisine Type", name: "cuisine", widget: "string" }
+      - { label: "Address", name: "address", widget: "text" }
+      - { label: "Phone", name: "phone", widget: "string" }
+      - { label: "Website", name: "website", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false, hint: "Recommended size: 800x600 pixels" }
+      - {
+          label: "Premium Listing",
+          name: "premium",
+          widget: "boolean",
+          default: false,
+          hint: "Premium restaurants get priority placement and featured badges"
+        }
+      - {
+          label: "Created Date",
+          name: "createdAt",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}"
+        }
+      - {
+          label: "Updated Date",
+          name: "updatedAt",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          default: "{{now}}"
+        }
+
+  - name: "deals"
+    label: "Restaurant Deals"
+    folder: "content/deals"
+    create: true
+    slug: "{{restaurantSlug}}-{{year}}-{{month}}-{{day}}"
+    fields:
+      - { label: "Restaurant Slug", name: "restaurantSlug", widget: "string", hint: "Must match a restaurant slug exactly" }
+      - { label: "Deal Title", name: "title", widget: "string" }
+      - { label: "Deal Description", name: "description", widget: "markdown", hint: "Use markdown to format your deal details" }
+      - { label: "Start Date", name: "startDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "End Date", name: "endDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Active", name: "active", widget: "boolean", default: true }
+      - { label: "Premium Deal", name: "premium", widget: "boolean", default: false, hint: "Premium deals get priority placement" }
+      - { label: "Deal Image", name: "image", widget: "image", required: false }
+
+  - name: "blog-posts"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Lowercase letters, numbers, and hyphens only"] }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short description for previews" }
+      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" } }
+      - { label: "Published", name: "published", widget: "boolean", default: false }
+
+  - name: "newsletters"
+    label: "Newsletters"
+    folder: "content/newsletters"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Content", name: "content", widget: "markdown" }
+      - { label: "Sent", name: "sent", widget: "boolean", default: false }
+      - { label: "Recipients", name: "recipients", widget: "number", default: 0 }
+
+  - name: "subscribers"
+    label: "Subscribers"
+    folder: "content/subscribers"
+    create: false
+    fields:
+      - { label: "Email", name: "email", widget: "string" }
+      - {
+          label: "Locations",
+          name: "locations",
+          widget: "list",
+          fields:
+            - {
+                label: "Location",
+                name: "location",
+                widget: "select",
+                options:
+                  [
+                    "Seattle, WA",
+                    "Spokane, WA",
+                    "Missoula, MT",
+                    "Billings, MT",
+                    "Rapid City, SD",
+                    "Sioux Falls, SD",
+                    "Des Moines, IA",
+                    "Chicago, IL",
+                    "Toledo, OH",
+                    "Cleveland, OH",
+                    "Buffalo, NY",
+                    "Albany, NY",
+                    "Boston, MA",
+                  ],
+              }
+        }
+      - { label: "Stripe Customer ID", name: "stripeCustomerId", widget: "string" }
+      - { label: "Stripe Subscription ID", name: "stripeSubscriptionId", widget: "string" }
+      - {
+          label: "Subscription Status",
+          name: "subscriptionStatus",
+          widget: "select",
+          options: ["active", "past_due", "cancelled", "unpaid"],
+          default: "active"
+        }
+      - { label: "Subscribed Date", name: "subscribedAt", widget: "datetime" }
+      - { label: "Current Period End", name: "currentPeriodEnd", widget: "datetime" }
+
+  - name: "restaurant-subscriptions"
+    label: "Restaurant Subscriptions"
+    folder: "content/restaurant-subscriptions"
+    create: false
+    fields:
+      - { label: "Restaurant Slug", name: "restaurantSlug", widget: "string" }
+      - { label: "Owner Email", name: "ownerEmail", widget: "string" }
+      - { label: "Stripe Customer ID", name: "stripeCustomerId", widget: "string" }
+      - { label: "Stripe Subscription ID", name: "stripeSubscriptionId", widget: "string" }
+      - {
+          label: "Subscription Tier",
+          name: "subscriptionTier",
+          widget: "select",
+          options: ["basic", "premium"],
+          default: "basic"
+        }
+      - {
+          label: "Subscription Status",
+          name: "subscriptionStatus",
+          widget: "select",
+          options: ["active", "past_due", "cancelled", "unpaid"],
+          default: "active"
+        }
+      - { label: "Subscribed Date", name: "subscribedAt", widget: "datetime" }
+      - { label: "Current Period End", name: "currentPeriodEnd", widget: "datetime" }
