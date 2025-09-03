@@ -50,7 +50,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/directory', '/sitemap.xml'],
+      routes: ['/', '/directory'],
+      ignore: ['/business/**', '/admin'],
+      failOnError: false
     },
     preset: 'netlify'
   },
