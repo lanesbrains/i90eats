@@ -120,11 +120,11 @@
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <NuxtLink to="/directory" class="btn-primary">
-              View Your Listing
+            <NuxtLink to="/business/dashboard" class="btn-primary">
+              Go to Dashboard
             </NuxtLink>
-            <NuxtLink to="/admin" class="btn-secondary">
-              Manage Content
+            <NuxtLink to="/directory" class="btn-secondary">
+              View Your Listing
             </NuxtLink>
           </div>
         </div>

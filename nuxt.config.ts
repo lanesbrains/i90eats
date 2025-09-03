@@ -1,16 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  
+
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss'
   ],
-  
+
   css: [
     '~/assets/css/main.css'
   ],
-  
+
   app: {
     head: {
       title: 'I-90 Restaurant Deals - Find Great Food Along the Interstate',
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
       ]
     }
   },
-  
+
   runtimeConfig: {
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY,
@@ -46,8 +46,10 @@ export default defineNuxtConfig({
       }
     }
   },
-  
+
   nitro: {
     preset: 'netlify'
-  }
+  },
+
+  compatibilityDate: '2025-09-03'
 })

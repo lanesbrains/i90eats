@@ -52,6 +52,12 @@
             >
               List Your Restaurant
             </NuxtLink>
+            <NuxtLink
+              to="/business/dashboard"
+              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              Business Dashboard
+            </NuxtLink>
             <NuxtLink to="/subscribe" class="btn-primary"> Subscribe </NuxtLink>
           </div>
 

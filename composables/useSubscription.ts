@@ -1,102 +1,125 @@
+import { ref, readonly } from 'vue'
+
 export const useSubscription = () => {
   const isSubscribed = ref(false)
-  const subscriptionStatus = ref<'active' | 'past_due' | 'cancelled' | 'unpaid' | null>(null)
-  const loading = ref(false)
+  const subscriptionStatus = ref('inactive')
+  const subscriptionPlan = ref(null)
 
-  // Check subscription status from localStorage or API
-  const checkSubscription = async (email?: string) => {
-    loading.value = true
-    
+  // Check subscription status from localStorage and API
+  const checkSubscription = async () => {
     try {
-      // First check localStorage for quick access
+      // Check localStorage first for quick response
       const localStatus = localStorage.getItem('subscription_status')
-      if (localStatus) {
-        const data = JSON.parse(localStatus)
-        isSubscribed.value = data.active
-        subscriptionStatus.value = data.status
+      const localPlan = localStorage.getItem('subscription_plan')
+      
+      if (localStatus === 'active') {
+        isSubscribed.value = true
+        subscriptionStatus.value = 'active'
+        subscriptionPlan.value = localPlan
       }
 
-      // If email provided, verify with server
-      if (email) {
-        const { data } = await $fetch('/api/subscription/status', {
-          method: 'GET',
-          query: { email }
-        })
-
-        if (data) {
-          isSubscribed.value = data.active
-          subscriptionStatus.value = data.status
-          
-          // Update localStorage
-          localStorage.setItem('subscription_status', JSON.stringify({
-            active: data.active,
-            status: data.status,
-            expires: data.current_period_end,
-            email: email
-          }))
-        }
-      }
+      // Verify with API (optional - for production you'd want this)
+      // const response = await $fetch('/api/subscription/verify')
+      // if (response.active) {
+      //   isSubscribed.value = true
+      //   subscriptionStatus.value = 'active'
+      //   subscriptionPlan.value = response.plan
+      //   localStorage.setItem('subscription_status', 'active')
+      //   localStorage.setItem('subscription_plan', response.plan)
+      // }
     } catch (error) {
       console.error('Error checking subscription:', error)
-      // If API fails, rely on localStorage
-    } finally {
-      loading.value = false
-    }
-  }
-
-  // Subscribe user
-  const subscribe = async (email: string, locations: string[]) => {
-    loading.value = true
-    
-    try {
-      const { data } = await $fetch('/api/subscription/create', {
-        method: 'POST',
-        body: {
-          email,
-          locations,
-          priceId: 'price_newsletter_monthly' // Your Stripe price ID
-        }
-      })
-
-      if (data.checkout_url) {
-        // Redirect to Stripe checkout
-        window.location.href = data.checkout_url
-      }
-    } catch (error) {
-      console.error('Subscription error:', error)
-      throw error
-    } finally {
-      loading.value = false
-    }
-  }
-
-  // Cancel subscription
-  const cancelSubscription = async (email: string) => {
-    loading.value = true
-    
-    try {
-      await $fetch('/api/subscription/cancel', {
-        method: 'POST',
-        body: { email }
-      })
-      
       isSubscribed.value = false
-      subscriptionStatus.value = 'cancelled'
-      localStorage.removeItem('subscription_status')
-    } catch (error) {
-      console.error('Cancel error:', error)
-      throw error
-    } finally {
-      loading.value = false
+      subscriptionStatus.value = 'inactive'
     }
+  }
+
+  // Set subscription status (called after successful payment)
+  const setSubscriptionActive = (plan: string) => {
+    isSubscribed.value = true
+    subscriptionStatus.value = 'active'
+    subscriptionPlan.value = plan
+    localStorage.setItem('subscription_status', 'active')
+    localStorage.setItem('subscription_plan', plan)
+  }
+
+  // Clear subscription status
+  const clearSubscription = () => {
+    isSubscribed.value = false
+    subscriptionStatus.value = 'inactive'
+    subscriptionPlan.value = null
+    localStorage.removeItem('subscription_status')
+    localStorage.removeItem('subscription_plan')
   }
 
   return {
     isSubscribed: readonly(isSubscribed),
     subscriptionStatus: readonly(subscriptionStatus),
-    loading: readonly(loading),
+    subscriptionPlan: readonly(subscriptionPlan),
     checkSubscription,
-    subscribe,
-    cancelSubscription
+    setSubscriptionActive,
+    clearSubscription
   }
 }
+////////////////////
+// export const useSubscription = () => {
+//   const isSubscribed = ref(false)
+//   const subscriptionStatus = ref('inactive')
+//   const subscriptionPlan = ref(null)
+
+//   // Check subscription status from localStorage and API
+//   const checkSubscription = async () => {
+//     try {
+//       // Check localStorage first for quick response
+//       const localStatus = localStorage.getItem('subscription_status')
+//       const localPlan = localStorage.getItem('subscription_plan')
+      
+//       if (localStatus === 'active') {
+//         isSubscribed.value = true
+//         subscriptionStatus.value = 'active'
+//         subscriptionPlan.value = localPlan
+//       }
+
+//       // Verify with API (optional - for production you'd want this)
+//       // const response = await $fetch('/api/subscription/verify')
+//       // if (response.active) {
+//       //   isSubscribed.value = true
+//       //   subscriptionStatus.value = 'active'
+//       //   subscriptionPlan.value = response.plan
+//       //   localStorage.setItem('subscription_status', 'active')
+//       //   localStorage.setItem('subscription_plan', response.plan)
+//       // }
+//     } catch (error) {
+//       console.error('Error checking subscription:', error)
+//       isSubscribed.value = false
+//       subscriptionStatus.value = 'inactive'
+//     }
+//   }
+
+//   // Set subscription status (called after successful payment)
+//   const setSubscriptionActive = (plan: string) => {
+//     isSubscribed.value = true
+//     subscriptionStatus.value = 'active'
+//     subscriptionPlan.value = plan
+//     localStorage.setItem('subscription_status', 'active')
+//     localStorage.setItem('subscription_plan', plan)
+//   }
+
+//   // Clear subscription status
+//   const clearSubscription = () => {
+//     isSubscribed.value = false
+//     subscriptionStatus.value = 'inactive'
+//     subscriptionPlan.value = null
+//     localStorage.removeItem('subscription_status')
+//     localStorage.removeItem('subscription_plan')
+//   }
+
+//   return {
+//     isSubscribed: readonly(isSubscribed),
+//     subscriptionStatus: readonly(subscriptionStatus),
+//     subscriptionPlan: readonly(subscriptionPlan),
+//     checkSubscription,
+//     setSubscriptionActive,
+//     clearSubscription
+//   }
+// }

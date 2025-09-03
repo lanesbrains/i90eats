@@ -387,21 +387,7 @@
 import { ref, computed } from "vue";
 
 // I-90 locations data
-const allLocations = [
-  "Seattle, WA",
-  "Spokane, WA",
-  "Missoula, MT",
-  "Billings, MT",
-  "Rapid City, SD",
-  "Sioux Falls, SD",
-  "Des Moines, IA",
-  "Chicago, IL",
-  "Toledo, OH",
-  "Cleveland, OH",
-  "Buffalo, NY",
-  "Albany, NY",
-  "Boston, MA",
-];
+const { allLocations } = useI90Locations();
 
 // Form state
 const form = ref({
