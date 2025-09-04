@@ -214,6 +214,4 @@ const blogPostSchema = {
   "keywords": post.tags.join(', '),
   "articleSection": "Food & Travel"
 }
-
-useJsonld(blogPostSchema)
 </script>
