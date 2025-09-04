@@ -303,6 +303,4 @@ const organizationSchema = {
     // "https://facebook.com/i90eats"
   ]
 }
-
-useJsonld(organizationSchema)
 </script>
