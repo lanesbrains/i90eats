@@ -10,9 +10,13 @@
   <script>
     // Initialize Netlify Identity widget for login
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', user => console.log('init', user));
-      window.netlifyIdentity.on('login', user => console.log('login', user));
-      window.netlifyIdentity.on('logout', () => console.log('Logged out'));
+        window.netlifyIdentity.on("init", user => {
+        if (!user) {
+            window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+            });
+        }
+        });
     }
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
