@@ -252,19 +252,13 @@
 <script setup>
 import { ref } from "vue";
 
-useHead({
-  script: [
-    { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
-  ],
-});
-
 // Sample featured restaurants
 const featuredRestaurants = ref([
   {
     title: "The Seattle Seafood Co.",
     slug: "seattle-seafood-co",
     location: "Seattle, WA",
-    cuisine: "Seafood",
+    cuisine: "Seafood", // Added trailing comma for consistency
   },
   {
     title: "Chicago Deep Dish Delight",
@@ -276,7 +270,7 @@ const featuredRestaurants = ref([
     title: "Boston Bistro",
     slug: "boston-bistro",
     location: "Boston, MA",
-    cuisine: "American",
+    cuisine: "American", // Added trailing comma for consistency
   },
 ]);
 
@@ -303,7 +297,7 @@ const formatDate = (date) => {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   }).format(date);
 };
 </script>

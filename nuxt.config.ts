@@ -25,6 +25,23 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      script: [
+        {
+          async: true,
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-SD7C2KX7YZ'
+        },
+        {
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
+          `
+        },
+        {
+          src: 'https://identity.netlify.com/v1/netlify-identity-widget.js'
+        }
       ]
     }
   },
@@ -35,6 +52,7 @@ export default defineNuxtConfig({
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
       webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
     },
+
     resend: {
       apiKey: process.env.RESEND_API_KEY
     },
@@ -43,7 +61,8 @@ export default defineNuxtConfig({
     public: {
       stripe: {
         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
-      }
+      },
+      googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID
     }
   },
 
