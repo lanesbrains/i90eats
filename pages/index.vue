@@ -252,6 +252,12 @@
 <script setup>
 import { ref } from "vue";
 
+useHead({
+  script: [
+    { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
+  ],
+});
+
 // Sample featured restaurants
 const featuredRestaurants = ref([
   {
