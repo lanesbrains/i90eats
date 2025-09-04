@@ -1,9 +1,14 @@
+# backend:
+#   name: auth0
+#   auth0:
+#     domain: dev-hwru7mq43np63pk4.us.auth0.com
+#     clientId: BN6lolGjUxfaeqOghS1SpgUghvIQIdod
+#     scope: openid profile email
 backend:
-  name: auth0
-  auth0:
-    domain: dev-hwru7mq43np63pk4.us.auth0.com
-    clientId: BN6lolGjUxfaeqOghS1SpgUghvIQIdod
-    scope: openid profile email
+  name: git-gateway
+  branch: main
+
+# Remove auth0 config
 
 # Remove local_backend: true for production/Auth0
 

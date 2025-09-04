@@ -4,9 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
-  <script src="https://cdn.auth0.com/js/auth0.js/9.13.4/auth0.min.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+  <script>
+    // Initialize Netlify Identity widget for login
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => console.log('init', user));
+      window.netlifyIdentity.on('login', user => console.log('login', user));
+      window.netlifyIdentity.on('logout', () => console.log('Logged out'));
+    }
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
