@@ -274,4 +274,35 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   showMobileMenu.value = false;
 };
+// SEO and Analytics
+useHead({
+  htmlAttrs: {
+    lang: 'en'
+  },
+  link: [
+    { rel: 'canonical', href: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}${useRoute().path}` }
+  ]
+})
+
+// Structured Data for Organization
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "I-90 Eats",
+  "url": process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com",
+  "logo": `${process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com"}/logo.png`,
+  "description": "Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    // Add your social media URLs here when available
+    // "https://twitter.com/i90eats",
+    // "https://facebook.com/i90eats"
+  ]
+}
+
+useJsonld(organizationSchema)
 </script>

@@ -158,8 +158,62 @@ const formatDate = (date) => {
 };
 
 // SEO
+// SEO
 useHead({
-  title: post.title,
-  meta: [{ name: "description", content: post.excerpt }],
-});
+  title: `${post.title} | I-90 Eats Blog`,
+  meta: [
+    { name: 'description', content: post.excerpt },
+    { name: 'keywords', content: post.tags.join(', ') },
+    { name: 'author', content: post.author },
+    { name: 'article:author', content: post.author },
+    { name: 'article:published_time', content: post.publishDate.toISOString() },
+    { name: 'article:section', content: 'Food & Travel' },
+    { name: 'article:tag', content: post.tags.join(',') },
+    // Open Graph for blog posts
+    { property: 'og:type', content: 'article' },
+    { property: 'og:title', content: post.title },
+    { property: 'og:description', content: post.excerpt },
+    { property: 'og:image', content: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/blog/${post.slug}/og-image.jpg` },
+    { property: 'og:url', content: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/blog/${post.slug}` },
+    { property: 'article:author', content: post.author },
+    // Twitter for blog posts
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: post.title },
+    { name: 'twitter:description', content: post.excerpt },
+    { name: 'twitter:image', content: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/blog/${post.slug}/og-image.jpg` }
+  ],
+  link: [
+    { rel: 'canonical', href: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/blog/${post.slug}` }
+  ]
+})
+
+// Structured Data for Blog Post
+const blogPostSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.title,
+  "description": post.excerpt,
+  "author": {
+    "@type": "Person",
+    "name": post.author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "I-90 Eats",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com"}/logo.png`
+    }
+  },
+  "datePublished": post.publishDate.toISOString(),
+  "dateModified": post.publishDate.toISOString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com"}/blog/${post.slug}`
+  },
+  "keywords": post.tags.join(', '),
+  "articleSection": "Food & Travel"
+}
+
+useJsonld(blogPostSchema)
 </script>

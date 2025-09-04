@@ -1,2 +1,16 @@
 User-Agent: *
-Disallow:
+Allow: /
+
+# Block admin and business dashboard pages
+Disallow: /admin
+Disallow: /business/dashboard
+Disallow: /business/login
+
+# Block API routes
+Disallow: /api/
+
+# Allow all other pages
+Allow: /
+
+# Sitemap
+Sitemap: https://i90eats.com/sitemap.xml
