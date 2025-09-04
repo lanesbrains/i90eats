@@ -1,12 +1,11 @@
 backend:
   name: auth0
   auth0:
-    domain: dev-hwru7mq43np63pk4.us.auth0.com # e.g., your-app.auth0.com
+    domain: dev-hwru7mq43np63pk4.us.auth0.com
     clientId: BN6lolGjUxfaeqOghS1SpgUghvIQIdod
-    audience: https://dev-hwru7mq43np63pk4.us.auth0.com/api/v2/
     scope: openid profile email
 
-local_backend: true
+# Remove local_backend: true for production/Auth0
 
 media_folder: "public/images"
 public_folder: "/images"
