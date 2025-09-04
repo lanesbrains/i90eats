@@ -88,89 +88,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-// Sample blog posts data
-const blogPosts = ref([
-  {
-    title: "The Ultimate Guide to Seattle's Best Seafood Spots",
-    slug: "ultimate-guide-seattle-seafood",
-    author: "Sarah Johnson",
-    publishDate: new Date('2024-01-15'),
-    image: null,
-    excerpt: "Discover the freshest seafood restaurants along Seattle's waterfront, from casual oyster bars to upscale dining experiences.",
-    body: "Full blog post content would go here...",
-    tags: ["Seattle", "Seafood", "Waterfront", "Restaurants"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    title: "Chicago Deep Dish vs. New York Style: The Great Pizza Debate",
-    slug: "chicago-deep-dish-vs-ny-style",
-    author: "Mike Chen",
-    publishDate: new Date('2024-01-10'),
-    image: null,
-    excerpt: "We settle the age-old question: which pizza style reigns supreme? Join us as we explore both cities' iconic pizza traditions.",
-    body: "Full blog post content would go here...",
-    tags: ["Chicago", "New York", "Pizza", "Food Culture"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    title: "Hidden Gems: Underrated Restaurants Along I-90",
-    slug: "hidden-gems-underrated-restaurants-i90",
-    author: "Emily Rodriguez",
-    publishDate: new Date('2024-01-05'),
-    image: null,
-    excerpt: "Skip the tourist traps and discover the local favorites that only insiders know about along the I-90 corridor.",
-    body: "Full blog post content would go here...",
-    tags: ["Hidden Gems", "Local Favorites", "I-90", "Travel Tips"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    title: "Seasonal Eating: What's Fresh Along I-90 This Winter",
-    slug: "seasonal-eating-winter-i90",
-    author: "David Thompson",
-    publishDate: new Date('2023-12-28'),
-    image: null,
-    excerpt: "From hearty stews to warming comfort foods, discover the best seasonal dishes being served along Interstate 90 this winter.",
-    body: "Full blog post content would go here...",
-    tags: ["Seasonal", "Winter", "Comfort Food", "Local Ingredients"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    title: "The Rise of Farm-to-Table Dining Along I-90",
-    slug: "farm-to-table-dining-i90",
-    author: "Lisa Wang",
-    publishDate: new Date('2023-12-20'),
-    image: null,
-    excerpt: "How restaurants along the I-90 corridor are embracing local agriculture and sustainable dining practices.",
-    body: "Full blog post content would go here...",
-    tags: ["Farm-to-Table", "Sustainability", "Local Agriculture", "Trends"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    title: "Weekend Road Trip: Food Stops Between Seattle and Spokane",
-    slug: "weekend-road-trip-seattle-spokane",
-    author: "Alex Martinez",
-    publishDate: new Date('2023-12-15'),
-    image: null,
-    excerpt: "Plan the perfect weekend getaway with our curated list of must-visit restaurants and food stops along the Washington stretch of I-90.",
-    body: "Full blog post content would go here...",
-    tags: ["Road Trip", "Weekend Getaway", "Washington", "Travel Guide"],
-    published: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-])
+// Fetch all blog posts from content/blog directory
+const { data: blogPosts } = await queryContent('/blog')
+  .where({ published: true })
+  .sort({ publishDate: -1 })
+  .find()
 
 // Methods
 const formatDate = (date) => {
@@ -178,6 +100,15 @@ const formatDate = (date) => {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }).format(date)
+  }).format(new Date(date))
 }
+
+// SEO
+useHead({
+  title: 'I-90 Food Blog | I-90 Eats',
+  meta: [
+    { name: 'description', content: 'Food news, travel tips, and insights from along Interstate 90. Discover the best restaurants and dining experiences along the I-90 corridor.' },
+    { name: 'keywords', content: 'I-90 food blog, interstate 90 restaurants, travel food tips, road trip dining, food news' }
+  ]
+})
 </script>
