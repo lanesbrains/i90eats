@@ -4,12 +4,17 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/image',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    'nuxt-gtag'
   ],
 
   css: [
     '~/assets/css/main.css'
   ],
+
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID
+  },
 
   app: {
     head: {
@@ -27,18 +32,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ],
       script: [
-        {
-          async: true,
-          src: 'https://www.googletagmanager.com/gtag/js?id=G-SD7C2KX7YZ'
-        },
-        {
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}');
-          `
-        },
         {
           src: 'https://identity.netlify.com/v1/netlify-identity-widget.js'
         }
