@@ -107,13 +107,13 @@ export default defineNuxtConfig({
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
       webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
     },
-
     resend: {
       apiKey: process.env.RESEND_API_KEY
     },
     jwtSecret: process.env.JWT_SECRET,
     adminEmail: process.env.ADMIN_EMAIL,
     public: {
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com',
       stripe: {
         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
       },

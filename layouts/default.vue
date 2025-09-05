@@ -254,7 +254,7 @@
 
         <div class="border-t border-gray-800 mt-8 pt-8 text-center">
           <p class="text-gray-400">
-            &copy; 2024 I-90 Eats. All rights reserved.
+            &copy; 2025 I-90 Eats. All rights reserved.
           </p>
         </div>
       </div>

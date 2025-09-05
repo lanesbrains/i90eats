@@ -60,8 +60,9 @@
                 </div>
                 
                 <NuxtLink 
-                  :to="`/blog/${post.slug}`"
+                  :to="`/blog/${getPostSlug(post)}`"
                   class="text-primary-600 hover:text-primary-700 font-medium text-sm"
+                  @click="handleNavigation(`/blog/${getPostSlug(post)}`)"
                 >
                   Read More →
                 </NuxtLink>
@@ -88,24 +89,37 @@
 </template>
 
 <script setup>
-// Fetch all blog posts from content/blog directory
-const { data: blogPosts } = await queryContent('/blog')
-  .where({ published: true })
-  .sort({ publishDate: -1 })
-  .find()
+const route = useRoute()
+// Get all blog posts and filter for published ones
+const { data: blogPosts } = await useAsyncData('blog-posts', async () => {
+  const posts = await queryContent('/blog')
+    .where({ published: true })
+    .sort({ publishDate: -1 })
+    .find()
+  return posts
+})
 
 // Methods
 const formatDate = (date) => {
+  const dateObj = typeof date === 'string' ? new Date(date) : new Date(date)
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-  }).format(new Date(date))
+  }).format(dateObj)
+}
+
+// Get post slug from either slug field or _path
+const getPostSlug = (post) => {
+  if (post.slug)
+    return post.slug
+  // Extract slug from _path (e.g., "/blog/my-post" -> "my-post")
+  return post._path?.split('/').pop() || ''
 }
 
 // SEO
 useHead({
-  title: 'I-90 Food Blog | I-90 Eats',
+  title: 'I-90 Food Blog',
   meta: [
     { name: 'description', content: 'Food news, travel tips, and insights from along Interstate 90. Discover the best restaurants and dining experiences along the I-90 corridor.' },
     { name: 'keywords', content: 'I-90 food blog, interstate 90 restaurants, travel food tips, road trip dining, food news' }
