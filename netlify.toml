@@ -1,10 +1,11 @@
 [build]
-  command = "npm run build"
-  publish = ".output/public"
+  publish = "dist"
+  command = "npm run generate"
 
-# Send all requests to Nuxt server (SSR).
-# Static assets in .output/public are served directly by Netlify before redirects.
+[build.environment]
+  NODE_VERSION = "20"
+
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/server"
+  to = "/index.html"
   status = 200
