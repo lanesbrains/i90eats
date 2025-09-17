@@ -292,9 +292,11 @@ const organizationSchema = {
   "url": process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com",
   "logo": `${process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com"}/logo.png`,
   "description": "Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food.",
+  "foundingDate": "2024",
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
+    "email": "support@i90eats.com",
     "availableLanguage": "English"
   },
   "sameAs": [
@@ -303,4 +305,25 @@ const organizationSchema = {
     // "https://facebook.com/i90eats"
   ]
 }
+
+// Website Schema for SEO
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "I-90 Eats",
+  "url": process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com",
+  "description": "Find great restaurant deals along Interstate 90 from Seattle to Boston",
+  "publisher": {
+    "@type": "Organization",
+    "name": "I-90 Eats"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${process.env.NUXT_PUBLIC_SITE_URL || "https://i90eats.com"}/directory?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+}
+
+// Add JSON-LD structured data to head
+useJsonld([organizationSchema, websiteSchema])
 </script>

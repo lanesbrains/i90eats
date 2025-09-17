@@ -3,7 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-gtag'
@@ -72,12 +71,12 @@ export default defineNuxtConfig({
         { name: 'mobile-web-app-capable', content: 'yes' },
         
         // Search Console Verification (add your actual verification codes)
-        // { name: 'google-site-verification', content: 'your-google-verification-code' },
-        // { name: 'msvalidate.01', content: 'your-bing-verification-code' },
-        // { name: 'yandex-verification', content: 'your-yandex-verification-code' },
-        
+        { name: 'google-site-verification', content: process.env.GOOGLE_SITE_VERIFICATION || 'your-google-verification-code' },
+        { name: 'msvalidate.01', content: process.env.BING_SITE_VERIFICATION || 'your-bing-verification-code' },
+        { name: 'yandex-verification', content: process.env.YANDEX_VERIFICATION || 'your-yandex-verification-code' },
+
         // Facebook Domain Verification
-        // { name: 'facebook-domain-verification', content: 'your-facebook-verification-code' }
+        { name: 'facebook-domain-verification', content: process.env.FACEBOOK_DOMAIN_VERIFICATION || 'your-facebook-verification-code' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
