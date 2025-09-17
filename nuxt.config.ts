@@ -13,7 +13,9 @@ export default defineNuxtConfig({
   ],
 
   gtag: {
-    id: process.env.GOOGLE_ANALYTICS_ID
+    id: process.env.GOOGLE_ANALYTICS_ID,
+    enabled: true,  // force-enable in dev
+    debug: true
   },
 
   app: {
