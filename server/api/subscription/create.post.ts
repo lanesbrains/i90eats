@@ -27,21 +27,17 @@ export default defineEventHandler(async (event) => {
     }
 
     // Create checkout session
+    const siteUrl = (config.public.siteUrl || 'https://i90eats.com').replace(/\/$/, '')
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
       payment_method_types: ['card'],
       line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
+        { price: priceId, quantity: 1 }
       ],
       mode: 'subscription',
-      success_url: `${getHeader(event, 'origin')}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${getHeader(event, 'origin')}/subscribe`,
-      metadata: {
-        locations: JSON.stringify(locations)
-      }
+      success_url: `${siteUrl}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/subscribe`,
+      metadata: { locations: JSON.stringify(locations) }
     })
 
     return {

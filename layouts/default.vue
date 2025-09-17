@@ -274,6 +274,10 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   showMobileMenu.value = false;
 };
+// Add JSON-LD structured data to head
+useHead({
+  
+})
 // SEO and Analytics
 useHead({
   htmlAttrs: {
@@ -281,7 +285,18 @@ useHead({
   },
   link: [
     { rel: 'canonical', href: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}${useRoute().path}` }
-  ]
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(organizationSchema)
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(websiteSchema)
+    }
+  ],
+  __dangerouslyDisableSanitizers: ['script']
 })
 
 // Structured Data for Organization
