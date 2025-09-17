@@ -2,17 +2,9 @@
   command = "npm run build"
   publish = ".output/public"
 
-[functions]
-  node_bundler = "esbuild"
-
-# Ensure API routes hit server functions first
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/server"
-  status = 200
-
-# SPA fallback for everything else
+# Send all requests to Nuxt server (SSR).
+# Static assets in .output/public are served directly by Netlify before redirects.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/server"
   status = 200
