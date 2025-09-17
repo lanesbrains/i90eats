@@ -274,30 +274,6 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   showMobileMenu.value = false;
 };
-// Add JSON-LD structured data to head
-useHead({
-  
-})
-// SEO and Analytics
-useHead({
-  htmlAttrs: {
-    lang: 'en'
-  },
-  link: [
-    { rel: 'canonical', href: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}${useRoute().path}` }
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify(organizationSchema)
-    },
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify(websiteSchema)
-    }
-  ],
-  __dangerouslyDisableSanitizers: ['script']
-})
 
 // Structured Data for Organization
 const organizationSchema = {
@@ -315,7 +291,6 @@ const organizationSchema = {
     "availableLanguage": "English"
   },
   "sameAs": [
-    // Add your social media URLs here when available
     // "https://twitter.com/i90eats",
     // "https://facebook.com/i90eats"
   ]
@@ -339,6 +314,16 @@ const websiteSchema = {
   }
 }
 
-// Add JSON-LD structured data to head
-useJsonld([organizationSchema, websiteSchema])
+// SEO and Analytics + JSON-LD (after schemas are defined)
+useHead({
+  htmlAttrs: { lang: 'en' },
+  link: [
+    { rel: 'canonical', href: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}${useRoute().path}` }
+  ],
+  script: [
+    { type: 'application/ld+json', innerHTML: JSON.stringify(organizationSchema) },
+    { type: 'application/ld+json', innerHTML: JSON.stringify(websiteSchema) }
+  ],
+  __dangerouslyDisableSanitizers: ['script']
+})
 </script>
