@@ -421,7 +421,7 @@ const handleSubscription = async () => {
       body: {
         email: form.value.email,
         locations: form.value.selectedLocations,
-        priceId: "price_newsletter_monthly", // Your Stripe price ID
+        priceId: "prod_SzlRyFksbigdTF", // Your Stripe price ID
       },
     });
 
