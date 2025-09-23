@@ -129,7 +129,7 @@ export default defineNuxtConfig({
       ignore: ['/business/**', '/admin'],
       failOnError: false
     },
-    preset: 'netlify-edge'
+    preset: 'netlify'
   },
 
   compatibilityDate: '2025-09-03'
