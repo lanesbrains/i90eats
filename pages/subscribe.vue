@@ -151,9 +151,7 @@
               </div>
 
               <div
-                v-if="
-                  !form.selectedLocations || form.selectedLocations.length === 0
-                "
+                v-if="form.selectedLocations.length === 0"
                 class="text-red-600 text-sm mt-2"
               >
                 Please select at least one location
@@ -386,93 +384,13 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from "vue";
+import { ref, computed } from "vue";
 
-// I-90 locations data - inline to avoid composable issues in production
-const allLocations = [
-  // Washington
-  "Seattle, WA",
-  "Bellevue, WA",
-  "Issaquah, WA",
-  "Snoqualmie Pass, WA",
-  "Cle Elum, WA",
-  "Ellensburg, WA",
-  "Spokane, WA",
+// I-90 locations data
+const { allLocations } = useI90Locations();
 
-  // Idaho
-  "Coeur d'Alene, ID",
-  "Kellogg, ID",
-  "Wallace, ID",
-  "Lookout Pass, ID",
-
-  // Montana
-  "Missoula, MT",
-  "Butte, MT",
-  "Bozeman, MT",
-  "Livingston, MT",
-  "Big Timber, MT",
-  "Billings, MT",
-
-  // Wyoming (brief section)
-  "Sheridan, WY",
-
-  // South Dakota
-  "Rapid City, SD",
-  "Wall, SD",
-  "Kadoka, SD",
-  "Murdo, SD",
-  "Chamberlain, SD",
-  "Mitchell, SD",
-  "Sioux Falls, SD",
-
-  // Minnesota
-  "Luverne, MN",
-  "Worthington, MN",
-  "Fairmont, MN",
-  "Blue Earth, MN",
-  "Albert Lea, MN",
-  "Austin, MN",
-  "Rochester, MN",
-  "La Crosse, WI", // Wisconsin section
-
-  // Iowa
-  "Des Moines, IA",
-  "Newton, IA",
-  "Grinnell, IA",
-  "Iowa City, IA",
-  "Davenport, IA",
-
-  // Illinois
-  "Rock Island, IL",
-  "Moline, IL",
-  "Chicago, IL",
-  "Hammond, IN", // Indiana section
-
-  // Ohio
-  "Toledo, OH",
-  "Fremont, OH",
-  "Elyria, OH",
-  "Cleveland, OH",
-
-  // Pennsylvania
-  "Erie, PA",
-
-  // New York
-  "Buffalo, NY",
-  "Batavia, NY",
-  "Rochester, NY",
-  "Syracuse, NY",
-  "Utica, NY",
-  "Albany, NY",
-
-  // Massachusetts
-  "Springfield, MA",
-  "Worcester, MA",
-  "Boston, MA",
-];
-
-// Form state - using reactive for better SSR compatibility
-const form = reactive({
+// Form state
+const form = ref({
   email: "",
   selectedLocations: [],
   includePremium: true,
@@ -484,12 +402,11 @@ const isSubmitting = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  const emailValid = form.email && form.email.trim().length > 0;
-  const locationsValid =
-    Array.isArray(form.selectedLocations) && form.selectedLocations.length > 0;
-  const termsValid = form.acceptTerms === true;
-
-  return emailValid && locationsValid && termsValid;
+  return (
+    form.value.email &&
+    form.value.selectedLocations.length > 0 &&
+    form.value.acceptTerms
+  );
 });
 
 // Methods
@@ -502,8 +419,8 @@ const handleSubscription = async () => {
     const { data } = await $fetch("/api/subscription/create", {
       method: "POST",
       body: {
-        email: form.email,
-        locations: form.selectedLocations,
+        email: form.value.email,
+        locations: form.value.selectedLocations,
         priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR", // Your Stripe price ID
       },
     });
@@ -519,12 +436,4 @@ const handleSubscription = async () => {
     isSubmitting.value = false;
   }
 };
-
-// Ensure proper client-side hydration
-onMounted(() => {
-  // Force reactivity update after hydration
-  if (!Array.isArray(form.selectedLocations)) {
-    form.selectedLocations = [];
-  }
-});
 </script>
