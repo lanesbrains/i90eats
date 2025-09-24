@@ -276,7 +276,7 @@
 import { ref } from "vue";
 
 // Better asset handling for production
-const heroBackgroundImage = "/images/i90-bg.jpg";
+import heroBackgroundImage from "~/assets/images/i90-bg.jpg";
 
 // Sample featured restaurants
 const featuredRestaurants = ref([

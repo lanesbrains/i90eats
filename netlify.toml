@@ -1,10 +1,20 @@
 [build]
   command = "npm run build"
-  publish = "public"
+  publish = ".output/public"
 
+[functions]
+  directory = ".output/server"
+
+# Redirect API requests to your server functions
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/server"
+  status = 200
+
+# Handle SPA routes (Nuxt client-side routing)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
 
 [build.environment]
