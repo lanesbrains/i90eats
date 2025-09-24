@@ -1,5 +1,18 @@
-import { d as defineEventHandler, u as useRuntimeConfig, r as readBody, a as getHeader, c as createError } from '../../../nitro/nitro.mjs';
+import { d as defineEventHandler, u as useRuntimeConfig, r as readBody, c as createError } from '../../../nitro/nitro.mjs';
 import Stripe from 'stripe';
+import 'unified';
+import 'remark-parse';
+import 'remark-rehype';
+import 'remark-mdc';
+import 'remark-gfm';
+import 'rehype-external-links';
+import 'rehype-sort-attribute-values';
+import 'rehype-sort-attributes';
+import 'rehype-raw';
+import 'detab';
+import 'micromark-util-sanitize-uri';
+import 'hast-util-to-string';
+import 'github-slugger';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -31,21 +44,17 @@ const create_post = defineEventHandler(async (event) => {
         }
       });
     }
+    const siteUrl = (config.public.siteUrl || "https://i90eats.com").replace(/\/$/, "");
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
       payment_method_types: ["card"],
       line_items: [
-        {
-          price: priceId,
-          quantity: 1
-        }
+        { price: priceId, quantity: 1 }
       ],
       mode: "subscription",
-      success_url: `${getHeader(event, "origin")}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${getHeader(event, "origin")}/subscribe`,
-      metadata: {
-        locations: JSON.stringify(locations)
-      }
+      success_url: `${siteUrl}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/subscribe`,
+      metadata: { locations: JSON.stringify(locations) }
     });
     return {
       success: true,
