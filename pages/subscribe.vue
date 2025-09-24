@@ -151,7 +151,11 @@
               </div>
 
               <div
-                v-if="form.selectedLocations.length === 0"
+                v-if="
+                  isClient &&
+                  (!form.selectedLocations ||
+                    form.selectedLocations.length === 0)
+                "
                 class="text-red-600 text-sm mt-2"
               >
                 Please select at least one location
@@ -218,7 +222,7 @@
             <div class="pt-4">
               <button
                 type="submit"
-                :disabled="!isFormValid || isSubmitting"
+                :disabled="!isFormValid || isSubmitting || !isClient"
                 class="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span
@@ -247,6 +251,7 @@
                   </svg>
                   Processing...
                 </span>
+                <span v-else-if="!isClient"> Loading... </span>
                 <span v-else> Subscribe Now - $2.99/month </span>
               </button>
             </div>
@@ -384,25 +389,25 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, reactive, nextTick } from "vue";
 
 // I-90 locations data - inline to avoid composable issues in production
 const allLocations = [
   // Washington
   "Seattle, WA",
-  "Bellevue, WA", 
+  "Bellevue, WA",
   "Issaquah, WA",
   "Snoqualmie Pass, WA",
   "Cle Elum, WA",
   "Ellensburg, WA",
   "Spokane, WA",
-  
+
   // Idaho
   "Coeur d'Alene, ID",
   "Kellogg, ID",
   "Wallace, ID",
   "Lookout Pass, ID",
-  
+
   // Montana
   "Missoula, MT",
   "Butte, MT",
@@ -410,10 +415,10 @@ const allLocations = [
   "Livingston, MT",
   "Big Timber, MT",
   "Billings, MT",
-  
+
   // Wyoming (brief section)
   "Sheridan, WY",
-  
+
   // South Dakota
   "Rapid City, SD",
   "Wall, SD",
@@ -422,7 +427,7 @@ const allLocations = [
   "Chamberlain, SD",
   "Mitchell, SD",
   "Sioux Falls, SD",
-  
+
   // Minnesota
   "Luverne, MN",
   "Worthington, MN",
@@ -432,29 +437,29 @@ const allLocations = [
   "Austin, MN",
   "Rochester, MN",
   "La Crosse, WI", // Wisconsin section
-  
+
   // Iowa
   "Des Moines, IA",
   "Newton, IA",
   "Grinnell, IA",
   "Iowa City, IA",
   "Davenport, IA",
-  
+
   // Illinois
   "Rock Island, IL",
   "Moline, IL",
   "Chicago, IL",
   "Hammond, IN", // Indiana section
-  
+
   // Ohio
   "Toledo, OH",
   "Fremont, OH",
   "Elyria, OH",
   "Cleveland, OH",
-  
+
   // Pennsylvania
   "Erie, PA",
-  
+
   // New York
   "Buffalo, NY",
   "Batavia, NY",
@@ -462,15 +467,15 @@ const allLocations = [
   "Syracuse, NY",
   "Utica, NY",
   "Albany, NY",
-  
+
   // Massachusetts
   "Springfield, MA",
   "Worcester, MA",
-  "Boston, MA"
+  "Boston, MA",
 ];
 
-// Form state
-const form = ref({
+// Form state - using reactive for better SSR compatibility
+const form = reactive({
   email: "",
   selectedLocations: [],
   includePremium: true,
@@ -479,26 +484,17 @@ const form = ref({
 });
 
 const isSubmitting = ref(false);
+const isClient = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  const emailValid = form.value.email && form.value.email.trim().length > 0;
-  const locationsValid = form.value.selectedLocations && form.value.selectedLocations.length > 0;
-  const termsValid = form.value.acceptTerms === true;
-  
-  // Debug logging for production
-  if (process.client) {
-    console.log('Form validation debug:', {
-      email: form.value.email,
-      emailValid,
-      selectedLocations: form.value.selectedLocations,
-      locationsValid,
-      acceptTerms: form.value.acceptTerms,
-      termsValid,
-      allLocationsLength: allLocations.length
-    });
-  }
-  
+  if (!isClient.value) return false; // Prevent validation during SSR
+
+  const emailValid = form.email && form.email.trim().length > 0;
+  const locationsValid =
+    Array.isArray(form.selectedLocations) && form.selectedLocations.length > 0;
+  const termsValid = form.acceptTerms === true;
+
   return emailValid && locationsValid && termsValid;
 });
 
@@ -512,8 +508,8 @@ const handleSubscription = async () => {
     const { data } = await $fetch("/api/subscription/create", {
       method: "POST",
       body: {
-        email: form.value.email,
-        locations: form.value.selectedLocations,
+        email: form.email,
+        locations: form.selectedLocations,
         priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR", // Your Stripe price ID
       },
     });
@@ -530,10 +526,14 @@ const handleSubscription = async () => {
   }
 };
 
-// Debug: Log when component mounts
+// Ensure proper client-side hydration
 onMounted(() => {
-  if (process.client) {
-    console.log('Subscribe page mounted, allLocations:', allLocations.length);
-  }
+  nextTick(() => {
+    isClient.value = true;
+    // Force reactivity update after hydration
+    if (!Array.isArray(form.selectedLocations)) {
+      form.selectedLocations = [];
+    }
+  });
 });
 </script>
