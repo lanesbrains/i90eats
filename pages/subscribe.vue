@@ -386,8 +386,88 @@
 <script setup>
 import { ref, computed } from "vue";
 
-// I-90 locations data
-const { allLocations } = useI90Locations();
+// I-90 locations data - inline to avoid composable issues in production
+const allLocations = [
+  // Washington
+  "Seattle, WA",
+  "Bellevue, WA", 
+  "Issaquah, WA",
+  "Snoqualmie Pass, WA",
+  "Cle Elum, WA",
+  "Ellensburg, WA",
+  "Spokane, WA",
+  
+  // Idaho
+  "Coeur d'Alene, ID",
+  "Kellogg, ID",
+  "Wallace, ID",
+  "Lookout Pass, ID",
+  
+  // Montana
+  "Missoula, MT",
+  "Butte, MT",
+  "Bozeman, MT",
+  "Livingston, MT",
+  "Big Timber, MT",
+  "Billings, MT",
+  
+  // Wyoming (brief section)
+  "Sheridan, WY",
+  
+  // South Dakota
+  "Rapid City, SD",
+  "Wall, SD",
+  "Kadoka, SD",
+  "Murdo, SD",
+  "Chamberlain, SD",
+  "Mitchell, SD",
+  "Sioux Falls, SD",
+  
+  // Minnesota
+  "Luverne, MN",
+  "Worthington, MN",
+  "Fairmont, MN",
+  "Blue Earth, MN",
+  "Albert Lea, MN",
+  "Austin, MN",
+  "Rochester, MN",
+  "La Crosse, WI", // Wisconsin section
+  
+  // Iowa
+  "Des Moines, IA",
+  "Newton, IA",
+  "Grinnell, IA",
+  "Iowa City, IA",
+  "Davenport, IA",
+  
+  // Illinois
+  "Rock Island, IL",
+  "Moline, IL",
+  "Chicago, IL",
+  "Hammond, IN", // Indiana section
+  
+  // Ohio
+  "Toledo, OH",
+  "Fremont, OH",
+  "Elyria, OH",
+  "Cleveland, OH",
+  
+  // Pennsylvania
+  "Erie, PA",
+  
+  // New York
+  "Buffalo, NY",
+  "Batavia, NY",
+  "Rochester, NY",
+  "Syracuse, NY",
+  "Utica, NY",
+  "Albany, NY",
+  
+  // Massachusetts
+  "Springfield, MA",
+  "Worcester, MA",
+  "Boston, MA"
+];
 
 // Form state
 const form = ref({
@@ -402,11 +482,24 @@ const isSubmitting = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  return (
-    form.value.email &&
-    form.value.selectedLocations.length > 0 &&
-    form.value.acceptTerms
-  );
+  const emailValid = form.value.email && form.value.email.trim().length > 0;
+  const locationsValid = form.value.selectedLocations && form.value.selectedLocations.length > 0;
+  const termsValid = form.value.acceptTerms === true;
+  
+  // Debug logging for production
+  if (process.client) {
+    console.log('Form validation debug:', {
+      email: form.value.email,
+      emailValid,
+      selectedLocations: form.value.selectedLocations,
+      locationsValid,
+      acceptTerms: form.value.acceptTerms,
+      termsValid,
+      allLocationsLength: allLocations.length
+    });
+  }
+  
+  return emailValid && locationsValid && termsValid;
 });
 
 // Methods
@@ -436,4 +529,11 @@ const handleSubscription = async () => {
     isSubmitting.value = false;
   }
 };
+
+// Debug: Log when component mounts
+onMounted(() => {
+  if (process.client) {
+    console.log('Subscribe page mounted, allLocations:', allLocations.length);
+  }
+});
 </script>
