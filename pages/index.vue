@@ -2,9 +2,15 @@
   <div>
     <!-- Hero Section -->
     <section
-      class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-20"
+      class="bg-cover bg-center bg-no-repeat text-white py-20"
+      style="
+        background-image: url('/images/i90-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      "
     >
-      <div class="container-max text-center">
+      <div class="container-max w-max text-center p-16 bg-[#0d1e06c1]">
         <h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1>
         <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
           Discover exclusive restaurant deals along Interstate 90 from Seattle
@@ -189,9 +195,20 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <article v-for="post in latestPosts" :key="post.slug" class="card">
+          <article
+            v-for="post in latestPosts"
+            :key="getPostSlug(post)"
+            class="card hover:shadow-xl transition-shadow duration-300"
+          >
             <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+              <img
+                v-if="post.image"
+                :src="post.image"
+                :alt="post.title"
+                class="w-full h-48 object-cover"
+              />
               <div
+                v-else
                 class="w-full h-48 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center"
               >
                 <svg
@@ -210,15 +227,21 @@
               </div>
             </div>
             <div class="p-6">
-              <div class="text-sm text-gray-500 mb-2">
-                {{ formatDate(post.publishDate) }}
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-sm text-gray-500">{{
+                  formatDate(post.publishDate)
+                }}</span>
+                <span v-if="post.author" class="text-sm text-gray-400">•</span>
+                <span v-if="post.author" class="text-sm text-gray-500">{{
+                  post.author
+                }}</span>
               </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
                 {{ post.title }}
               </h3>
-              <p class="text-gray-600 mb-4">{{ post.excerpt }}</p>
+              <p class="text-gray-600 mb-4 line-clamp-3">{{ post.excerpt }}</p>
               <NuxtLink
-                :to="`/blog/${post.slug}`"
+                :to="`/blog/${getPostSlug(post)}`"
                 class="text-primary-600 hover:text-primary-700 font-medium"
               >
                 Read More →
@@ -274,30 +297,33 @@ const featuredRestaurants = ref([
   },
 ]);
 
-// Sample blog posts
-const latestPosts = ref([
-  {
-    title: "The Ultimate Guide to Seattle's Best Seafood Spots",
-    slug: "ultimate-guide-seattle-seafood",
-    publishDate: new Date("2024-01-15"),
-    excerpt:
-      "Discover the freshest seafood restaurants along Seattle's waterfront, from casual oyster bars to upscale dining experiences.",
-  },
-  {
-    title: "Chicago Deep Dish vs. New York Style: The Great Pizza Debate",
-    slug: "chicago-deep-dish-vs-ny-style",
-    publishDate: new Date("2024-01-10"),
-    excerpt:
-      "We settle the age-old question: which pizza style reigns supreme? Join us as we explore both cities' iconic pizza traditions.",
-  },
-]);
+// Get latest blog posts using the same pattern as blog page
+const { data: latestPosts } = await useAsyncData(
+  "latest-blog-posts",
+  async () => {
+    const posts = await queryContent("/blog")
+      .where({ published: true })
+      .sort({ publishDate: -1 })
+      .limit(2)
+      .find();
+    return posts;
+  }
+);
 
 // Methods
 const formatDate = (date) => {
+  const dateObj = typeof date === "string" ? new Date(date) : new Date(date);
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
-    day: "numeric"
-  }).format(date);
+    day: "numeric",
+  }).format(dateObj);
+};
+
+// Get post slug from either slug field or _path
+const getPostSlug = (post) => {
+  if (post.slug) return post.slug;
+  // Extract slug from _path (e.g., "/blog/my-post" -> "my-post")
+  return post._path?.split("/").pop() || "";
 };
 </script>
