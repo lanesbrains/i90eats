@@ -5,7 +5,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@nuxt/content'
   ],
 
   css: [
