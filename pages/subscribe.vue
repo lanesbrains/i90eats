@@ -384,13 +384,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 
 // I-90 locations data
 const { allLocations } = useI90Locations();
 
 // Form state
-const form = ref({
+const form = reactive({
   email: "",
   selectedLocations: [],
   includePremium: true,
@@ -402,11 +402,7 @@ const isSubmitting = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  return (
-    form.value.email &&
-    form.value.selectedLocations.length > 0 &&
-    form.value.acceptTerms
-  );
+  return form.email && form.selectedLocations.length > 0 && form.acceptTerms;
 });
 
 // Methods
@@ -419,9 +415,9 @@ const handleSubscription = async () => {
     const { data } = await $fetch("/api/subscription/create", {
       method: "POST",
       body: {
-        email: form.value.email,
-        locations: form.value.selectedLocations,
-        priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR", // Your Stripe price ID
+        email: form.email,
+        locations: form.selectedLocations,
+        priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR",
       },
     });
 
