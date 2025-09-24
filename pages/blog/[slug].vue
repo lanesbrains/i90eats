@@ -171,22 +171,36 @@ const { data: post } = await useAsyncData(`blog-${slug}`, async () => {
     // Try multiple methods to find the post
     let foundPost = null
     
-    // Method 1: Direct path query
+    // Method 1: Find by slug field first (most reliable)
     try {
-      foundPost = await queryContent(`/blog/${slug}`).findOne()
-    } catch (e) {
-      // Method 2: Find by slug field
       const posts = await queryContent('/blog').where({ slug: slug }).find()
       foundPost = posts[0] || null
+    } catch (e) {
+      console.log('Method 1 failed:', e)
     }
     
     if (!foundPost) {
-      // Method 3: Find by filename
-      const allPosts = await queryContent('/blog').find()
-      foundPost = allPosts.find(p => {
-        const filename = p._path?.split('/').pop()
-        return filename === slug
-      })
+      // Method 2: Find by filename (without extension)
+      try {
+        const allPosts = await queryContent('/blog').find()
+        foundPost = allPosts.find(p => {
+          const filename = p._path?.split('/').pop()
+          // Remove .md extension and compare
+          const filenameWithoutExt = filename?.replace(/\.md$/, '')
+          return filenameWithoutExt === slug
+        })
+      } catch (e) {
+        console.log('Method 2 failed:', e)
+      }
+    }
+    
+    if (!foundPost) {
+      // Method 3: Direct path query as fallback
+      try {
+        foundPost = await queryContent(`/blog/${slug}`).findOne()
+      } catch (e) {
+        console.log('Method 3 failed:', e)
+      }
     }
     
     return foundPost
