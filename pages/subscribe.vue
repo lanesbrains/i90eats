@@ -152,9 +152,7 @@
 
               <div
                 v-if="
-                  isClient &&
-                  (!form.selectedLocations ||
-                    form.selectedLocations.length === 0)
+                  !form.selectedLocations || form.selectedLocations.length === 0
                 "
                 class="text-red-600 text-sm mt-2"
               >
@@ -222,7 +220,7 @@
             <div class="pt-4">
               <button
                 type="submit"
-                :disabled="!isFormValid || isSubmitting || !isClient"
+                :disabled="!isFormValid || isSubmitting"
                 class="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span
@@ -251,7 +249,6 @@
                   </svg>
                   Processing...
                 </span>
-                <span v-else-if="!isClient"> Loading... </span>
                 <span v-else> Subscribe Now - $2.99/month </span>
               </button>
             </div>
@@ -389,7 +386,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, nextTick } from "vue";
+import { ref, computed, reactive } from "vue";
 
 // I-90 locations data - inline to avoid composable issues in production
 const allLocations = [
@@ -484,12 +481,9 @@ const form = reactive({
 });
 
 const isSubmitting = ref(false);
-const isClient = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  if (!isClient.value) return false; // Prevent validation during SSR
-
   const emailValid = form.email && form.email.trim().length > 0;
   const locationsValid =
     Array.isArray(form.selectedLocations) && form.selectedLocations.length > 0;
@@ -528,12 +522,9 @@ const handleSubscription = async () => {
 
 // Ensure proper client-side hydration
 onMounted(() => {
-  nextTick(() => {
-    isClient.value = true;
-    // Force reactivity update after hydration
-    if (!Array.isArray(form.selectedLocations)) {
-      form.selectedLocations = [];
-    }
-  });
+  // Force reactivity update after hydration
+  if (!Array.isArray(form.selectedLocations)) {
+    form.selectedLocations = [];
+  }
 });
 </script>
