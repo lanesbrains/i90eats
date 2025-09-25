@@ -1,16 +1,16 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section
-      class="bg-cover bg-center bg-no-repeat text-white py-20"
-      style="
-        background-image: url('/i90-bg.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-      "
-    >
-      <div class="container-max w-max text-center p-16 bg-[#0d1e06c1]">
+    <section class="relative bg-gray-800 text-white py-20 overflow-hidden">
+      <!-- Background Image -->
+      <div
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+        style="background-image: url('/i90-bg.jpg')"
+      ></div>
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <!-- Content -->
+      <div class="relative z-10 container-max text-center px-4">
         <h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1>
         <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
           Discover exclusive restaurant deals along Interstate 90 from Seattle

@@ -3207,39 +3207,39 @@ async function dispose(driver) {
 const _assets = {
   ["nitro:bundled:cache:content:content-index.json"]: {
     import: () => import('../raw/content-index.mjs').then(r => r.default || r),
-    meta: {"type":"application/json","etag":"\"455-Ie7xYrA2hCfDw7zNm4z8D8rFPOs\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"application/json","etag":"\"455-RvjejZsl6KYuyysUddSky4yHQ0w\"","mtime":"2025-09-25T04:04:44.273Z"}
   },
   ["nitro:bundled:cache:content:content-navigation.json"]: {
     import: () => import('../raw/content-navigation.mjs').then(r => r.default || r),
-    meta: {"type":"application/json","etag":"\"4d1-6D4hHRjeZthEmHXm07n8vhSddZ0\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"application/json","etag":"\"4d1-6D4hHRjeZthEmHXm07n8vhSddZ0\"","mtime":"2025-09-25T04:04:44.272Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:blog:2024-01-15-ultimate-guide-seattle-seafood.md"]: {
     import: () => import('../raw/2024-01-15-ultimate-guide-seattle-seafood.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"15f0-fbHab7Z12R+7ThVN9KT7rgMpGkA\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"15f0-fbHab7Z12R+7ThVN9KT7rgMpGkA\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.md"]: {
     import: () => import('../raw/2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1c55-hi+PmNZl0071ACX8Syc/M8FSR8I\"","mtime":"2025-09-25T03:49:01.848Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1c55-hi+PmNZl0071ACX8Syc/M8FSR8I\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.md"]: {
     import: () => import('../raw/2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1ed4-4JMDZtlRHzH5mnEtvUDHmYUlUJ0\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1ed4-4JMDZtlRHzH5mnEtvUDHmYUlUJ0\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.md"]: {
     import: () => import('../raw/2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"17e0-RoXNMV27WVNTSyOwmoEgLsK7UdM\"","mtime":"2025-09-25T03:49:01.848Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"17e0-RoXNMV27WVNTSyOwmoEgLsK7UdM\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.md"]: {
     import: () => import('../raw/2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1b41-zCVvzJNWdpsrMekNP/8Dp/ZOCRI\"","mtime":"2025-09-25T03:49:01.848Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1b41-zCVvzJNWdpsrMekNP/8Dp/ZOCRI\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:deals:seattle-seafood-co-2024-01-15.md"]: {
     import: () => import('../raw/seattle-seafood-co-2024-01-15.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"3b5-1INFkV4yiHX8RwTevXCdXrF4dyI\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"3b5-1INFkV4yiHX8RwTevXCdXrF4dyI\"","mtime":"2025-09-25T04:04:44.274Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:restaurants:seattle-seafood-co.md"]: {
     import: () => import('../raw/seattle-seafood-co.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"9e7-wsuTGBMPgXgWClglyrCDjDyL4pE\"","mtime":"2025-09-25T03:49:01.847Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"9e7-wsuTGBMPgXgWClglyrCDjDyL4pE\"","mtime":"2025-09-25T04:04:44.273Z"}
   }
 };
 
@@ -4270,7 +4270,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "3cae2890-4f68-4626-8cd2-afb6b60502b7",
+    "buildId": "b2243bc0-c814-4a14-83ca-67ad86a60280",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4279,6 +4279,18 @@ const _inlineRuntimeConfig = {
     "routeRules": {
       "/__nuxt_error": {
         "cache": false
+      },
+      "/subscribe": {
+        "ssr": false
+      },
+      "/api/**": {
+        "cors": true,
+        "headers": {
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "*",
+          "access-control-allow-headers": "*",
+          "access-control-max-age": "0"
+        }
       },
       "/_nuxt/builds/meta/**": {
         "headers": {
@@ -4358,7 +4370,7 @@ const _inlineRuntimeConfig = {
     "content": {
       "locales": [],
       "defaultLocale": "",
-      "integrity": 1758772133724,
+      "integrity": 1758773076430,
       "experimental": {
         "stripQueryParameters": false,
         "advanceQuery": false,
@@ -5843,7 +5855,7 @@ const handlers = [
   { route: '/api/_content/query/:qid/**:params', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/query/:qid', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/query', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
-  { route: '/api/_content/cache.1758772133724.json', handler: _D8rdcN, lazy: false, middleware: false, method: "get" },
+  { route: '/api/_content/cache.1758773076430.json', handler: _D8rdcN, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation/:qid/**:params', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation/:qid', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },

@@ -1,6 +1,9 @@
 import Stripe from 'stripe'
 
+import Stripe from 'stripe'
+
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig()
   const body = await readBody(event)
   const { email, locations, priceId } = body
 
@@ -14,17 +17,17 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // For testing, return a mock success response
-  // TODO: Uncomment Stripe integration when ready
-  
-  /*
-  const config = useRuntimeConfig()
-  
+  // Check if we have Stripe keys
   if (!config.stripe.secretKey) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Stripe configuration missing'
-    })
+    console.log('No Stripe key found, returning mock response')
+    return {
+      success: true,
+      data: {
+        checkout_url: 'https://checkout.stripe.com/test-session',
+        session_id: 'test_session_123'
+      },
+      message: 'Mock subscription created successfully (no Stripe key)'
+    }
   }
   
   const stripe = new Stripe(config.stripe.secretKey)
@@ -75,16 +78,5 @@ export default defineEventHandler(async (event) => {
       statusCode: 500,
       statusMessage: 'Failed to create subscription'
     })
-  }
-  */
-
-  // Mock response for testing
-  return {
-    success: true,
-    data: {
-      checkout_url: 'https://checkout.stripe.com/test-session',
-      session_id: 'test_session_123'
-    },
-    message: 'Mock subscription created successfully'
   }
 })

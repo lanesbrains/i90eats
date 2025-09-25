@@ -134,6 +134,11 @@ export default defineNuxtConfig({
   },
 
   ssr: true,
+  
+  routeRules: {
+    '/subscribe': { ssr: false },
+    '/api/**': { cors: true }
+  },
 
   compatibilityDate: '2025-09-03'
 })
