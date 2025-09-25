@@ -27,8 +27,6 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 
 const VueResolver = (_, value) => {
   return isRef(value) ? toValue(value) : value;
@@ -229,7 +227,7 @@ async function renderInlineStyles(usedModules) {
 
 const renderSSRHeadOptions = {"omitLineBreaks":false};
 
-const entryFileName = "DFdN89nY.js";
+const entryFileName = "DJQnUMea.js";
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;

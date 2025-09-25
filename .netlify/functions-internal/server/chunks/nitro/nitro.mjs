@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { unified } from 'unified';
+import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remark2rehype from 'remark-rehype';
 import remarkMDC, { parseFrontMatter } from 'remark-mdc';
@@ -18,8 +18,6 @@ import { Buffer as Buffer$1 } from 'node:buffer';
 import { promises, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
-import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXH3Handler } from 'ipx';
 
 const suspectProtoRx = /"(?:_|\\u0{2}5[Ff]){2}(?:p|\\u0{2}70)(?:r|\\u0{2}72)(?:o|\\u0{2}6[Ff])(?:t|\\u0{2}74)(?:o|\\u0{2}6[Ff])(?:_|\\u0{2}5[Ff]){2}"\s*:/;
 const suspectConstructorRx = /"(?:c|\\u0063)(?:o|\\u006[Ff])(?:n|\\u006[Ee])(?:s|\\u0073)(?:t|\\u0074)(?:r|\\u0072)(?:u|\\u0075)(?:c|\\u0063)(?:t|\\u0074)(?:o|\\u006[Ff])(?:r|\\u0072)"\s*:/;
@@ -687,24 +685,6 @@ const defuFn = createDefu((object, key, currentValue) => {
 });
 
 function o(n){throw new Error(`${n} is not implemented yet!`)}let i$1 = class i extends EventEmitter{__unenv__={};readableEncoding=null;readableEnded=true;readableFlowing=false;readableHighWaterMark=0;readableLength=0;readableObjectMode=false;readableAborted=false;readableDidRead=false;closed=false;errored=null;readable=false;destroyed=false;static from(e,t){return new i(t)}constructor(e){super();}_read(e){}read(e){}setEncoding(e){return this}pause(){return this}resume(){return this}isPaused(){return  true}unpipe(e){return this}unshift(e,t){}wrap(e){return this}push(e,t){return  false}_destroy(e,t){this.removeAllListeners();}destroy(e){return this.destroyed=true,this._destroy(e),this}pipe(e,t){return {}}compose(e,t){throw new Error("Method not implemented.")}[Symbol.asyncDispose](){return this.destroy(),Promise.resolve()}async*[Symbol.asyncIterator](){throw o("Readable.asyncIterator")}iterator(e){throw o("Readable.iterator")}map(e,t){throw o("Readable.map")}filter(e,t){throw o("Readable.filter")}forEach(e,t){throw o("Readable.forEach")}reduce(e,t,r){throw o("Readable.reduce")}find(e,t){throw o("Readable.find")}findIndex(e,t){throw o("Readable.findIndex")}some(e,t){throw o("Readable.some")}toArray(e){throw o("Readable.toArray")}every(e,t){throw o("Readable.every")}flatMap(e,t){throw o("Readable.flatMap")}drop(e,t){throw o("Readable.drop")}take(e,t){throw o("Readable.take")}asIndexedPairs(e){throw o("Readable.asIndexedPairs")}};let l$1 = class l extends EventEmitter{__unenv__={};writable=true;writableEnded=false;writableFinished=false;writableHighWaterMark=0;writableLength=0;writableObjectMode=false;writableCorked=0;closed=false;errored=null;writableNeedDrain=false;writableAborted=false;destroyed=false;_data;_encoding="utf8";constructor(e){super();}pipe(e,t){return {}}_write(e,t,r){if(this.writableEnded){r&&r();return}if(this._data===void 0)this._data=e;else {const s=typeof this._data=="string"?Buffer$1.from(this._data,this._encoding||t||"utf8"):this._data,a=typeof e=="string"?Buffer$1.from(e,t||this._encoding||"utf8"):e;this._data=Buffer$1.concat([s,a]);}this._encoding=t,r&&r();}_writev(e,t){}_destroy(e,t){}_final(e){}write(e,t,r){const s=typeof t=="string"?this._encoding:"utf8",a=typeof t=="function"?t:typeof r=="function"?r:void 0;return this._write(e,s,a),true}setDefaultEncoding(e){return this}end(e,t,r){const s=typeof e=="function"?e:typeof t=="function"?t:typeof r=="function"?r:void 0;if(this.writableEnded)return s&&s(),this;const a=e===s?void 0:e;if(a){const u=t===s?void 0:t;this.write(a,u,s);}return this.writableEnded=true,this.writableFinished=true,this.emit("close"),this.emit("finish"),this}cork(){}uncork(){}destroy(e){return this.destroyed=true,delete this._data,this.removeAllListeners(),this}compose(e,t){throw new Error("Method not implemented.")}};const c=class{allowHalfOpen=true;_destroy;constructor(e=new i$1,t=new l$1){Object.assign(this,e),Object.assign(this,t),this._destroy=g(e._destroy,t._destroy);}};function _(){return Object.assign(c.prototype,i$1.prototype),Object.assign(c.prototype,l$1.prototype),c}function g(...n){return function(...e){for(const t of n)t(...e);}}const m=_();class A extends m{__unenv__={};bufferSize=0;bytesRead=0;bytesWritten=0;connecting=false;destroyed=false;pending=false;localAddress="";localPort=0;remoteAddress="";remoteFamily="";remotePort=0;autoSelectFamilyAttemptedAddresses=[];readyState="readOnly";constructor(e){super();}write(e,t,r){return  false}connect(e,t,r){return this}end(e,t,r){return this}setEncoding(e){return this}pause(){return this}resume(){return this}setTimeout(e,t){return this}setNoDelay(e){return this}setKeepAlive(e,t){return this}address(){return {}}unref(){return this}ref(){return this}destroySoon(){this.destroy();}resetAndDestroy(){const e=new Error("ERR_SOCKET_CLOSED");return e.code="ERR_SOCKET_CLOSED",this.destroy(e),this}}class y extends i$1{aborted=false;httpVersion="1.1";httpVersionMajor=1;httpVersionMinor=1;complete=true;connection;socket;headers={};trailers={};method="GET";url="/";statusCode=200;statusMessage="";closed=false;errored=null;readable=false;constructor(e){super(),this.socket=this.connection=e||new A;}get rawHeaders(){const e=this.headers,t=[];for(const r in e)if(Array.isArray(e[r]))for(const s of e[r])t.push(r,s);else t.push(r,e[r]);return t}get rawTrailers(){return []}setTimeout(e,t){return this}get headersDistinct(){return p(this.headers)}get trailersDistinct(){return p(this.trailers)}}function p(n){const e={};for(const[t,r]of Object.entries(n))t&&(e[t]=(Array.isArray(r)?r:[r]).filter(Boolean));return e}class w extends l$1{statusCode=200;statusMessage="";upgrading=false;chunkedEncoding=false;shouldKeepAlive=false;useChunkedEncodingByDefault=false;sendDate=false;finished=false;headersSent=false;strictContentLength=false;connection=null;socket=null;req;_headers={};constructor(e){super(),this.req=e;}assignSocket(e){e._httpMessage=this,this.socket=e,this.connection=e,this.emit("socket",e),this._flush();}_flush(){this.flushHeaders();}detachSocket(e){}writeContinue(e){}writeHead(e,t,r){e&&(this.statusCode=e),typeof t=="string"&&(this.statusMessage=t,t=void 0);const s=r||t;if(s&&!Array.isArray(s))for(const a in s)this.setHeader(a,s[a]);return this.headersSent=true,this}writeProcessing(){}setTimeout(e,t){return this}appendHeader(e,t){e=e.toLowerCase();const r=this._headers[e],s=[...Array.isArray(r)?r:[r],...Array.isArray(t)?t:[t]].filter(Boolean);return this._headers[e]=s.length>1?s:s[0],this}setHeader(e,t){return this._headers[e.toLowerCase()]=t,this}setHeaders(e){for(const[t,r]of Object.entries(e))this.setHeader(t,r);return this}getHeader(e){return this._headers[e.toLowerCase()]}getHeaders(){return this._headers}getHeaderNames(){return Object.keys(this._headers)}hasHeader(e){return e.toLowerCase()in this._headers}removeHeader(e){delete this._headers[e.toLowerCase()];}addTrailers(e){}flushHeaders(){}writeEarlyHints(e,t){typeof t=="function"&&t();}}const E=(()=>{const n=function(){};return n.prototype=Object.create(null),n})();function R(n={}){const e=new E,t=Array.isArray(n)||H(n)?n:Object.entries(n);for(const[r,s]of t)if(s){if(e[r]===void 0){e[r]=s;continue}e[r]=[...Array.isArray(e[r])?e[r]:[e[r]],...Array.isArray(s)?s:[s]];}return e}function H(n){return typeof n?.entries=="function"}function v(n={}){if(n instanceof Headers)return n;const e=new Headers;for(const[t,r]of Object.entries(n))if(r!==void 0){if(Array.isArray(r)){for(const s of r)e.append(t,String(s));continue}e.set(t,String(r));}return e}const S=new Set([101,204,205,304]);async function b(n,e){const t=new y,r=new w(t);t.url=e.url?.toString()||"/";let s;if(!t.url.startsWith("/")){const d=new URL(t.url);s=d.host,t.url=d.pathname+d.search+d.hash;}t.method=e.method||"GET",t.headers=R(e.headers||{}),t.headers.host||(t.headers.host=e.host||s||"localhost"),t.connection.encrypted=t.connection.encrypted||e.protocol==="https",t.body=e.body||null,t.__unenv__=e.context,await n(t,r);let a=r._data;(S.has(r.statusCode)||t.method.toUpperCase()==="HEAD")&&(a=null,delete r._headers["content-length"]);const u={status:r.statusCode,statusText:r.statusMessage,headers:r._headers,body:a};return t.destroy(),r.destroy(),u}async function C(n,e,t={}){try{const r=await b(n,{url:e,...t});return new Response(r.body,{status:r.status,statusText:r.statusText,headers:v(r.headers)})}catch(r){return new Response(r.toString(),{status:Number.parseInt(r.statusCode||r.code)||500,statusText:r.statusText})}}
-
-function useBase(base, handler) {
-  base = withoutTrailingSlash(base);
-  if (!base || base === "/") {
-    return handler;
-  }
-  return eventHandler(async (event) => {
-    event.node.req.originalUrl = event.node.req.originalUrl || event.node.req.url || "/";
-    const _path = event._path || event.node.req.url || "/";
-    event._path = withoutBase(event.path || "/", base);
-    event.node.req.url = event._path;
-    try {
-      return await handler(event);
-    } finally {
-      event._path = event.node.req.url = _path;
-    }
-  });
-}
 
 function hasProp(obj, prop) {
   try {
@@ -3205,41 +3185,37 @@ async function dispose(driver) {
 }
 
 const _assets = {
-  ["nitro:bundled:cache:content:content-index.json"]: {
-    import: () => import('../raw/content-index.mjs').then(r => r.default || r),
-    meta: {"type":"application/json","etag":"\"455-RvjejZsl6KYuyysUddSky4yHQ0w\"","mtime":"2025-09-25T04:04:44.273Z"}
-  },
   ["nitro:bundled:cache:content:content-navigation.json"]: {
     import: () => import('../raw/content-navigation.mjs').then(r => r.default || r),
-    meta: {"type":"application/json","etag":"\"4d1-6D4hHRjeZthEmHXm07n8vhSddZ0\"","mtime":"2025-09-25T04:04:44.272Z"}
-  },
-  ["nitro:bundled:cache:content:parsed:content:blog:2024-01-15-ultimate-guide-seattle-seafood.md"]: {
-    import: () => import('../raw/2024-01-15-ultimate-guide-seattle-seafood.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"15f0-fbHab7Z12R+7ThVN9KT7rgMpGkA\"","mtime":"2025-09-25T04:04:44.274Z"}
-  },
-  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.md"]: {
-    import: () => import('../raw/2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1c55-hi+PmNZl0071ACX8Syc/M8FSR8I\"","mtime":"2025-09-25T04:04:44.274Z"}
-  },
-  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.md"]: {
-    import: () => import('../raw/2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1ed4-4JMDZtlRHzH5mnEtvUDHmYUlUJ0\"","mtime":"2025-09-25T04:04:44.274Z"}
-  },
-  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.md"]: {
-    import: () => import('../raw/2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"17e0-RoXNMV27WVNTSyOwmoEgLsK7UdM\"","mtime":"2025-09-25T04:04:44.274Z"}
-  },
-  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.md"]: {
-    import: () => import('../raw/2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1b41-zCVvzJNWdpsrMekNP/8Dp/ZOCRI\"","mtime":"2025-09-25T04:04:44.274Z"}
+    meta: {"type":"application/json","etag":"\"4d1-6D4hHRjeZthEmHXm07n8vhSddZ0\"","mtime":"2025-09-25T16:42:56.171Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:deals:seattle-seafood-co-2024-01-15.md"]: {
     import: () => import('../raw/seattle-seafood-co-2024-01-15.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"3b5-1INFkV4yiHX8RwTevXCdXrF4dyI\"","mtime":"2025-09-25T04:04:44.274Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"3b5-1INFkV4yiHX8RwTevXCdXrF4dyI\"","mtime":"2025-09-25T16:42:56.172Z"}
+  },
+  ["nitro:bundled:cache:content:parsed:content:blog:2024-01-15-ultimate-guide-seattle-seafood.md"]: {
+    import: () => import('../raw/2024-01-15-ultimate-guide-seattle-seafood.mjs').then(r => r.default || r),
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"15f0-fbHab7Z12R+7ThVN9KT7rgMpGkA\"","mtime":"2025-09-25T16:42:56.172Z"}
+  },
+  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.md"]: {
+    import: () => import('../raw/2025-09-04-best-breakfast-in-missoula-along-i-90-top-spots-to-fuel-your-montana-drive-in-2025.mjs').then(r => r.default || r),
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1c55-hi+PmNZl0071ACX8Syc/M8FSR8I\"","mtime":"2025-09-25T16:42:56.172Z"}
+  },
+  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.md"]: {
+    import: () => import('../raw/2025-09-04-best-pizza-in-spokane-along-i-90-top-5-spots-for-road-trip-cravings-in-2025.mjs').then(r => r.default || r),
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1ed4-4JMDZtlRHzH5mnEtvUDHmYUlUJ0\"","mtime":"2025-09-25T16:42:56.172Z"}
+  },
+  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.md"]: {
+    import: () => import('../raw/2025-09-06-best-lakeside-dining-in-coeur-dalene-along-i-90-scenic-spots-for-2025.mjs').then(r => r.default || r),
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"17e0-RoXNMV27WVNTSyOwmoEgLsK7UdM\"","mtime":"2025-09-25T16:42:56.171Z"}
+  },
+  ["nitro:bundled:cache:content:parsed:content:blog:2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.md"]: {
+    import: () => import('../raw/2025-09-06-long-standing-restaurants-in-bozeman-along-i-90-famous-dishes-you-cant-miss-in-2025.mjs').then(r => r.default || r),
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"1b41-zCVvzJNWdpsrMekNP/8Dp/ZOCRI\"","mtime":"2025-09-25T16:42:56.172Z"}
   },
   ["nitro:bundled:cache:content:parsed:content:restaurants:seattle-seafood-co.md"]: {
     import: () => import('../raw/seattle-seafood-co.mjs').then(r => r.default || r),
-    meta: {"type":"text/markdown; charset=utf-8","etag":"\"9e7-wsuTGBMPgXgWClglyrCDjDyL4pE\"","mtime":"2025-09-25T04:04:44.273Z"}
+    meta: {"type":"text/markdown; charset=utf-8","etag":"\"9e7-wsuTGBMPgXgWClglyrCDjDyL4pE\"","mtime":"2025-09-25T16:42:56.172Z"}
   }
 };
 
@@ -4270,7 +4246,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "b2243bc0-c814-4a14-83ca-67ad86a60280",
+    "buildId": "786796e6-9aff-4395-bdcc-7dbd777e5ef8",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4370,7 +4346,7 @@ const _inlineRuntimeConfig = {
     "content": {
       "locales": [],
       "defaultLocale": "",
-      "integrity": 1758773076430,
+      "integrity": 1758818562595,
       "experimental": {
         "stripQueryParameters": false,
         "advanceQuery": false,
@@ -4513,16 +4489,6 @@ const _inlineRuntimeConfig = {
       "stripQueryParameters": false,
       "advanceQuery": false,
       "search": ""
-    }
-  },
-  "ipx": {
-    "baseURL": "/_ipx",
-    "alias": {},
-    "fs": {
-      "dir": "../../../dist"
-    },
-    "http": {
-      "domains": []
     }
   }
 };
@@ -5804,29 +5770,6 @@ const _Iu1VHC = defineEventHandler(async (event) => {
   return createNav(contents?.result || contents, configs);
 });
 
-const _IS_ABSOLUTE_RE = /^[/\\](?![/\\])|^[/\\]{2}(?!\.)|^[A-Za-z]:[/\\]/;
-const isAbsolute = function(p) {
-  return _IS_ABSOLUTE_RE.test(p);
-};
-
-const _5vyVwh = lazyEventHandler(() => {
-  const opts = useRuntimeConfig().ipx || {};
-  const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, globalThis._importMeta_.url))) : void 0;
-  const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
-  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : void 0;
-  if (!fsStorage && !httpStorage) {
-    throw new Error("IPX storage is not configured!");
-  }
-  const ipxOptions = {
-    ...opts,
-    storage: fsStorage || httpStorage,
-    httpStorage
-  };
-  const ipx = createIPX(ipxOptions);
-  const ipxHandler = createIPXH3Handler(ipx);
-  return useBase(opts.baseURL, ipxHandler);
-});
-
 const _lazy_gid3vq = () => import('../routes/api/business/deals.post.mjs');
 const _lazy_T8vVVR = () => import('../routes/api/business/deals/_id_.delete.mjs');
 const _lazy_FTHOn9 = () => import('../routes/api/business/deals/_id_.put.mjs');
@@ -5855,11 +5798,10 @@ const handlers = [
   { route: '/api/_content/query/:qid/**:params', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/query/:qid', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/query', handler: _Os3ZBJ, lazy: false, middleware: false, method: "get" },
-  { route: '/api/_content/cache.1758773076430.json', handler: _D8rdcN, lazy: false, middleware: false, method: "get" },
+  { route: '/api/_content/cache.1758818562595.json', handler: _D8rdcN, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation/:qid/**:params', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation/:qid', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },
   { route: '/api/_content/navigation', handler: _Iu1VHC, lazy: false, middleware: false, method: "get" },
-  { route: '/_ipx/**', handler: _5vyVwh, lazy: false, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_GNVLi6, lazy: true, middleware: false, method: undefined }
 ];
 

@@ -20,8 +20,6 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 
 const signup_post = defineEventHandler(async (event) => {
   const config = useRuntimeConfig();

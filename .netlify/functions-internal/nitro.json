@@ -1,5 +1,5 @@
 {
-  "date": "2025-09-25T04:04:48.741Z",
+  "date": "2025-09-25T16:42:58.857Z",
   "preset": "netlify",
   "framework": {
     "name": "nuxt",
@@ -9,5 +9,13 @@
     "nitro": "2.12.5"
   },
   "commands": {},
-  "config": {}
+  "config": {
+    "netlify": {
+      "images": {
+        "remote_images": [
+          "https?:\\/\\/i90eats\\.com\\/.*"
+        ]
+      }
+    }
+  }
 }

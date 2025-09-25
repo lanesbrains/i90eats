@@ -19,8 +19,6 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 
 function jsonParse(value) {
   return JSON.parse(value, regExpReviver);

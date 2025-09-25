@@ -19,6 +19,4 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 //# sourceMappingURL=main.mjs.map

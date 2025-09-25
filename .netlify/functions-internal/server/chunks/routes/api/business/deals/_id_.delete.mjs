@@ -19,8 +19,6 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 
 const _id__delete = defineEventHandler(async (event) => {
   const dealId = getRouterParam(event, "id");

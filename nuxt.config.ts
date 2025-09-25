@@ -1,22 +1,15 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-
-  modules: [
-    '@nuxt/image',
-    '@nuxtjs/tailwindcss',
-    'nuxt-gtag',
-    '@nuxt/content'
-  ],
-
-  css: [
-    '~/assets/css/main.css'
-  ],
-
+  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content'],
+  css: ['~/assets/css/main.css'],
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID,
-    enabled: true,  // force-enable in dev
+    enabled: true,
     debug: true
+  },
+  image: {
+    provider: 'netlify', // Use Netlify’s image optimization
+    domains: ['i90eats.com'] // Add your domain
   },
 
   app: {
@@ -123,22 +116,25 @@ export default defineNuxtConfig({
     }
   },
 
+  target: 'server', // Explicitly set to ensure serverless build
   nitro: {
-    preset: 'netlify',
+    preset: 'netlify', // Keep for Netlify Functions
+    output: {
+      dir: '.output', // Explicitly set output directory
+      publicDir: '.output/public', // Static assets
+      serverDir: '.output/server' // Serverless functions
+    },
     prerender: {
-      crawlLinks: true,
-      routes: ['/', '/directory'],
+      crawlLinks: false, // Disable crawlLinks to avoid prerendering issues
+      routes: ['/'], // Only prerender homepage to minimize errors
       ignore: ['/business/**', '/admin', '/api/**', '/subscribe'],
       failOnError: false
     }
   },
-
   ssr: true,
-  
   routeRules: {
-    '/subscribe': { ssr: false },
+    // '/subscribe': { ssr: false }, // Keep for client-side rendering
     '/api/**': { cors: true }
   },
-
   compatibilityDate: '2025-09-03'
 })

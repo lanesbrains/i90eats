@@ -21,8 +21,6 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import 'node:url';
-import 'ipx';
 
 function createNav(contents, configs) {
   const { navigation } = useRuntimeConfig().public.content;
