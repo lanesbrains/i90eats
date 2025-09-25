@@ -5,7 +5,7 @@
       <!-- Background Image -->
       <div
         class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
-        style="background-image: url('/i90-bg.jpg')"
+        style="background-image: url('/images/i90-bg.jpg')"
       ></div>
       <!-- Overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-40"></div>

@@ -5,13 +5,11 @@
 [functions]
   directory = ".output/server"
 
-# Redirect API requests to your server functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server"
   status = 200
 
-# Handle SPA routes (Nuxt client-side routing)
 [[redirects]]
   from = "/*"
   to = "/index.html"
