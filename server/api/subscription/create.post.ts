@@ -1,6 +1,23 @@
 import Stripe from 'stripe'
 
 export default defineEventHandler(async (event) => {
+  const body = await readBody(event)
+  const { email, locations, priceId } = body
+
+  console.log('Subscription API called with:', { email, locations: locations?.length, priceId })
+
+  // Validate input
+  if (!email || !locations || !Array.isArray(locations) || locations.length === 0) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid input data'
+    })
+  }
+
+  // For testing, return a mock success response
+  // TODO: Uncomment Stripe integration when ready
+  
+  /*
   const config = useRuntimeConfig()
   
   if (!config.stripe.secretKey) {
@@ -12,17 +29,6 @@ export default defineEventHandler(async (event) => {
   
   const stripe = new Stripe(config.stripe.secretKey)
   
-  const body = await readBody(event)
-  const { email, locations, priceId } = body
-
-  // Validate input
-  if (!email || !locations || !Array.isArray(locations) || locations.length === 0) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Invalid input data'
-    })
-  }
-
   try {
     // Create or retrieve customer
     let customer
@@ -69,5 +75,16 @@ export default defineEventHandler(async (event) => {
       statusCode: 500,
       statusMessage: 'Failed to create subscription'
     })
+  }
+  */
+
+  // Mock response for testing
+  return {
+    success: true,
+    data: {
+      checkout_url: 'https://checkout.stripe.com/test-session',
+      session_id: 'test_session_123'
+    },
+    message: 'Mock subscription created successfully'
   }
 })

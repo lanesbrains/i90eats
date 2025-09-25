@@ -3,12 +3,12 @@
     <!-- Hero Section -->
     <section
       class="bg-cover bg-center bg-no-repeat text-white py-20"
-      :style="{
-        backgroundImage: `url('${heroBackgroundImage}')`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      }"
+      style="
+        background-image: url('/i90-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      "
     >
       <div class="container-max w-max text-center p-16 bg-[#0d1e06c1]">
         <h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1>
@@ -275,8 +275,7 @@
 <script setup>
 import { ref } from "vue";
 
-// Better asset handling for production
-const heroBackgroundImage = "/i90-bg.jpg";
+// Hero background image is now inline in template
 
 // Sample featured restaurants
 const featuredRestaurants = ref([
