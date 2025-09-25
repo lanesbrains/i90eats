@@ -1,4 +1,4 @@
-import { d as defineEventHandler, u as useRuntimeConfig, r as readBody, c as createError } from '../../../nitro/nitro.mjs';
+import { d as defineEventHandler, u as useRuntimeConfig, c as createError, r as readBody } from '../../../nitro/nitro.mjs';
 import Stripe from 'stripe';
 import 'unified';
 import 'remark-parse';
@@ -25,9 +25,21 @@ import 'ipx';
 
 const create_post = defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
+  if (!config.stripe.secretKey) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "Stripe configuration missing"
+    });
+  }
   const stripe = new Stripe(config.stripe.secretKey);
   const body = await readBody(event);
   const { email, locations, priceId } = body;
+  if (!email || !locations || !Array.isArray(locations) || locations.length === 0) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Invalid input data"
+    });
+  }
   try {
     let customer;
     const existingCustomers = await stripe.customers.list({

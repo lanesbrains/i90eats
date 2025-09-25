@@ -124,14 +124,16 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    preset: 'netlify',
     prerender: {
       crawlLinks: true,
       routes: ['/', '/directory'],
-      ignore: ['/business/**', '/admin'],
+      ignore: ['/business/**', '/admin', '/api/**', '/subscribe'],
       failOnError: false
-    },
-    preset: 'netlify'
+    }
   },
+
+  ssr: true,
 
   compatibilityDate: '2025-09-03'
 })

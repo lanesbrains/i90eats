@@ -1,8 +1,8 @@
+import { f as buildAssetsURL } from '../nitro/nitro.mjs';
 import { _ as __nuxt_component_0 } from './nuxt-link-BkWIATs8.mjs';
-import { ref, withAsyncContext, withCtx, createTextVNode, unref, useSSRContext } from 'vue';
+import { ref, withAsyncContext, unref, withCtx, createTextVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderStyle, ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderAttr } from 'vue/server-renderer';
 import { u as useAsyncData, q as queryContent } from './query-CvoIjgeB.mjs';
-import '../nitro/nitro.mjs';
 import 'unified';
 import 'remark-parse';
 import 'remark-rehype';
@@ -30,6 +30,7 @@ import 'vue-router';
 import '../_/index.mjs';
 import './preview-B3_Asz5r.mjs';
 
+const heroBackgroundImage = "" + buildAssetsURL("i90-bg.DLlaXN8D.jpg");
 const _sfc_main = {
   __name: "index",
   __ssrInlineRender: true,
@@ -79,7 +80,12 @@ const _sfc_main = {
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0;
-      _push(`<div${ssrRenderAttrs(_attrs)}><section class="bg-cover bg-center bg-no-repeat text-white py-20" style="${ssrRenderStyle({ "background-image": "url('/images/i90-bg.jpg')", "background-size": "cover", "background-repeat": "no-repeat", "background-position": "center" })}"><div class="container-max w-max text-center p-16 bg-[#0d1e06c1]"><h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1><p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto"> Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food. </p><div class="flex flex-col sm:flex-row gap-4 justify-center">`);
+      _push(`<div${ssrRenderAttrs(_attrs)}><section class="bg-cover bg-center bg-no-repeat text-white py-20" style="${ssrRenderStyle({
+        backgroundImage: `url('${unref(heroBackgroundImage)}')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center"
+      })}"><div class="container-max w-max text-center p-16 bg-[#0d1e06c1]"><h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1><p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto"> Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food. </p><div class="flex flex-col sm:flex-row gap-4 justify-center">`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/subscribe",
         class: "btn-accent text-lg px-8 py-4"
@@ -227,4 +233,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-CsLqMGvt.mjs.map
+//# sourceMappingURL=index-B-k43cHc.mjs.map

@@ -117,7 +117,7 @@
               </label>
               <input
                 id="email"
-                v-model="form.email"
+                v-model="email"
                 type="email"
                 required
                 class="input-field"
@@ -143,7 +143,7 @@
                   <input
                     type="checkbox"
                     :value="location"
-                    v-model="form.selectedLocations"
+                    v-model="selectedLocations"
                     class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <span class="ml-3 text-sm text-gray-700">{{ location }}</span>
@@ -151,7 +151,7 @@
               </div>
 
               <div
-                v-if="form.selectedLocations.length === 0"
+                v-if="selectedLocations.length === 0 && email.length > 0"
                 class="text-red-600 text-sm mt-2"
               >
                 Please select at least one location
@@ -167,7 +167,7 @@
                 <label class="flex items-center">
                   <input
                     type="checkbox"
-                    v-model="form.includePremium"
+                    v-model="includePremium"
                     class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <span class="ml-3 text-sm text-gray-700">
@@ -177,7 +177,7 @@
                 <label class="flex items-center">
                   <input
                     type="checkbox"
-                    v-model="form.weeklyDigest"
+                    v-model="weeklyDigest"
                     class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <span class="ml-3 text-sm text-gray-700">
@@ -192,7 +192,7 @@
               <label class="flex items-start">
                 <input
                   type="checkbox"
-                  v-model="form.acceptTerms"
+                  v-model="acceptTerms"
                   required
                   class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 mt-1"
                 />
@@ -212,6 +212,18 @@
                   cancel anytime.
                 </span>
               </label>
+            </div>
+
+            <!-- Debug Info (remove in production) -->
+            <div
+              v-if="process.dev"
+              class="bg-gray-100 p-4 rounded text-sm mb-4"
+            >
+              <strong>Debug Info:</strong><br />
+              Email: {{ email }}<br />
+              Locations: {{ selectedLocations.length }}<br />
+              Terms: {{ acceptTerms }}<br />
+              Form Valid: {{ isFormValid }}
             </div>
 
             <!-- Submit Button -->
@@ -384,46 +396,54 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from "vue";
-
 // I-90 locations data
 const { allLocations } = useI90Locations();
 
-// Form state
-const form = reactive({
-  email: "",
-  selectedLocations: [],
-  includePremium: true,
-  weeklyDigest: true,
-  acceptTerms: false,
-});
-
+// Form state - using refs for better reactivity
+const email = ref("");
+const selectedLocations = ref([]);
+const includePremium = ref(true);
+const weeklyDigest = ref(true);
+const acceptTerms = ref(false);
 const isSubmitting = ref(false);
 
 // Computed properties
 const isFormValid = computed(() => {
-  return form.email && form.selectedLocations.length > 0 && form.acceptTerms;
+  return (
+    email.value.trim() !== "" &&
+    selectedLocations.value.length > 0 &&
+    acceptTerms.value
+  );
 });
 
 // Methods
 const handleSubscription = async () => {
-  if (!isFormValid.value) return;
+  if (!isFormValid.value) {
+    console.log("Form validation failed:", {
+      email: email.value,
+      locations: selectedLocations.value.length,
+      terms: acceptTerms.value,
+    });
+    return;
+  }
 
   isSubmitting.value = true;
 
   try {
-    const { data } = await $fetch("/api/subscription/create", {
+    const response = await $fetch("/api/subscription/create", {
       method: "POST",
       body: {
-        email: form.email,
-        locations: form.selectedLocations,
+        email: email.value,
+        locations: selectedLocations.value,
         priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR",
       },
     });
 
-    if (data.checkout_url) {
+    if (response.success && response.data?.checkout_url) {
       // Redirect to Stripe checkout
-      window.location.href = data.checkout_url;
+      window.location.href = response.data.checkout_url;
+    } else {
+      throw new Error("Invalid response from server");
     }
   } catch (error) {
     console.error("Subscription error:", error);
@@ -432,4 +452,14 @@ const handleSubscription = async () => {
     isSubmitting.value = false;
   }
 };
+
+// Debug form state
+watch([email, selectedLocations, acceptTerms], () => {
+  console.log("Form state changed:", {
+    email: email.value,
+    locations: selectedLocations.value.length,
+    terms: acceptTerms.value,
+    valid: isFormValid.value,
+  });
+});
 </script>

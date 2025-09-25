@@ -402,7 +402,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-CsLqMGvt.mjs')
+    component: () => import('./index-B-k43cHc.mjs')
   },
   {
     name: "directory",
@@ -412,7 +412,7 @@ const _routes = [
   {
     name: "subscribe",
     path: "/subscribe",
-    component: () => import('./subscribe-CAwoObN-.mjs')
+    component: () => import('./subscribe-D5KRBeLG.mjs')
   },
   {
     name: "blog",

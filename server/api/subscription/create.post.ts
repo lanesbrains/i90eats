@@ -2,10 +2,26 @@ import Stripe from 'stripe'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
+  
+  if (!config.stripe.secretKey) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Stripe configuration missing'
+    })
+  }
+  
   const stripe = new Stripe(config.stripe.secretKey)
   
   const body = await readBody(event)
   const { email, locations, priceId } = body
+
+  // Validate input
+  if (!email || !locations || !Array.isArray(locations) || locations.length === 0) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid input data'
+    })
+  }
 
   try {
     // Create or retrieve customer
