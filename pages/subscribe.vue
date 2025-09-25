@@ -215,15 +215,19 @@
             </div>
 
             <!-- Debug Info (remove in production) -->
-            <div
-              v-if="process.dev"
-              class="bg-gray-100 p-4 rounded text-sm mb-4"
-            >
+            <div class="bg-gray-100 p-4 rounded text-sm mb-4">
               <strong>Debug Info:</strong><br />
               Email: {{ email }}<br />
               Locations: {{ selectedLocations.length }}<br />
               Terms: {{ acceptTerms }}<br />
-              Form Valid: {{ isFormValid }}
+              Form Valid: {{ isFormValid }}<br />
+              <button
+                type="button"
+                @click="testForm"
+                class="mt-2 px-4 py-2 bg-blue-500 text-white rounded text-xs"
+              >
+                Test Form Values
+              </button>
             </div>
 
             <!-- Submit Button -->
@@ -396,6 +400,8 @@
 </template>
 
 <script setup>
+import { ref, computed, watch } from "vue";
+
 // I-90 locations data
 const { allLocations } = useI90Locations();
 
@@ -418,18 +424,27 @@ const isFormValid = computed(() => {
 
 // Methods
 const handleSubscription = async () => {
+  console.log("Form submission attempted", {
+    email: email.value,
+    locations: selectedLocations.value.length,
+    terms: acceptTerms.value,
+    valid: isFormValid.value,
+  });
+
   if (!isFormValid.value) {
     console.log("Form validation failed:", {
       email: email.value,
       locations: selectedLocations.value.length,
       terms: acceptTerms.value,
     });
+    alert("Please fill in all required fields");
     return;
   }
 
   isSubmitting.value = true;
 
   try {
+    console.log("Making API request...");
     const response = await $fetch("/api/subscription/create", {
       method: "POST",
       body: {
@@ -438,6 +453,8 @@ const handleSubscription = async () => {
         priceId: "price_1S3luTFqXu3q4jXwq5cIzHNR",
       },
     });
+
+    console.log("API response:", response);
 
     if (response.success && response.data?.checkout_url) {
       // Redirect to Stripe checkout
@@ -451,6 +468,15 @@ const handleSubscription = async () => {
   } finally {
     isSubmitting.value = false;
   }
+};
+
+// Test function
+const testForm = () => {
+  alert(`Form Values:
+Email: ${email.value}
+Locations: ${selectedLocations.value.length}
+Terms: ${acceptTerms.value}
+Valid: ${isFormValid.value}`);
 };
 
 // Debug form state
