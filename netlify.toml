@@ -1,14 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = ".output/public"
-  functions = ".output/server"
+  command = "npm run generate"  # Change to generate for static build
+  publish = "dist"  # Change to dist for static output
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-  force = true
-
+# Remove function redirects since we're going static
+# Keep the SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
