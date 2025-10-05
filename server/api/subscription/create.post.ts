@@ -1,7 +1,5 @@
 import Stripe from 'stripe'
 
-import Stripe from 'stripe'
-
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)

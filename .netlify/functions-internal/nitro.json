@@ -1,0 +1,21 @@
+{
+  "date": "2025-10-05T23:13:50.227Z",
+  "preset": "netlify",
+  "framework": {
+    "name": "nuxt",
+    "version": "3.19.0"
+  },
+  "versions": {
+    "nitro": "2.12.6"
+  },
+  "commands": {},
+  "config": {
+    "netlify": {
+      "images": {
+        "remote_images": [
+          "https?:\\/\\/i90eats\\.com\\/.*"
+        ]
+      }
+    }
+  }
+}

@@ -59,9 +59,7 @@
             <!-- Location Selection -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Select I-90 Locations * ({{
-                  selectedLocations.length
-                }}
+                Select I-90 Locations * ({{ selectedLocations.length }}
                 selected)
               </label>
               <div
@@ -149,6 +147,11 @@
 </template>
 
 <script setup>
+// Ensure client-side rendering for form reactivity
+definePageMeta({
+  ssr: false,
+});
+
 // Simple locations array for immediate functionality
 const locations = [
   "Seattle, WA",
@@ -163,7 +166,7 @@ const locations = [
   "Cleveland, OH",
 ];
 
-// Form state using refs
+// Form state using refs with proper reactivity
 const email = ref("");
 const selectedLocations = ref([]);
 const acceptTerms = ref(false);

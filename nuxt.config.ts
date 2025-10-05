@@ -116,39 +116,20 @@ export default defineNuxtConfig({
     }
   },
 
-  target: 'server', // Explicitly set to ensure serverless build
-  // nitro: {
-  //   preset: 'netlify', // Keep for Netlify Functions
-  //   output: {
-  //     dir: '.output', // Explicitly set output directory
-  //     publicDir: '.output/public', // Static assets
-  //     serverDir: '.output/server' // Serverless functions
-  //   },
-  //   prerender: {
-  //     crawlLinks: false, // Disable crawlLinks to avoid prerendering issues
-  //     routes: ['/'], // Only prerender homepage to minimize errors
-  //     ignore: ['/business/**', '/admin', '/api/**', '/subscribe'],
-  //     failOnError: false
-  //   }
-  // },
-    // Remove SSR and serverless function config
-  // target: 'server',
   nitro: {
-    preset: 'static', // Change to static generation
+    preset: 'netlify',
     prerender: {
-      routes: ['/'], // Prerender homepage
-      ignore: ['/admin'], // Ignore admin pages
+      crawlLinks: false,
+      routes: ['/'],
+      ignore: ['/business/**', '/admin', '/api/**'],
+      failOnError: false
     }
   },
-  // Remove ssr: true (defaults to false for static generation)
+  ssr: true,
   routeRules: {
-    '/subscribe': { prerender: false }, // Client-side only for form
-    '/directory': { prerender: false } // Client-side for subscription checks
+    '/subscribe': { ssr: false }, // Client-side for form reactivity
+    '/directory': { ssr: false }, // Client-side for subscription checks
+    '/api/**': { cors: true }
   },
-  // ssr: true,
-  // routeRules: {
-  //   // '/subscribe': { ssr: false }, // Keep for client-side rendering
-  //   '/api/**': { cors: true }
-  // },
   compatibilityDate: '2025-09-03'
 })

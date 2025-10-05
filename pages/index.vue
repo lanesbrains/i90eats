@@ -3,10 +3,11 @@
     <!-- Hero Section -->
     <section class="relative bg-gray-800 text-white py-20 overflow-hidden">
       <!-- Background Image -->
-      <NuxtImg
-        src="/images/i90-bg.jpg"
+      <img
+        src="/i90-bg.jpg"
         class="absolute inset-0 w-full h-full object-cover opacity-70"
         alt="I-90 Background"
+        loading="eager"
       />
       <!-- Overlay -->
       <div class="absolute inset-0 bg-black bg-opacity-40"></div>
