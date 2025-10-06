@@ -102,6 +102,8 @@ export default defineNuxtConfig({
       publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
       webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
     },
+    beehiivApiKey: process.env.BEEHIIV_API_KEY,
+    beehiivPublicationId: process.env.BEEHIIV_PUBLICATION_ID,
     resend: {
       apiKey: process.env.RESEND_API_KEY
     },

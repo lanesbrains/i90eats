@@ -1,14 +1,10 @@
 <template>
   <div>
     <!-- Page Header -->
-    <section
-      class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16"
-    >
+    <section class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
       <div class="container-max text-center">
         <h1 class="text-4xl font-bold mb-4">Restaurant Directory</h1>
-        <p class="text-xl text-primary-100">
-          Discover amazing restaurants along Interstate 90
-        </p>
+        <p class="text-xl text-primary-100">Discover amazing restaurants along Interstate 90</p>
       </div>
     </section>
 
@@ -19,24 +15,9 @@
           <!-- Search -->
           <div class="flex-1">
             <div class="relative">
-              <input
-                v-model="searchQuery"
-                type="text"
-                placeholder="Search restaurants..."
-                class="input-field pl-10"
-              />
-              <svg
-                class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
+              <input v-model="searchQuery" type="text" placeholder="Search restaurants..." class="input-field pl-10" />
+              <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
           </div>
@@ -45,13 +26,7 @@
           <div class="lg:w-64">
             <select v-model="selectedLocation" class="input-field">
               <option value="">All Locations</option>
-              <option
-                v-for="location in allLocations"
-                :key="location"
-                :value="location"
-              >
-                {{ location }}
-              </option>
+              <option v-for="location in allLocations" :key="location" :value="location">{{ location }}</option>
             </select>
           </div>
 
@@ -59,20 +34,12 @@
           <div class="lg:w-64">
             <select v-model="selectedCuisine" class="input-field">
               <option value="">All Cuisines</option>
-              <option
-                v-for="cuisine in availableCuisines"
-                :key="cuisine"
-                :value="cuisine"
-              >
-                {{ cuisine }}
-              </option>
+              <option v-for="cuisine in availableCuisines" :key="cuisine" :value="cuisine">{{ cuisine }}</option>
             </select>
           </div>
 
           <!-- Clear Filters -->
-          <button @click="clearFilters" class="btn-secondary whitespace-nowrap">
-            Clear Filters
-          </button>
+          <button @click="clearFilters" class="btn-secondary whitespace-nowrap">Clear Filters</button>
         </div>
       </div>
     </section>
@@ -81,28 +48,11 @@
     <section class="bg-gray-50 py-4">
       <div class="container-max">
         <div class="flex flex-col sm:flex-row justify-between items-center">
-          <p class="text-gray-600">
-            Showing {{ filteredRestaurants.length }} of
-            {{ restaurants.length }} restaurants
-          </p>
-
-          <div
-            v-if="selectedLocation || selectedCuisine"
-            class="flex items-center gap-2 mt-2 sm:mt-0"
-          >
+          <p class="text-gray-600">Showing {{ filteredRestaurants.length }} of {{ restaurants.length }} restaurants</p>
+          <div v-if="selectedLocation || selectedCuisine" class="flex items-center gap-2 mt-2 sm:mt-0">
             <span class="text-sm text-gray-500">Active filters:</span>
-            <span
-              v-if="selectedLocation"
-              class="bg-primary-100 text-primary-800 text-sm px-2 py-1 rounded-full"
-            >
-              {{ selectedLocation }}
-            </span>
-            <span
-              v-if="selectedCuisine"
-              class="bg-accent-100 text-accent-800 text-sm px-2 py-1 rounded-full"
-            >
-              {{ selectedCuisine }}
-            </span>
+            <span v-if="selectedLocation" class="bg-primary-100 text-primary-800 text-sm px-2 py-1 rounded-full">{{ selectedLocation }}</span>
+            <span v-if="selectedCuisine" class="bg-accent-100 text-accent-800 text-sm px-2 py-1 rounded-full">{{ selectedCuisine }}</span>
           </div>
         </div>
       </div>
@@ -112,306 +62,94 @@
     <section class="py-12">
       <div class="container-max">
         <div v-if="filteredRestaurants.length === 0" class="text-center py-16">
-          <div
-            class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              class="w-12 h-12 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
+          <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">
-            No restaurants found
-          </h3>
-          <p class="text-gray-600 mb-4">
-            Try adjusting your search terms or filters to find more restaurants.
-          </p>
-          <button @click="clearFilters" class="btn-primary">
-            Clear All Filters
-          </button>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">No restaurants found</h3>
+          <p class="text-gray-600 mb-4">Try adjusting your search terms or filters to find more restaurants.</p>
+          <button @click="clearFilters" class="btn-primary">Clear All Filters</button>
         </div>
 
-        <div
-          v-else
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <div
-            v-for="restaurant in filteredRestaurants"
-            :key="restaurant.slug"
-            class="card hover:shadow-xl transition-shadow duration-300"
-          >
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-for="restaurant in filteredRestaurants" :key="restaurant.slug" class="card hover:shadow-xl transition-shadow duration-300">
             <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-              <img
-                v-if="restaurant.image"
-                :src="restaurant.image"
-                :alt="restaurant.title"
-                class="w-full h-full object-cover"
-              />
-              <div
-                v-else
-                class="w-full h-full bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center"
-              >
-                <svg
-                  class="w-12 h-12 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
+              <img v-if="restaurant.image" :src="restaurant.image" :alt="restaurant.title" class="w-full h-48 object-cover" />
+              <div v-else class="w-full h-48 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                 </svg>
               </div>
             </div>
-
             <div class="p-6">
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-semibold text-gray-900">
-                  {{ restaurant.title }}
-                </h3>
-                <span
-                  v-if="restaurant.premium"
-                  class="bg-accent-100 text-accent-800 text-xs px-2 py-1 rounded-full font-medium"
-                >
-                  Premium
-                </span>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-sm text-gray-500">{{ formatDate(restaurant.createdAt) }}</span>
+                <span v-if="restaurant.premium" class="bg-accent-500 text-white text-sm px-2 py-1 rounded-full">Premium</span>
               </div>
-
-              <p class="text-gray-600 mb-2">{{ restaurant.location }}</p>
-              <p class="text-gray-500 text-sm mb-4">{{ restaurant.cuisine }}</p>
-
-              <!-- Deals Section - Behind Payment Gate or Unlocked -->
-              <div
-                v-if="!isSubscribed"
-                class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-lg p-4 mb-4 border border-primary-200"
-              >
-                <div class="text-center">
-                  <div
-                    class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3"
-                  >
-                    <svg
-                      class="w-6 h-6 text-primary-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                      />
-                    </svg>
-                  </div>
-                  <h4 class="font-semibold text-gray-900 mb-2">
-                    Exclusive Deals Available
-                  </h4>
-                  <p class="text-sm text-gray-600 mb-3">
-                    Subscribe to unlock current deals and specials from this
-                    restaurant
-                  </p>
-                  <button
-                    @click="openDealsModal(restaurant)"
-                    class="btn-primary text-sm px-4 py-2"
-                  >
-                    View Deals - $2.99/month
-                  </button>
-                </div>
-              </div>
-
-              <!-- Unlocked Deals for Subscribers -->
-              <div
-                v-else
-                class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4 border border-green-200"
-              >
-                <div class="text-center">
-                  <div
-                    class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3"
-                  >
-                    <svg
-                      class="w-6 h-6 text-green-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <h4 class="font-semibold text-gray-900 mb-2">
-                    Current Deals
-                  </h4>
-                  <div class="text-left space-y-2">
-                    <div class="bg-white rounded p-3 border border-green-200">
-                      <h5 class="font-medium text-gray-900">
-                        Happy Hour Special
-                      </h5>
-                      <p class="text-sm text-gray-600">
-                        20% off appetizers Mon-Fri 3-6pm
-                      </p>
-                      <p class="text-xs text-green-600 font-medium">
-                        Valid until Feb 29, 2024
-                      </p>
-                    </div>
-                    <div class="bg-white rounded p-3 border border-green-200">
-                      <h5 class="font-medium text-gray-900">Weekend Brunch</h5>
-                      <p class="text-sm text-gray-600">
-                        Free mimosa with entree purchase
-                      </p>
-                      <p class="text-xs text-green-600 font-medium">
-                        Saturdays & Sundays
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">{{ restaurant.title }}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">{{ restaurant.description }}</p>
               <div class="flex items-center justify-between">
-                <NuxtLink
-                  :to="`/restaurant/${restaurant.slug}`"
-                  class="btn-secondary flex-1 text-center"
-                >
-                  View Details
-                </NuxtLink>
-
-                <a
-                  v-if="restaurant.phone"
-                  :href="`tel:${restaurant.phone}`"
-                  class="ml-2 p-2 text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-colors"
-                  title="Call restaurant"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                </a>
+                <span class="text-sm text-gray-500">{{ restaurant.location }}</span>
+                <NuxtLink :to="`/directory/${restaurant.slug}`" class="text-primary-600 hover:text-primary-700 font-medium">View Details</NuxtLink>
+              </div>
+              <div class="mt-4">
+                <button @click="openDealsModal(restaurant)" class="w-full btn-secondary text-sm">View Deals</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Newsletter CTA -->
-    <section class="bg-primary-600 text-white py-16">
-      <div class="container-max text-center">
-        <h2 class="text-3xl font-bold mb-4">Get Weekly Newsletter</h2>
-        <p class="text-xl text-primary-100 mb-8">
-          Subscribe to our newsletter for food news, travel tips, and I-90
-          insights
-        </p>
-        <NuxtLink to="/subscribe" class="btn-accent text-lg px-8 py-4">
-          Subscribe Now - $2.99/month
-        </NuxtLink>
       </div>
     </section>
 
     <!-- Deals Modal -->
-    <div
-      v-if="showDealsModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-    >
-      <div
-        class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
-      >
-        <div
-          class="flex items-center justify-between p-6 border-b border-gray-200"
-        >
-          <h3 class="text-xl font-semibold text-gray-900">
-            Deals from {{ selectedRestaurant?.title }}
-          </h3>
-          <button
-            @click="closeDealsModal"
-            class="text-gray-400 hover:text-gray-600"
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
+    <div v-if="showDealsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div class="p-6">
-          <div class="text-center mb-6">
-            <div
-              class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-8 h-8 text-primary-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
+          <button @click="closeDealsModal" class="float-right text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">{{ selectedRestaurant?.title }} Deals</h3>
+          
+          <div v-if="isSubscribed">
+            <div class="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-8 border border-accent-200">
+              <h4 class="font-semibold text-gray-900 mb-2">Unlocked Deals:</h4>
+              <ul class="text-sm text-gray-700 space-y-1">
+                <li v-for="deal in selectedRestaurant?.deals" :key="deal" class="flex items-start">
+                  <svg class="w-4 h-4 text-green-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ deal }}
+                </li>
+                <li v-if="!selectedRestaurant?.deals || selectedRestaurant.deals.length === 0">No current deals—check back soon!</li>
+              </ul>
             </div>
-            <h4 class="text-lg font-semibold text-gray-900 mb-2">
-              Deals are Locked
-            </h4>
-            <p class="text-gray-600 mb-4">
-              Subscribe to our newsletter to unlock exclusive deals and specials
-              from this restaurant
-            </p>
+            <p class="text-green-600 mt-4 text-center text-sm">Deals unlocked! Enjoy your subscriber perks.</p>
           </div>
+          
+          <div v-else>
+            <div class="text-center mb-6">
+              <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-2">Deals are Locked</h4>
+              <p class="text-gray-600 mb-4">Subscribe to our newsletter to unlock exclusive deals and specials from this restaurant</p>
+            </div>
 
-          <div
-            class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-lg p-4 mb-6"
-          >
-            <h5 class="font-semibold text-gray-900 mb-2">What you'll get:</h5>
-            <ul class="text-sm text-gray-700 space-y-1">
-              <li>• Current deals and specials</li>
-              <li>• Happy hour information</li>
-              <li>• Seasonal promotions</li>
-              <li>• Exclusive subscriber-only offers</li>
-            </ul>
-          </div>
+            <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-lg p-4 mb-6">
+              <h5 class="font-semibold text-gray-900 mb-2">What you'll get:</h5>
+              <ul class="text-sm text-gray-700 space-y-1">
+                <li>• Current deals and specials</li>
+                <li>• Happy hour information</li>
+                <li>• Seasonal promotions</li>
+                <li>• Exclusive subscriber-only offers</li>
+              </ul>
+            </div>
 
-          <div class="flex gap-4">
-            <NuxtLink to="/subscribe" class="btn-primary flex-1 text-center">
-              Subscribe Now
-            </NuxtLink>
-            <button @click="closeDealsModal" class="btn-secondary flex-1">
-              Maybe Later
-            </button>
+            <div class="flex gap-4">
+              <NuxtLink to="/subscribe" class="btn-primary flex-1 text-center">Subscribe Now</NuxtLink>
+              <button @click="closeDealsModal" class="btn-secondary flex-1">Maybe Later</button>
+            </div>
           </div>
         </div>
       </div>
@@ -421,19 +159,18 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { useSubscription } from '~/composables/useSubscription';
 
-// Subscription management
 const { isSubscribed, checkSubscription } = useSubscription();
 
-// Check subscription status on page load
 onMounted(() => {
   checkSubscription();
 });
 
-// I-90 locations data
-const { allLocations } = useI90Locations();
+// Mock allLocations (replace with composable if exists)
+const allLocations = ['Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH'];
 
-// Sample restaurant data for demo (deals removed from restaurants)
+// Sample restaurant data (add deals for gating demo)
 const restaurants = [
   {
     title: "The Seattle Seafood Co.",
@@ -444,8 +181,10 @@ const restaurants = [
     phone: "(206) 555-0123",
     description: "Fresh seafood with a view of Puget Sound",
     premium: true,
+    deals: ["50% off appetizers during happy hour", "Buy one get one free on select entrees"],
     createdAt: new Date(),
     updatedAt: new Date(),
+    image: null
   },
   {
     title: "Spokane Steakhouse",
@@ -456,8 +195,10 @@ const restaurants = [
     phone: "(509) 555-0456",
     description: "Premium steaks and fine dining",
     premium: false,
+    deals: ["$10 off steaks on Tuesdays", "Free dessert with entree"],
     createdAt: new Date(),
     updatedAt: new Date(),
+    image: null
   },
   {
     title: "Missoula Montana Grill",
@@ -468,8 +209,10 @@ const restaurants = [
     phone: "(406) 555-0789",
     description: "Classic American comfort food",
     premium: false,
+    deals: ["Happy hour 4-6 PM: $5 burgers", "Family meal deal for 4"],
     createdAt: new Date(),
     updatedAt: new Date(),
+    image: null
   },
   {
     title: "Chicago Deep Dish Delight",
@@ -480,8 +223,10 @@ const restaurants = [
     phone: "(312) 555-0456",
     description: "Authentic Chicago-style deep dish pizza",
     premium: false,
+    deals: ["2 large pizzas for $25", "Free soda with large pie"],
     createdAt: new Date(),
     updatedAt: new Date(),
+    image: null
   },
   {
     title: "Boston Bistro",
@@ -492,9 +237,11 @@ const restaurants = [
     phone: "(617) 555-0789",
     description: "Classic New England cuisine with a modern twist",
     premium: true,
+    deals: ["Brunch specials: $15 bottomless mimosas", "10% off for locals"],
     createdAt: new Date(),
     updatedAt: new Date(),
-  },
+    image: null
+  }
 ];
 
 // Reactive state
@@ -512,26 +259,23 @@ const availableCuisines = computed(() => {
 
 const filteredRestaurants = computed(() => {
   return restaurants.filter((restaurant) => {
-    const matchesSearch =
-      !searchQuery.value ||
-      restaurant.title
-        .toLowerCase()
-        .includes(searchQuery.value.toLowerCase()) ||
-      restaurant.description
-        .toLowerCase()
-        .includes(searchQuery.value.toLowerCase());
+    const matchesSearch = !searchQuery.value ||
+      restaurant.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      restaurant.description.toLowerCase().includes(searchQuery.value.toLowerCase());
 
-    const matchesLocation =
-      !selectedLocation.value || restaurant.location === selectedLocation.value;
+    const matchesLocation = !selectedLocation.value || restaurant.location === selectedLocation.value;
 
-    const matchesCuisine =
-      !selectedCuisine.value || restaurant.cuisine === selectedCuisine.value;
+    const matchesCuisine = !selectedCuisine.value || restaurant.cuisine === selectedCuisine.value;
 
     return matchesSearch && matchesLocation && matchesCuisine;
   });
 });
 
 // Methods
+const formatDate = (date) => {
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format(new Date(date));
+};
+
 const clearFilters = () => {
   searchQuery.value = "";
   selectedLocation.value = "";
