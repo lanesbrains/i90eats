@@ -390,9 +390,6 @@ async function getRouteRules(arg) {
     return defu({}, ..._routeRulesMatcher.matchAll(path).reverse());
   }
 }
-const __nuxt_page_meta = {
-  ssr: false
-};
 const _routes = [
   {
     name: "admin",
@@ -413,8 +410,7 @@ const _routes = [
   {
     name: "subscribe",
     path: "/subscribe",
-    meta: __nuxt_page_meta || {},
-    component: () => import('./subscribe-7aTUFKX7.mjs')
+    component: () => import('./subscribe-D7zfUxP4.mjs')
   },
   {
     name: "test-form",

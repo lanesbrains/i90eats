@@ -147,11 +147,6 @@
 </template>
 
 <script setup>
-// Ensure client-side rendering for form reactivity
-definePageMeta({
-  ssr: false,
-});
-
 // Simple locations array for immediate functionality
 const locations = [
   "Seattle, WA",

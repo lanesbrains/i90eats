@@ -117,19 +117,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify',
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
-      ignore: ['/business/**', '/admin', '/api/**'],
-      failOnError: false
-    }
+    preset: 'netlify'
   },
   ssr: true,
-  routeRules: {
-    '/subscribe': { ssr: false }, // Client-side for form reactivity
-    '/directory': { ssr: false }, // Client-side for subscription checks
-    '/api/**': { cors: true }
-  },
   compatibilityDate: '2025-09-03'
 })

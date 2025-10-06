@@ -2,13 +2,11 @@
   command = "npm run build"
   publish = ".output/public"
 
-# Netlify Functions for API routes
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/server"
+  to = "/.netlify/functions-internal/server"
   status = 200
 
-# SPA fallback for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
