@@ -119,7 +119,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify', // Ensures serverless functions + .output
+    output: {
+      publicDir: './.output/public', // Force .output/public
+      serverDir: './.output/server'  // For functions
+    }
   },
   ssr: true,
   compatibilityDate: '2025-09-03'

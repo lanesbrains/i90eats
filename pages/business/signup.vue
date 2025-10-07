@@ -82,84 +82,85 @@
               <button @click="selectedPlan = 'premium'" class="w-full py-2 px-4 rounded-lg border-2 transition-colors" :class="selectedPlan === 'premium' ? 'bg-accent-600 text-white border-accent-600' : 'border-gray-300 text-gray-700 hover:border-accent-300'">Select Premium</button>
             </div>
           </div>
+          <ClientOnly>
+            <!-- Form Fields -->
+            <form @submit.prevent="handleSignup" class="space-y-6">
+              <!-- Restaurant Name -->
+              <div>
+                <label for="restaurantName" class="block text-sm font-medium text-gray-700 mb-2">Restaurant Name *</label>
+                <input id="restaurantName" v-model="form.restaurantName" type="text" required class="input-field" placeholder="Your restaurant name" />
+              </div>
 
-          <!-- Form Fields -->
-          <form @submit.prevent="handleSignup" class="space-y-6">
-            <!-- Restaurant Name -->
-            <div>
-              <label for="restaurantName" class="block text-sm font-medium text-gray-700 mb-2">Restaurant Name *</label>
-              <input id="restaurantName" v-model="form.restaurantName" type="text" required class="input-field" placeholder="Your restaurant name" />
-            </div>
+              <!-- Owner Email -->
+              <div>
+                <label for="ownerEmail" class="block text-sm font-medium text-gray-700 mb-2">Owner Email *</label>
+                <input id="ownerEmail" v-model="form.ownerEmail" type="email" required class="input-field" placeholder="owner@restaurant.com" />
+              </div>
 
-            <!-- Owner Email -->
-            <div>
-              <label for="ownerEmail" class="block text-sm font-medium text-gray-700 mb-2">Owner Email *</label>
-              <input id="ownerEmail" v-model="form.ownerEmail" type="email" required class="input-field" placeholder="owner@restaurant.com" />
-            </div>
+              <!-- Location -->
+              <div>
+                <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location *</label>
+                <select id="location" v-model="form.location" required class="input-field">
+                  <option value="">Select a location</option>
+                  <option v-for="location in allLocations" :key="location" :value="location">{{ location }}</option>
+                </select>
+              </div>
 
-            <!-- Location -->
-            <div>
-              <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location *</label>
-              <select id="location" v-model="form.location" required class="input-field">
-                <option value="">Select a location</option>
-                <option v-for="location in allLocations" :key="location" :value="location">{{ location }}</option>
-              </select>
-            </div>
+              <!-- Address -->
+              <div>
+                <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
+                <input id="address" v-model="form.address" type="text" required class="input-field" placeholder="123 Main St, City, State ZIP" />
+              </div>
 
-            <!-- Address -->
-            <div>
-              <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-              <input id="address" v-model="form.address" type="text" required class="input-field" placeholder="123 Main St, City, State ZIP" />
-            </div>
+              <!-- Phone Number -->
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                <input id="phone" v-model="form.phone" type="tel" required class="input-field" placeholder="(555) 123-4567" />
+              </div>
 
-            <!-- Phone Number -->
-            <div>
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-              <input id="phone" v-model="form.phone" type="tel" required class="input-field" placeholder="(555) 123-4567" />
-            </div>
+              <!-- Cuisine -->
+              <div>
+                <label for="cuisine" class="block text-sm font-medium text-gray-700 mb-2">Cuisine Type *</label>
+                <input id="cuisine" v-model="form.cuisine" type="text" required class="input-field" placeholder="American, Italian, Mexican, etc." />
+              </div>
 
-            <!-- Cuisine -->
-            <div>
-              <label for="cuisine" class="block text-sm font-medium text-gray-700 mb-2">Cuisine Type *</label>
-              <input id="cuisine" v-model="form.cuisine" type="text" required class="input-field" placeholder="American, Italian, Mexican, etc." />
-            </div>
+              <!-- Website -->
+              <div>
+                <label for="website" class="block text-sm font-medium text-gray-700 mb-2">Website (Optional)</label>
+                <input id="website" v-model="form.website" type="url" class="input-field" placeholder="https://yourrestaurant.com" />
+              </div>
 
-            <!-- Website -->
-            <div>
-              <label for="website" class="block text-sm font-medium text-gray-700 mb-2">Website (Optional)</label>
-              <input id="website" v-model="form.website" type="url" class="input-field" placeholder="https://yourrestaurant.com" />
-            </div>
+              <!-- Description -->
+              <div>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Restaurant Description *</label>
+                <textarea id="description" v-model="form.description" required rows="4" class="input-field" placeholder="Tell customers about your restaurant, specialties, atmosphere, etc."></textarea>
+              </div>
 
-            <!-- Description -->
-            <div>
-              <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Restaurant Description *</label>
-              <textarea id="description" v-model="form.description" required rows="4" class="input-field" placeholder="Tell customers about your restaurant, specialties, atmosphere, etc."></textarea>
-            </div>
+              <!-- Terms -->
+              <div>
+                <label class="flex items-start">
+                  <input type="checkbox" v-model="form.acceptTerms" required class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 mt-1" />
+                  <span class="ml-3 text-sm text-gray-700">
+                    I agree to the <a href="#" class="text-primary-600 hover:text-primary-700 underline">Terms of Service</a> and <a href="#" class="text-primary-600 hover:text-primary-700 underline">Business Agreement</a>. I understand billing will begin immediately.
+                  </span>
+                </label>
+              </div>
 
-            <!-- Terms -->
-            <div>
-              <label class="flex items-start">
-                <input type="checkbox" v-model="form.acceptTerms" required class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 mt-1" />
-                <span class="ml-3 text-sm text-gray-700">
-                  I agree to the <a href="#" class="text-primary-600 hover:text-primary-700 underline">Terms of Service</a> and <a href="#" class="text-primary-600 hover:text-primary-700 underline">Business Agreement</a>. I understand billing will begin immediately.
-                </span>
-              </label>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="pt-4">
-              <button type="submit" :disabled="!isFormValid || isSubmitting" class="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed">
-                <span v-if="isSubmitting" class="flex items-center justify-center">
-                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Processing...
-                </span>
-                <span v-else>Sign Up - ${{ selectedPlan === "premium" ? "19.99" : "9.99" }}/month</span>
-              </button>
-            </div>
-          </form>
+              <!-- Submit Button -->
+              <div class="pt-4">
+                <button type="submit" :disabled="!isFormValid || isSubmitting" class="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span v-if="isSubmitting" class="flex items-center justify-center">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </span>
+                  <span v-else>Sign Up - ${{ selectedPlan === "premium" ? "19.99" : "9.99" }}/month</span>
+                </button>
+              </div>
+            </form>
+          </ClientOnly>
         </div>
       </div>
     </section>

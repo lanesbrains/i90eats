@@ -61,6 +61,7 @@
     <!-- Restaurant Grid -->
     <section class="py-12">
       <div class="container-max">
+      <ClientOnly>
         <div v-if="filteredRestaurants.length === 0" class="text-center py-16">
           <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,9 +100,10 @@
             </div>
           </div>
         </div>
+      </ClientOnly>
       </div>
     </section>
-
+  <ClientOnly>
     <!-- Deals Modal -->
     <div v-if="showDealsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
@@ -154,6 +156,7 @@
         </div>
       </div>
     </div>
+  </ClientOnly>
   </div>
 </template>
 

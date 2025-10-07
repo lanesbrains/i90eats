@@ -2,15 +2,16 @@
   <div>
     <!-- Hero Section -->
     <section class="relative bg-gray-800 text-white py-20 overflow-hidden">
-      <!-- Background Image -->
-      <img
-        src="/i90-bg.jpg"
-        class="absolute inset-0 w-full h-full object-cover opacity-70"
-        alt="I-90 Background"
-        loading="eager"
-      />
-      <!-- Overlay -->
-      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+    <!-- Background Image -->
+    <NuxtImg
+      src="/i90-bg.jpg"
+      class="absolute inset-0 w-full h-full object-cover opacity-70"
+      alt="I-90 Background"
+      loading="eager"
+      sizes="100vw"
+    />
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
       <!-- Content -->
       <div class="relative z-10 container-max text-center px-4">
         <h1 class="text-5xl font-bold mb-6">I-90 Restaurant Deals</h1>
@@ -276,9 +277,8 @@
 
 <script setup>
 import { ref } from "vue";
-
+import BG from '@/assets/images/i90-bg.jpg?url'
 // Hero background image is now inline in template
-
 // Sample featured restaurants
 const featuredRestaurants = ref([
   {
