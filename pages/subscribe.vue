@@ -64,9 +64,9 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useSubscription } from '~/composables/useSecureSubscription';
+import { useSecureSubscription } from '~/composables/useSecureSubscription';
 
-const { setSubscribed } = useSubscription();
+const { setSubscribed } = useSecureSubscription();
 
 // Expanded locations: Original 10 + 20 biggest I-90 cities/stops
 const locations = [

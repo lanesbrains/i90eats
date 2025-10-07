@@ -59,10 +59,10 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import { useSubscription } from '~/composables/useSubscription'
+import { useSecureSubscription } from '~/composables/useSecureSubscription'
 
 // Set subscription status on success page load
-const { setSubscriptionActive } = useSubscription()
+const { setSubscriptionActive } = useSecureSubscription()
 
 onMounted(() => {
   // Extract plan from URL or default to newsletter
