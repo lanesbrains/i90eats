@@ -3,8 +3,8 @@
     <!-- Hero Section -->
     <section class="relative bg-gray-800 text-white py-20 overflow-hidden">
     <!-- Background Image -->
-    <NuxtImg
-      src="/i90-bg.jpg"
+    <img
+      src="/i90-bg.webp"
       class="absolute inset-0 w-full h-full object-cover opacity-70"
       alt="I-90 Background"
       loading="eager"
@@ -277,7 +277,6 @@
 
 <script setup>
 import { ref } from "vue";
-import BG from '@/assets/images/i90-bg.jpg?url'
 // Hero background image is now inline in template
 // Sample featured restaurants
 const featuredRestaurants = ref([

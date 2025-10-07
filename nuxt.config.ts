@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     debug: true
   },
   image: {
-    provider: 'netlify',
+    provider: 'static',
     domains: ['i90eats.com']
   },
 
@@ -95,7 +95,9 @@ export default defineNuxtConfig({
       ]
     }
   },
-
+  plugins: [
+    { src: '~/plugins/prerender.server.js', mode: 'server' }
+  ],
   runtimeConfig: {
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY,
@@ -120,8 +122,11 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: [],  // Auto-discover from content/pages
-      failOnError: false  // Ignores missing files (like your blog prerenders)
+      routes: [
+        '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
+        // Dynamic slugs auto-added by plugin above—no hard-code needed
+      ],
+      failOnError: false // Ignores missing files (like your blog prerenders)
     }
   },
   compatibilityDate: '2025-09-03'

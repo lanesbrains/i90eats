@@ -16,6 +16,11 @@
   to = "/admin/index.html"
   status = 200
 
+[[redirects]]
+  from = "/directory/*"
+  to = "/directory/index.html"
+  status = 200
+
 # SPA fallback for dynamic routes (directory, blog)
 [[redirects]]
   from = "/*"

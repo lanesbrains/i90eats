@@ -64,11 +64,21 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useSubscription } from '~/composables/useSubscription';
+import { useSubscription } from '~/composables/useSecureSubscription';
 
 const { setSubscribed } = useSubscription();
 
-const locations = ['Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH'];
+// Expanded locations: Original 10 + 20 biggest I-90 cities/stops
+const locations = [
+  // Original
+  'Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 
+  'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH',
+  // +20 more (key I-90 hubs, sorted west-east)
+  'Bellevue, WA', 'Issaquah, WA', 'Snoqualmie, WA', 'Ellensburg, WA', 'Cle Elum, WA',
+  'George, WA', 'Moses Lake, WA', 'Ritzville, WA', 'Coeur d\'Alene, ID', 'Missoula, MT',
+  'Bozeman, MT', 'Livingston, MT', 'Big Timber, MT', 'Laurel, MT', 'Wallace, ID',
+  'Butte, MT', 'Sioux Falls, SD', 'Mitchell, SD', 'Albert Lea, MN', 'Rochester, MN'
+];
 
 const email = ref('');
 const selectedLocations = ref([]);
@@ -90,7 +100,7 @@ const handleSubmit = async () => {
       body: { email: email.value, locations: selectedLocations.value }
     });
     if (response.ok) {
-      setSubscribed(); // Unlock gates
+      await signupAndVerify(email.value);  // Verify + persist
       success.value = true;
     } else {
       throw new Error(response.error || 'Signup failed');
