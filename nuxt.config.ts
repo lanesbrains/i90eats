@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content'],
+  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content'],  // Keep yours
   css: ['~/assets/css/main.css'],
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID,
@@ -8,8 +8,8 @@ export default defineNuxtConfig({
     debug: true
   },
   image: {
-    provider: 'netlify', // Use Netlify’s image optimization
-    domains: ['i90eats.com'] // Add your domain
+    provider: 'netlify',
+    domains: ['i90eats.com']
   },
 
   app: {
@@ -119,12 +119,10 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify', // Ensures serverless functions + .output
-    output: {
-      publicDir: './.output/public', // Force .output/public
-      serverDir: './.output/server'  // For functions
+    prerender: {
+      routes: [],  // Auto-discover from content/pages
+      failOnError: false  // Ignores missing files (like your blog prerenders)
     }
   },
-  ssr: true,
   compatibilityDate: '2025-09-03'
 })
