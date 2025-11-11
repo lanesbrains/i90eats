@@ -66,7 +66,7 @@
 import { ref, computed } from 'vue';
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
 
-const { setSubscribed } = useSecureSubscription();
+const { signupAndVerify } = useSecureSubscription();
 
 // Expanded locations: Original 10 + 20 biggest I-90 cities/stops
 const locations = [

@@ -14,7 +14,7 @@ export const useI90Locations = () => {
     "Coeur d'Alene, ID",
     "Kellogg, ID",
     "Wallace, ID",
-    "Lookout Pass, ID",
+    "Post Falls, ID",
     
     // Montana
     "Missoula, MT",

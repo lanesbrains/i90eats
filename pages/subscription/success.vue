@@ -62,13 +62,15 @@ import { onMounted } from 'vue'
 import { useSecureSubscription } from '~/composables/useSecureSubscription'
 
 // Set subscription status on success page load
-const { setSubscriptionActive } = useSecureSubscription()
+const { signupAndVerify } = useSecureSubscription()
 
-onMounted(() => {
-  // Extract plan from URL or default to newsletter
+onMounted(async () => {
+  // Extract email from URL or localStorage
   const urlParams = new URLSearchParams(window.location.search)
-  const plan = urlParams.get('plan') || 'newsletter'
+  const email = urlParams.get('email') || localStorage.getItem('i90_email')
   
-  setSubscriptionActive(plan)
+  if (email) {
+    await signupAndVerify(email)
+  }
 })
 </script>

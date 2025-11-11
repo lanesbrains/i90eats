@@ -96,7 +96,8 @@ export default defineNuxtConfig({
     }
   },
   plugins: [
-    { src: '~/plugins/prerender.server.js', mode: 'server' }
+    // Remove this line - the plugin is now in server/plugins/prerender.ts
+    // { src: '~/plugins/prerender.server.js', mode: 'server' }
   ],
   runtimeConfig: {
     stripe: {
@@ -124,7 +125,6 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
-        // Dynamic restaurant slugs auto-added by plugin above—no hard-code needed
       ],
       failOnError: false // Ignores missing files (like your blog prerenders)
     }
