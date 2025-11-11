@@ -140,9 +140,9 @@ const { isSubscribed } = useSecureSubscription()
 const route = useRoute()
 const slug = route.params.slug
 
-// Fetch from Decap/@nuxt/content
-const { data: restaurant } = await useAsyncData(`directory-${slug}`, () =>
-  queryContent('/directory', slug).findOne()
+// Fetch from @nuxt/content
+const { data: restaurant } = await useAsyncData(`restaurant-${slug}`, () =>
+  queryContent('/restaurants').where({ slug }).findOne()
 )
 
 const formattedDeals = computed(() => {

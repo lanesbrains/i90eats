@@ -124,7 +124,7 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
-        // Dynamic slugs auto-added by plugin above—no hard-code needed
+        // Dynamic restaurant slugs auto-added by plugin above—no hard-code needed
       ],
       failOnError: false // Ignores missing files (like your blog prerenders)
     }

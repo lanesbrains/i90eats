@@ -1,27 +1,19 @@
 // plugins/prerender.server.js
-import { defineNitroPlugin } from '#imports'
+import { defineNitroPlugin, addPrerenderRoutes } from 'nitropack'
 
 export default defineNitroPlugin(async (nitroApp) => {
-  if (process.dev || !process.static) return  // Only run on static build
+  if (process.dev) return  // Skip dev
 
-  // Query all directory entries from Decap/@nuxt/content
+  // Query all restaurant entries from @nuxt/content
   const { queryContent } = await import('#content/server')
-  const directoryEntries = await queryContent('/directory').find()
+  const restaurantEntries = await queryContent('/restaurants').find()
 
-  // Extract slugs for prerender routes
-  const directorySlugs = directoryEntries.map(entry => `/directory/${entry._path.split('/').pop()}`)  // e.g., /directory/seattle-seafood-co
+  // Extract slugs for prerender
+  const restaurantSlugs = restaurantEntries.map(entry => `/restaurant/${entry.slug}`)
 
-  // Extend nitro prerender routes
-  nitroApp.hooks.hook('render:route', (route, { event }) => {
-    // Skip if already prerendered
-    if (event.context.prerendered) return
+  // Add to prerender routes
+  addPrerenderRoutes(nitroApp, restaurantSlugs)
 
-    // Add directory slugs
-    if (directorySlugs.includes(route)) {
-      event.context.prerendered = true
-    }
-  })
-
-  // Log for debug
-  console.log(`[Prerender] Adding ${directorySlugs.length} directory slugs:`, directorySlugs.slice(0, 5))  // First 5
+  // Log
+  console.log(`[Prerender] Added ${restaurantSlugs.length} restaurant slugs:`, restaurantSlugs.slice(0, 5))
 })
