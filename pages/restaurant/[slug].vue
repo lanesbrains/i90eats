@@ -150,6 +150,54 @@ const formattedDeals = computed(() => {
   const deals = restaurant.value.deals || (restaurant.value.body && restaurant.value.body.match(/### Deals\n([\s\S]*?)(?=###|$)/)?.[1]) || ''
   return marked(deals || '')
 })
+
+// Add this after your data fetching
+useHead(() => ({
+  title: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats`,
+  meta: [
+    { 
+      name: 'description', 
+      content: restaurant.value?.description || `Find deals and information for ${restaurant.value?.title} along Interstate 90. ${restaurant.value?.cuisine} restaurant in ${restaurant.value?.location}.` 
+    },
+    { name: 'keywords', content: `${restaurant.value?.title}, ${restaurant.value?.cuisine}, restaurant deals, ${restaurant.value?.location}, I-90, dining specials` },
+    // Open Graph
+    { property: 'og:title', content: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats` },
+    { property: 'og:description', content: restaurant.value?.description },
+    { property: 'og:image', content: restaurant.value?.image || `${config.public.siteUrl}/og-image.jpg` },
+    { property: 'og:url', content: currentUrl.value },
+    { property: 'og:type', content: 'restaurant.restaurant' },
+    // Twitter
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats` },
+    { name: 'twitter:description', content: restaurant.value?.description },
+    { name: 'twitter:image', content: restaurant.value?.image || `${config.public.siteUrl}/og-image.jpg` }
+  ],
+  link: [
+    { rel: 'canonical', href: currentUrl.value }
+  ]
+}))
+
+// Add Restaurant Schema.org structured data
+useJsonld(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: restaurant.value?.title,
+  description: restaurant.value?.description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: restaurant.value?.address,
+    addressLocality: restaurant.value?.location
+  },
+  telephone: restaurant.value?.phone,
+  url: restaurant.value?.website,
+  servesCuisine: restaurant.value?.cuisine,
+  priceRange: '$$',
+  aggregateRating: restaurant.value?.rating ? {
+    '@type': 'AggregateRating',
+    ratingValue: restaurant.value?.rating,
+    reviewCount: restaurant.value?.reviewCount || 1
+  } : undefined
+}))
 </script>
 
 <style scoped>

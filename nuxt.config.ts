@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content'],  // Keep yours
+  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content', '@nuxtjs/sitemap', '@nuxtjs/robots'],  // Keep yours
   css: ['~/assets/css/main.css'],
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID,

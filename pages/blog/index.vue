@@ -125,4 +125,12 @@ useHead({
     { name: 'keywords', content: 'I-90 food blog, interstate 90 restaurants, travel food tips, road trip dining, food news' }
   ]
 })
+
+// Add this for sitemap generation
+definePageMeta({
+  sitemap: {
+    changefreq: 'daily',
+    priority: 0.8
+  }
+})
 </script>
