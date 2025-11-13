@@ -1,18 +1,11 @@
 [build]
-  command = "npm run build"  # Make sure this runs generate
-  publish = "dist"
+  command = "npm run build"
+  publish = "dist"  # Static output
 
-# Add this section:
-[functions]
-  directory = ".output/server"
+[build.environment]
+  NODE_VERSION = "20"
 
-# API routes → Netlify Functions
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/server"
-  status = 200
-
-# Admin/CMS routes
+# Admin/CMS routes (if using Decap)
 [[redirects]]
   from = "/admin"
   to = "/admin/index.html"
@@ -28,7 +21,7 @@
   to = "/directory/index.html"
   status = 200
 
-# SPA fallback
+# SPA fallback for dynamic routes (directory, blog)
 [[redirects]]
   from = "/*"
   to = "/index.html"
