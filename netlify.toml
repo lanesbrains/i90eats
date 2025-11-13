@@ -1,6 +1,6 @@
 [build]
-  command = "npm run generate"  # Make sure this runs generate
-  publish = ".output/public"
+  command = "npm run build"  # Make sure this runs generate
+  publish = "dist"
 
 # Add this section:
 [functions]
