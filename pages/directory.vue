@@ -163,87 +163,20 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
+import { useLocations } from '~/composables/useLocations';
+
 const { isSubscribed } = useSecureSubscription();
+const { allLocations } = useLocations();
 
 onMounted(() => {
 });
 
-// Mock allLocations (replace with composable if exists)
-const allLocations = ['Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH'];
-
-// Sample restaurant data (add deals for gating demo)
-const restaurants = [
-  {
-    title: "The Seattle Seafood Co.",
-    slug: "seattle-seafood-co",
-    location: "Seattle, WA",
-    cuisine: "Seafood",
-    address: "123 Pike Place, Seattle, WA 98101",
-    phone: "(206) 555-0123",
-    description: "Fresh seafood with a view of Puget Sound",
-    premium: true,
-    deals: ["50% off appetizers during happy hour", "Buy one get one free on select entrees"],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    image: null
-  },
-  {
-    title: "Spokane Steakhouse",
-    slug: "spokane-steakhouse",
-    location: "Spokane, WA",
-    cuisine: "Steakhouse",
-    address: "456 Main St, Spokane, WA 99201",
-    phone: "(509) 555-0456",
-    description: "Premium steaks and fine dining",
-    premium: false,
-    deals: ["$10 off steaks on Tuesdays", "Free dessert with entree"],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    image: null
-  },
-  {
-    title: "Missoula Montana Grill",
-    slug: "missoula-montana-grill",
-    location: "Missoula, MT",
-    cuisine: "American",
-    address: "789 Higgins Ave, Missoula, MT 59801",
-    phone: "(406) 555-0789",
-    description: "Classic American comfort food",
-    premium: false,
-    deals: ["Happy hour 4-6 PM: $5 burgers", "Family meal deal for 4"],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    image: null
-  },
-  {
-    title: "Chicago Deep Dish Delight",
-    slug: "chicago-deep-dish-delight",
-    location: "Chicago, IL",
-    cuisine: "Pizza",
-    address: "456 Michigan Ave, Chicago, IL 60601",
-    phone: "(312) 555-0456",
-    description: "Authentic Chicago-style deep dish pizza",
-    premium: false,
-    deals: ["2 large pizzas for $25", "Free soda with large pie"],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    image: null
-  },
-  {
-    title: "Boston Bistro",
-    slug: "boston-bistro",
-    location: "Boston, MA",
-    cuisine: "American",
-    address: "789 Newbury St, Boston, MA 02116",
-    phone: "(617) 555-0789",
-    description: "Classic New England cuisine with a modern twist",
-    premium: true,
-    deals: ["Brunch specials: $15 bottomless mimosas", "10% off for locals"],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    image: null
-  }
-];
+// Load all restaurants from content/restaurants directory
+const { data: restaurants } = await useAsyncData('restaurants', () =>
+  queryContent('/restaurants')
+    .sort({ createdAt: -1 }) // Most recent first
+    .find()
+);
 
 // Reactive state
 const searchQuery = ref("");
@@ -254,12 +187,14 @@ const selectedRestaurant = ref(null);
 
 // Computed properties
 const availableCuisines = computed(() => {
-  const cuisines = [...new Set(restaurants.map((r) => r.cuisine))];
+  if (!restaurants.value) return [];
+  const cuisines = [...new Set(restaurants.value.map((r) => r.cuisine))];
   return cuisines.sort();
 });
 
 const filteredRestaurants = computed(() => {
-  return restaurants.filter((restaurant) => {
+  if (!restaurants.value) return [];
+  return restaurants.value.filter((restaurant) => {
     const matchesSearch = !searchQuery.value ||
       restaurant.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
       restaurant.description.toLowerCase().includes(searchQuery.value.toLowerCase());

@@ -277,28 +277,16 @@
 
 <script setup>
 import { ref } from "vue";
+
 // Hero background image is now inline in template
-// Sample featured restaurants
-const featuredRestaurants = ref([
-  {
-    title: "The Seattle Seafood Co.",
-    slug: "seattle-seafood-co",
-    location: "Seattle, WA",
-    cuisine: "Seafood", // Added trailing comma for consistency
-  },
-  {
-    title: "Chicago Deep Dish Delight",
-    slug: "chicago-deep-dish-delight",
-    location: "Chicago, IL",
-    cuisine: "Pizza",
-  },
-  {
-    title: "Boston Bistro",
-    slug: "boston-bistro",
-    location: "Boston, MA",
-    cuisine: "American", // Added trailing comma for consistency
-  },
-]);
+
+// Load featured restaurants dynamically
+const { data: featuredRestaurants } = await useAsyncData('featured-restaurants', () =>
+  queryContent('/restaurants')
+    .sort({ premium: -1, createdAt: -1 }) // Premium first, then most recent
+    .limit(3) // Show 3 featured restaurants
+    .find()
+);
 
 // Get latest blog posts using the same pattern as blog page
 const { data: latestPosts } = await useAsyncData(
@@ -318,15 +306,8 @@ const formatDate = (date) => {
   const dateObj = typeof date === "string" ? new Date(date) : new Date(date);
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
-    month: "long",
-    day: "numeric",
+    month: "short",
+    day: "numeric"
   }).format(dateObj);
-};
-
-// Get post slug from either slug field or _path
-const getPostSlug = (post) => {
-  if (post.slug) return post.slug;
-  // Extract slug from _path (e.g., "/blog/my-post" -> "my-post")
-  return post._path?.split("/").pop() || "";
 };
 </script>

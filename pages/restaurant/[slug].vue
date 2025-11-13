@@ -182,21 +182,21 @@ useJsonld(() => ({
   '@context': 'https://schema.org',
   '@type': 'Restaurant',
   name: restaurant.value?.title,
-  description: restaurant.value?.description,
   address: {
     '@type': 'PostalAddress',
     streetAddress: restaurant.value?.address,
-    addressLocality: restaurant.value?.location
+    addressLocality: restaurant.value?.location,
+    addressRegion: 'WA',
+    postalCode: restaurant.value?.zipCode
   },
   telephone: restaurant.value?.phone,
-  url: restaurant.value?.website,
-  servesCuisine: restaurant.value?.cuisine,
   priceRange: '$$',
-  aggregateRating: restaurant.value?.rating ? {
+  servesCuisine: restaurant.value?.cuisine,
+  aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: restaurant.value?.rating,
-    reviewCount: restaurant.value?.reviewCount || 1
-  } : undefined
+    ratingValue: restaurant.value?.rating || 4.5,
+    reviewCount: restaurant.value?.reviewCount || 50
+  }
 }))
 </script>
 

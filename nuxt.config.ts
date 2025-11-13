@@ -9,7 +9,9 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'static',
-    domains: ['i90eats.com']
+    domains: ['i90eats.com', 'images.unsplash.com'],
+    format: ['webp', 'avif', 'png', 'jpg'],
+    quality: 80
   },
 
   app: {
@@ -86,7 +88,11 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'preconnect', href: 'https://www.google-analytics.com' },
-        { rel: 'preconnect', href: 'https://www.googletagmanager.com' }
+        { rel: 'preconnect', href: 'https://www.googletagmanager.com' },
+        { 
+          rel: 'stylesheet', 
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' 
+        }
       ],
       script: [
         {
@@ -127,6 +133,9 @@ export default defineNuxtConfig({
         '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
       ],
       failOnError: false // Ignores missing files (like your blog prerenders)
+    },
+    experimental: {
+      wasm: true
     }
   },
   compatibilityDate: '2025-09-03'
