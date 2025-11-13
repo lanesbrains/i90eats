@@ -128,7 +128,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify',  // ← ADD THIS LINE
     prerender: {
       routes: [
         '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
