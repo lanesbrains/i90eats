@@ -2,7 +2,7 @@
   <div>
     <ClientOnly>
       <div v-if="restaurant" class="min-h-screen">
-        <!-- Restaurant Header -->
+        <!-- Restaurant Header (Always Visible) -->
         <section class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
           <div class="container-max">
             <div class="flex flex-col lg:flex-row items-center gap-8">
@@ -64,7 +64,7 @@
           </div>
         </section>
 
-        <!-- Restaurant Details -->
+        <!-- Basic Info (Always Visible) -->
         <section class="py-16">
           <div class="container-max">
             <div class="max-w-4xl mx-auto">
@@ -78,42 +78,42 @@
                 </div>
               </div>
 
-              <!-- Description -->
+              <!-- Description (Always Visible) -->
               <div class="prose prose-lg max-w-none mb-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">About {{ restaurant.title }}</h2>
                 <div v-html="restaurant.body || restaurant.description"></div>
               </div>
 
-              <!-- Current Deals & Specials -->
+              <!-- Deals Section (Gated) -->
               <section class="py-16 bg-white">
                 <div class="text-center mb-12">
                   <h2 class="text-3xl font-bold text-gray-900 mb-4">Current Deals & Specials</h2>
                   <p class="text-xl text-gray-600">Don't miss these amazing offers!</p>
                 </div>
                 
-                <div v-if="isSubscribed" class="max-w-4xl mx-auto">
-                  <!-- Full Deals (from frontmatter or body) -->
-                  <div class="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-8 border border-accent-200">
-                    <div class="prose prose-lg max-w-none" v-html="formattedDeals"></div>
-                    <p v-if="!restaurant.deals && !restaurant.body?.includes('deals')" class="text-gray-600 mt-4 text-center">No current deals available—check back soon for updates!</p>
-                  </div>
-                </div>
-                
-                <div v-else class="text-center py-12">
-                  <!-- Locked Teaser -->
+                <!-- Paywall for Non-Subscribed Users -->
+                <div v-if="!isSubscribed" class="text-center py-12">
                   <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                     </svg>
                   </div>
-                  <h3 class="text-xl font-semibold text-gray-900 mb-2">Deals are Locked</h3>
-                  <p class="text-gray-600 mb-4">Subscribe to unlock exclusive deals from this restaurant.</p>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-2">Deals Available</h3>
+                  <p class="text-gray-600 mb-4">Subscribe to our free newsletter to unlock exclusive deals and specials from this restaurant.</p>
                   <NuxtLink to="/subscribe" class="btn-primary inline-flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Subscribe Now
+                    Subscribe for Free
                   </NuxtLink>
+                </div>
+                
+                <!-- Full Deals (for Subscribed Users) -->
+                <div v-else class="max-w-4xl mx-auto">
+                  <div class="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-8 border border-accent-200">
+                    <div class="prose prose-lg max-w-none" v-html="formattedDeals"></div>
+                    <p v-if="!restaurant.deals && !restaurant.body?.includes('deals')" class="text-gray-600 mt-4 text-center">No current deals available—check back soon for updates!</p>
+                  </div>
                 </div>
               </section>
             </div>
@@ -121,7 +121,7 @@
         </section>
       </div>
 
-      <!-- Not Found -->
+      <!-- Restaurant Not Found -->
       <div v-else class="text-center py-16">
         <h1 class="text-4xl font-bold text-gray-900 mb-4">Restaurant Not Found</h1>
         <p class="text-gray-600 mb-8">Sorry, we couldn't find that restaurant.</p>
@@ -133,17 +133,29 @@
 
 <script setup>
 import { marked } from 'marked'
-import { useSecureSubscription } from '~/composables/useSecureSubscription'  // Use secure version
+import { useSecureSubscription } from '~/composables/useSecureSubscription'
 
 const { isSubscribed } = useSecureSubscription()
 
 const route = useRoute()
 const slug = route.params.slug
 
-// Fetch from @nuxt/content
-const { data: restaurant } = await useAsyncData(`restaurant-${slug}`, () =>
-  queryContent('/restaurants').where({ slug }).findOne()
-)
+// Fetch restaurant data with more robust querying
+const { data: restaurant } = await useAsyncData(`restaurant-${slug}`, async () => {
+  // First try to find by slug
+  let found = await queryContent('/restaurants').where({ slug }).findOne()
+  
+  // If not found, try to find by _file path (fallback)
+  if (!found) {
+    const allRestaurants = await queryContent('/restaurants').find()
+    found = allRestaurants.find(r => {
+      const fileSlug = r._file?.replace('.md', '') || ''
+      return fileSlug === slug || r.slug === slug
+    })
+  }
+  
+  return found
+})
 
 const formattedDeals = computed(() => {
   if (!restaurant.value) return ''
@@ -151,7 +163,7 @@ const formattedDeals = computed(() => {
   return marked(deals || '')
 })
 
-// Add this after your data fetching
+// Add SEO meta tags
 useHead(() => ({
   title: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats`,
   meta: [
@@ -163,40 +175,18 @@ useHead(() => ({
     // Open Graph
     { property: 'og:title', content: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats` },
     { property: 'og:description', content: restaurant.value?.description },
-    { property: 'og:image', content: restaurant.value?.image || `${config.public.siteUrl}/og-image.jpg` },
-    { property: 'og:url', content: currentUrl.value },
+    { property: 'og:image', content: restaurant.value?.image || '/og-image.jpg' },
+    { property: 'og:url', content: `/restaurant/${slug}` },
     { property: 'og:type', content: 'restaurant.restaurant' },
     // Twitter
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: `${restaurant.value?.title} - Restaurant Deals | I-90 Eats` },
     { name: 'twitter:description', content: restaurant.value?.description },
-    { name: 'twitter:image', content: restaurant.value?.image || `${config.public.siteUrl}/og-image.jpg` }
+    { name: 'twitter:image', content: restaurant.value?.image || '/og-image.jpg' }
   ],
   link: [
-    { rel: 'canonical', href: currentUrl.value }
+    { rel: 'canonical', href: `/restaurant/${slug}` }
   ]
-}))
-
-// Add Restaurant Schema.org structured data
-useJsonld(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'Restaurant',
-  name: restaurant.value?.title,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: restaurant.value?.address,
-    addressLocality: restaurant.value?.location,
-    addressRegion: 'WA',
-    postalCode: restaurant.value?.zipCode
-  },
-  telephone: restaurant.value?.phone,
-  priceRange: '$$',
-  servesCuisine: restaurant.value?.cuisine,
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: restaurant.value?.rating || 4.5,
-    reviewCount: restaurant.value?.reviewCount || 50
-  }
 }))
 </script>
 

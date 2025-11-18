@@ -301,6 +301,14 @@ const { data: latestPosts } = await useAsyncData(
   }
 );
 
+// Get post slug from either slug field or _path
+const getPostSlug = (post) => {
+  if (post.slug)
+    return post.slug
+  // Extract slug from _path (e.g., "/blog/my-post" -> "my-post")
+  return post._path?.split('/').pop() || ''
+}
+
 // Methods
 const formatDate = (date) => {
   const dateObj = typeof date === "string" ? new Date(date) : new Date(date);

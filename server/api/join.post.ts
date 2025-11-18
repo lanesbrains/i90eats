@@ -7,20 +7,28 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { plan, priceId, ...listingData } = body;
 
-  // Log for now; integrate with CMS/email later
-  console.log('New business listing:', { plan, ...listingData });
-
   if (plan === 'basic' || plan === 'premium') {
-    const session = await stripe.checkout.sessions.create({
-      mode: 'subscription',
-      payment_method_types: ['card'],
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/join-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/join?canceled=1`,
-      metadata: { listingData: JSON.stringify(listingData) }
-    });
-    return { checkout_url: session.url };
+    try {
+      const session = await stripe.checkout.sessions.create({
+        mode: 'subscription',
+        payment_method_types: ['card'],
+        line_items: [{ price: priceId, quantity: 1 }],
+        success_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/business/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/business/signup?canceled=1`,
+        metadata: { 
+          listingData: JSON.stringify(listingData),
+          plan: plan
+        }
+      });
+      return { checkout_url: session.url };
+    } catch (error) {
+      console.error('Stripe error:', error);
+      throw createError({ 
+        statusCode: 500, 
+        statusMessage: 'Payment processing failed' 
+      });
+    }
   }
 
-  return { statusCode: 400, body: { error: 'Invalid plan' } };
+  throw createError({ statusCode: 400, statusMessage: 'Invalid plan' });
 });

@@ -46,17 +46,19 @@
             >
               Blog
             </NuxtLink>
+            <!-- Only show Business Dashboard for business users -->
+            <NuxtLink
+              v-if="isBusinessUser"
+              to="/business/dashboard"
+              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              Business
+            </NuxtLink>
             <NuxtLink
               to="/business/signup"
               class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
             >
-              List Your Restaurant
-            </NuxtLink>
-            <NuxtLink
-              to="/business/dashboard"
-              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-            >
-              Business Dashboard
+              List Restaurant
             </NuxtLink>
             <NuxtLink to="/subscribe" class="btn-primary"> Subscribe </NuxtLink>
           </div>
@@ -325,5 +327,15 @@ useHead({
     { type: 'application/ld+json', innerHTML: JSON.stringify(websiteSchema) }
   ],
   __dangerouslyDisableSanitizers: ['script']
+})
+
+// Check if user is a business owner (has business subscription)
+const isBusinessUser = computed(() => {
+  // TODO: Check if user has active business subscription
+  // For now, check if they have business-related localStorage or session
+  if (process.client) {
+    return localStorage.getItem('i90_business_owner') === 'true'
+  }
+  return false
 })
 </script>

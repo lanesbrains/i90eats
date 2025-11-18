@@ -12,6 +12,11 @@
     <section class="py-16">
       <div class="container-max max-w-4xl mx-auto">
         <div class="card p-8">
+          <div class="text-center mb-8">
+            <div class="text-4xl font-bold text-primary-600 mb-2">FREE</div>
+            <p class="text-gray-600">Get exclusive restaurant deals delivered to your inbox</p>
+          </div>
+
           <ClientOnly>
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <!-- Email -->
@@ -20,7 +25,7 @@
                 <input id="email" v-model="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="your@email.com" />
               </div>
 
-              <!-- Location Selection -->
+              <!-- Location Selection - Using your correct I-90 locations -->
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Select I-90 Locations * ({{ selectedLocations.length }} selected)</label>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-60 overflow-y-auto border border-gray-200 rounded-lg p-4">
@@ -47,15 +52,16 @@
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Processing...
+                    Subscribing...
                   </span>
                   <span v-else>Subscribe for Free</span>
                 </button>
               </div>
             </form>
           </ClientOnly>
+          
           <p v-if="error" class="text-red-600 mt-4 text-center">{{ error }}</p>
-          <p v-if="success" class="text-green-600 mt-4 text-center">Subscribed! Check your email for confirmation and unlock deals.</p>
+          <p v-if="success" class="text-green-600 mt-4 text-center">Welcome! Check your email for confirmation and start exploring deals.</p>
         </div>
       </div>
     </section>
@@ -65,20 +71,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
+import { useI90Locations } from '~/composables/useI90Locations';
 
 const { signupAndVerify } = useSecureSubscription();
-
-// Expanded locations: Original 10 + 20 biggest I-90 cities/stops
-const locations = [
-  // Original
-  'Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 
-  'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH',
-  // +20 more (key I-90 hubs, sorted west-east)
-  'Bellevue, WA', 'Issaquah, WA', 'Snoqualmie, WA', 'Ellensburg, WA', 'Cle Elum, WA',
-  'George, WA', 'Moses Lake, WA', 'Ritzville, WA', 'Coeur d\'Alene, ID', 'Missoula, MT',
-  'Bozeman, MT', 'Livingston, MT', 'Big Timber, MT', 'Laurel, MT', 'Wallace, ID',
-  'Butte, MT', 'Sioux Falls, SD', 'Mitchell, SD', 'Albert Lea, MN', 'Rochester, MN'
-];
+const { allLocations } = useI90Locations();
 
 const email = ref('');
 const selectedLocations = ref([]);
@@ -86,6 +82,9 @@ const acceptTerms = ref(false);
 const isSubmitting = ref(false);
 const error = ref('');
 const success = ref(false);
+
+// Use your existing correct I-90 locations
+const locations = allLocations;
 
 const isFormValid = computed(() => email.value.trim() && selectedLocations.value.length > 0 && acceptTerms.value);
 
