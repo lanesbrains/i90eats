@@ -88,25 +88,37 @@ const locations = allLocations;
 
 const isFormValid = computed(() => email.value.trim() && selectedLocations.value.length > 0 && acceptTerms.value);
 
+// In pages/subscribe.vue, replace the handleSubmit function:
+
+// In pages/subscribe.vue, replace the handleSubmit function:
+
 const handleSubmit = async () => {
   if (!isFormValid.value) return;
   isSubmitting.value = true;
   error.value = '';
   success.value = false;
+  
   try {
-    // pages/subscribe.vue
-    const response = await $fetch('/api/subscribe', {
+    // Call Beehiiv directly from the client
+    const response = await $fetch('https://api.beehiiv.com/v2/publications/f1525f16-155c-471a-b3f3-f99951f54b6c/subscriptions', {
       method: 'POST',
-      body: { email: email.value, locations: selectedLocations.value }
+      headers: { 
+        'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`,
+        'Content-Type': 'application/json' 
+      },
+      body: {
+        email: email.value,
+        send_welcome_email: true,
+        custom_fields: [{ name: 'locations', value: selectedLocations.value.join(',') }],
+        reactivate_existing: true,
+        utm_source: 'website_signup'
+      }
     });
-    if (response.ok) {
-      await signupAndVerify(email.value);  // Verify + persist
-      success.value = true;
-    } else {
-      throw new Error(response.error || 'Signup failed');
-    }
+    
+    await signupAndVerify(email.value);
+    success.value = true;
   } catch (err) {
-    error.value = err.message;
+    error.value = err.message || 'Subscription failed';
   } finally {
     isSubmitting.value = false;
   }
