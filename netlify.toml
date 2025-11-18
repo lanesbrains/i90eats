@@ -1,11 +1,17 @@
 [build]
   command = "npm run build"
-  publish = "dist"  # Static output
+  publish = ".output/public"  # Static output
 
 [build.environment]
   NODE_VERSION = "20"
 
 # Admin/CMS routes (if using Decap)
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions-internal/server"
+  status = 200
+
 [[redirects]]
   from = "/admin"
   to = "/admin/index.html"

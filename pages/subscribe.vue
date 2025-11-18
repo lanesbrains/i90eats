@@ -94,6 +94,7 @@ const handleSubmit = async () => {
   error.value = '';
   success.value = false;
   try {
+    // pages/subscribe.vue
     const response = await $fetch('/api/subscribe', {
       method: 'POST',
       body: { email: email.value, locations: selectedLocations.value }

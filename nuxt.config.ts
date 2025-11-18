@@ -126,14 +126,15 @@ export default defineNuxtConfig({
       googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID
     }
   },
-
+  ssr: true,
   nitro: {
-    prerender: {
-      routes: [
-        '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
-      ],
-      failOnError: false // Ignores missing files (like your blog prerenders)
-    },
+    // prerender: {
+    //   routes: [
+    //     '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
+    //   ],
+    //   failOnError: false // Ignores missing files (like your blog prerenders)
+    // },
+    preset: 'netlify',
     experimental: {
       wasm: true
     }
