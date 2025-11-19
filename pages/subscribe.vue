@@ -110,7 +110,7 @@ const handleSubmit = async () => {
       success.value = true;
       
       // 🚀 REDIRECT TO DIRECTORY AFTER 2 SECONDS
-      setTimeout(() => {
+      setTimeout(async () => {
         await navigateTo('/directory');
       }, 2000);
     } else {
