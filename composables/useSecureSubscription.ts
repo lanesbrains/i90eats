@@ -4,66 +4,67 @@ import { ref, onMounted } from 'vue';
 export const useSecureSubscription = () => {
   const isSubscribed = ref(false);
   const email = ref('');
-  const subscriptionData = ref(null);
+  const subscriptionToken = ref('');
 
   onMounted(async () => {
+    // Check for stored subscription token
+    const storedToken = localStorage.getItem('i90_subscription_token');
     const storedEmail = localStorage.getItem('i90_email');
-    const storedSub = localStorage.getItem('i90_subscribed');
     
-    if (storedEmail) {
+    if (storedToken && storedEmail) {
+      subscriptionToken.value = storedToken;
       email.value = storedEmail;
-      // Always verify with server on page load (more secure)
-      await verifySubscription(storedEmail);
+      await verifyToken(storedToken);
     }
   });
 
-  const verifySubscription = async (userEmail) => {
+  const verifyToken = async (token) => {
     try {
-      console.log('🔍 Verifying subscription for:', userEmail);
+      console.log('🔍 Verifying subscription token...');
       const response = await $fetch('/api/verify-sub', {
         method: 'POST',
-        body: { email: userEmail }
+        body: { token }
       });
-      
-      console.log('📋 Verification response:', response);
       
       if (response.subscribed) {
         isSubscribed.value = true;
-        subscriptionData.value = response;
-        localStorage.setItem('i90_subscribed', 'true');
-        console.log('✅ User is subscribed');
+        console.log('✅ Token verified - user is subscribed');
       } else {
         isSubscribed.value = false;
-        subscriptionData.value = null;
-        localStorage.removeItem('i90_subscribed');
-        console.log('❌ User is NOT subscribed');
+        console.log('❌ Token invalid - user not subscribed');
       }
       
       return response.subscribed;
     } catch (error) {
-      console.error('❌ Verification failed:', error);
+      console.error('❌ Token verification failed:', error);
       isSubscribed.value = false;
-      localStorage.removeItem('i90_subscribed');
       return false;
     }
   };
 
   const signupAndVerify = async (userEmail) => {
-    console.log('📝 Recording signup for:', userEmail);
+    // This will now be called from the subscribe page with the token
+    // The token will be passed from the API response
+    console.log('📝 Signup recorded for:', userEmail);
     localStorage.setItem('i90_email', userEmail);
     email.value = userEmail;
+  };
+
+  const setSubscriptionToken = async (token) => {
+    console.log('🔐 Setting subscription token...');
+    subscriptionToken.value = token;
+    localStorage.setItem('i90_subscription_token', token);
     
-    // Wait a moment for Beehiiv processing, then verify
-    setTimeout(async () => {
-      await verifySubscription(userEmail);
-    }, 1000);
+    // Verify the token immediately
+    await verifyToken(token);
   };
 
   return { 
     isSubscribed: readonly(isSubscribed), 
     email: readonly(email), 
-    subscriptionData: readonly(subscriptionData),
+    subscriptionToken: readonly(subscriptionToken),
     signupAndVerify,
-    verifySubscription 
+    setSubscriptionToken,
+    verifyToken
   };
 };

@@ -1,38 +1,33 @@
 // server/api/verify-sub.post.ts
 import { defineEventHandler, readBody } from 'h3';
-import fs from 'fs';
-import path from 'path';
+import jwt from 'jsonwebtoken';
 
 export default defineEventHandler(async (event) => {
-  const { email } = await readBody(event);
+  const { token } = await readBody(event);
   
-  if (!email) {
+  if (!token) {
+    console.log('❌ No subscription token provided');
     return { subscribed: false };
   }
 
   try {
-    // Read local subscription data
-    const subscriptionsPath = path.join(process.cwd(), 'server', 'subscriptions.json');
-    const data = fs.readFileSync(subscriptionsPath, 'utf8');
-    const subscriptions = JSON.parse(data);
+    // Verify the JWT token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
     
-    // Check if email exists and is verified
-    const subscriber = subscriptions.subscribers[email.toLowerCase()];
-    
-    if (subscriber && subscriber.verified) {
-      console.log(`✅ Verified subscription for: ${email}`);
+    if (decoded.verified && decoded.email) {
+      console.log(`✅ Valid subscription token for: ${decoded.email}`);
       return { 
         subscribed: true, 
-        locations: subscriber.locations,
-        subscribedAt: subscriber.subscribedAt 
+        email: decoded.email,
+        locations: decoded.locations,
+        subscribedAt: decoded.subscribedAt 
       };
     }
     
-    console.log(`❌ No subscription found for: ${email}`);
+    console.log('❌ Invalid subscription token');
     return { subscribed: false };
   } catch (error) {
-    console.error('❌ Verification error:', error);
-    // If file doesn't exist or can't be read, assume not subscribed
+    console.error('❌ Token verification failed:', error.message);
     return { subscribed: false };
   }
 });

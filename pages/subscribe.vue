@@ -72,10 +72,8 @@
 import { ref, computed } from 'vue';
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
 import { useI90Locations } from '~/composables/useI90Locations';
-
-const { signupAndVerify } = useSecureSubscription();
+const { signupAndVerify, setSubscriptionToken } = useSecureSubscription();
 const { allLocations } = useI90Locations();
-
 const email = ref('');
 const selectedLocations = ref([]);
 const acceptTerms = ref(false);
@@ -105,16 +103,18 @@ const handleSubmit = async () => {
       }
     });
     
-    if (response.ok) {
+    if (response.ok && response.subscriptionToken) {
+      // Store the secure token
+      await setSubscriptionToken(response.subscriptionToken);
       await signupAndVerify(email.value);
       success.value = true;
       
-      // 🚀 REDIRECT TO DIRECTORY AFTER 2 SECONDS
+      // Redirect after success
       setTimeout(async () => {
         await navigateTo('/directory');
       }, 2000);
     } else {
-      throw new Error(response.error || 'Subscription failed');
+      throw new Error(response.message || 'Subscription failed');
     }
   } catch (err) {
     error.value = err.message || 'Subscription failed';

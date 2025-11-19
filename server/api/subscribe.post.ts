@@ -1,7 +1,6 @@
 // server/api/subscribe.post.ts
 import { defineEventHandler, readBody, createError } from 'h3';
-import fs from 'fs';
-import path from 'path';
+import jwt from 'jsonwebtoken';
 
 export default defineEventHandler(async (event) => {
   const { beehiivApiKey, beehiivPublicationId } = useRuntimeConfig();
@@ -37,31 +36,23 @@ export default defineEventHandler(async (event) => {
 
     console.log('✅ Beehiiv subscription successful');
 
-    // 📝 STORE LOCALLY (for verification)
-    const subscriptionsPath = path.join(process.cwd(), 'server', 'subscriptions.json');
-    
-    // Read existing subscriptions
-    let subscriptions = { subscribers: {} };
-    try {
-      const data = fs.readFileSync(subscriptionsPath, 'utf8');
-      subscriptions = JSON.parse(data);
-    } catch (err) {
-      // File doesn't exist yet, use default
-    }
+    // 🔐 CREATE SECURE SUBSCRIPTION TOKEN
+    const subscriptionToken = jwt.sign(
+      {
+        email: email.toLowerCase(),
+        locations,
+        subscribedAt: new Date().toISOString(),
+        verified: true
+      },
+      process.env.JWT_SECRET || 'fallback-secret', // Use your JWT_SECRET from env
+      { expiresIn: '1y' } // Valid for 1 year
+    );
 
-    // Add/update subscriber
-    subscriptions.subscribers[email.toLowerCase()] = {
-      subscribedAt: new Date().toISOString(),
-      locations: locations,
-      verified: true,
-      beehiivId: beehiivResponse?.id || null
+    return { 
+      ok: true, 
+      subscriptionToken,
+      message: 'Successfully subscribed!' 
     };
-
-    // Save back to file
-    fs.writeFileSync(subscriptionsPath, JSON.stringify(subscriptions, null, 2));
-    console.log('💾 Local subscription recorded');
-
-    return { ok: true, data: beehiivResponse };
   } catch (error) {
     console.error('❌ Subscription error:', error);
     throw createError({ 
