@@ -6,6 +6,7 @@ cuisine: "Seafood"
 address: "1200 N Wells St, Chicago, IL 60610"
 phone: "(312) 642-8458"
 website: "https://blueislandoysterbar.com"
+image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&h=600&fit=crop"
 description: "Blue Island Oyster Bar has been Chicago's premier seafood destination since 1982, offering the freshest oysters, seafood, and a lively atmosphere. Our commitment to quality and sustainability makes us a favorite among seafood lovers."
 premium: false
 createdAt: "2024-01-01"

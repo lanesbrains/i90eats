@@ -6,6 +6,7 @@ cuisine: "Contemporary American"
 address: "1723 N Halsted St, Chicago, IL 60614"
 phone: "(312) 867-0110"
 website: "https://alinearestaurant.com"
+image: "https://images.squarespace-cdn.com/content/v1/6091adceeec0df416e2b512e/571c1030-989d-49e1-a91b-ab33e6dff688/SDP03264.jpg?format=1000w"
 description: "Alinea represents the pinnacle of culinary innovation in Chicago..."
 premium: true
 createdAt: "2024-01-01"

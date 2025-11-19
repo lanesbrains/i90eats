@@ -6,6 +6,7 @@ cuisine: "Pacific Northwest"
 address: "2576 Aurora Ave N, Seattle, WA 98109"
 phone: "(206) 283-3313"
 website: "https://canlis.com"
+image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop"
 description: "Canlis has been a Pacific Northwest institution since 1950, offering exceptional Pacific Northwest cuisine with stunning views of Lake Union. Our menu celebrates the region's freshest ingredients prepared with innovative techniques."
 premium: true
 createdAt: "2024-01-01"

@@ -130,22 +130,22 @@
                 </div>
                 
                 <!-- Deals Preview (only for subscribers) -->
-                <div v-if="isSubscribed && restaurant.deals && restaurant.deals.length > 0" class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                <div v-if="isSubscribed && restaurant.dealCount > 0" class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
                   <div class="flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span class="text-sm text-green-800 font-medium">{{ restaurant.deals.length }} deals available</span>
+                    <span class="text-sm text-green-800 font-medium">{{ restaurant.dealCount }} deals available</span>
                   </div>
                 </div>
 
                 <!-- Locked Deals Message -->
-                <div v-else-if="!isSubscribed && restaurant.deals && restaurant.deals.length > 0" class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <div v-else-if="!isSubscribed && restaurant.dealCount > 0" class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
                   <div class="flex items-center gap-2">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
-                    <span class="text-sm text-gray-600">Deals available with free subscription</span>
+                    <span class="text-sm text-gray-600">{{ restaurant.dealCount }} deals available</span>
                   </div>
                 </div>
               </div>
@@ -193,13 +193,25 @@ watch(isSubscribed, (newVal) => {
 const freePreviewCount = 3; // Show first 3 restaurants fully
 const previewLimit = 6; // Show first 6 restaurants, lock the rest
 
+const countDeals = (dealsString) => {
+  if (!dealsString) return 0;
+  // Count ### headers (each represents a deal section)
+  const matches = dealsString.match(/### .+/g);
+  return matches ? matches.length : 0;
+};
 // Load all restaurants from content/restaurants directory
 const { data: restaurants } = await useAsyncData('directory-restaurants', () =>
   queryContent('/restaurants')
-    .sort({ createdAt: -1 }) // Most recent first
+    .sort({ premium: -1, createdAt: -1 }) // Premium first, then most recent
     .find()
 );
-
+// Process restaurants to add deal counts
+const processedRestaurants = computed(() => {
+  return restaurants.value?.map(restaurant => ({
+    ...restaurant,
+    dealCount: countDeals(restaurant.deals)
+  })) || [];
+});
 // Reactive state
 const searchQuery = ref("");
 const selectedLocation = ref("");
@@ -211,24 +223,32 @@ const availableCuisines = computed(() => {
   return cuisines.sort();
 });
 
+// ... existing filters ...
 const filteredRestaurants = computed(() => {
-  if (!restaurants.value || !Array.isArray(restaurants.value)) return [];
+  let filtered = processedRestaurants.value;
   
-  return restaurants.value.filter((restaurant) => {
-    // Ensure restaurant has required properties
-    if (!restaurant || !restaurant.title) return false;
-    
-    const matchesSearch = !searchQuery.value ||
-      restaurant.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      (restaurant.description && restaurant.description.toLowerCase().includes(searchQuery.value.toLowerCase()));
-
-    const matchesLocation = !selectedLocation.value || restaurant.location === selectedLocation.value;
-
-    const matchesCuisine = !selectedCuisine.value || restaurant.cuisine === selectedCuisine.value;
-
-    return matchesSearch && matchesLocation && matchesCuisine;
-  });
+  if (selectedLocation.value) {
+    filtered = filtered.filter(r => r.location === selectedLocation.value);
+  }
+  
+  if (selectedCuisine.value) {
+    filtered = filtered.filter(r => r.cuisine === selectedCuisine.value);
+  }
+  
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase();
+    filtered = filtered.filter(r => 
+      r.title.toLowerCase().includes(query) ||
+      r.description.toLowerCase().includes(query) ||
+      r.cuisine.toLowerCase().includes(query) ||
+      r.location.toLowerCase().includes(query)
+    );
+  }
+  
+  return filtered;
 });
+
+// ... rest of existing code ...
 
 // Show different amounts based on subscription status
 const visibleRestaurants = computed(() => {
