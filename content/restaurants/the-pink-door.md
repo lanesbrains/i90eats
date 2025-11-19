@@ -6,7 +6,7 @@ cuisine: "Italian"
 address: "1919 Post Alley, Seattle, WA 98101"
 phone: "(206) 443-3241"
 website: "https://thepinkdoor.net"
-image: "https://images.unsplash.com/photo-1551218377-a37d4ce8a0e0?w=800&h=600&fit=crop"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Seattle_-_The_Pink_Door_01.jpg/1280px-Seattle_-_The_Pink_Door_01.jpg"
 description: "A hidden gem in Pike Place Market, The Pink Door offers authentic Italian cuisine with a touch of whimsy. Behind the unassuming pink door lies a warm, eclectic space serving handmade pastas, fresh seafood, and classic Italian dishes."
 premium: true
 createdAt: "2024-01-01"

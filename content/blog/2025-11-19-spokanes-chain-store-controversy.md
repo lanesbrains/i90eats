@@ -1,10 +1,10 @@
 ---
 title: "Spokane's Chain Store War: Big Box Invasion vs. Local Business Survival"
-description: "The heated battle over chain restaurants in Spokane - are national brands destroying local character or bringing needed competition?"
-image: "/images/spokane-chain-vs-local.jpg"
-alt: "Chain restaurant vs local eatery in Spokane Washington"
-publishedAt: "2025-11-21"
+slug: "spokanes-chain-store-controversy"
 author: "I-90 Eats"
+publishDate: "2025-11-21"
+excerpt: "The heated battle over chain restaurants in Spokane - are national brands destroying local character or bringing needed competition?"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/MK02733_Spokane_Upper_Falls_3x2_crop.jpg/1280px-MK02733_Spokane_Upper_Falls_3x2_crop.jpg"
 tags:
   [
     "Spokane",
@@ -15,6 +15,7 @@ tags:
     "Urban Development",
     "Business Competition",
   ]
+published: true
 ---
 
 # Spokane's Chain Store War: Big Box Invasion vs. Local Business Survival

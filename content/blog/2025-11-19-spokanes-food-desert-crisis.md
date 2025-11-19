@@ -1,10 +1,10 @@
 ---
 title: "Spokane's Food Desert Shame: Why City Residents Go Hungry While Suburbs Feast"
-description: "The shocking truth about food access inequality in Spokane - urban residents face empty shelves while suburban neighbors enjoy abundance"
-image: "/images/spokane-food-desert.jpg"
-alt: "Empty grocery store in urban Spokane vs suburban grocery abundance"
-publishedAt: "2025-11-19"
-author: "Breakfast King"
+slug: "spokanes-food-desert-crisis"
+author: "I-90 Eats"
+publishDate: "2025-11-19"
+excerpt: "The shocking truth about food access inequality in Spokane - urban residents face empty shelves while suburban neighbors enjoy abundance"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Kemp_and_Herbert_Building.JPG/1280px-Kemp_and_Herbert_Building.JPG"
 tags:
   [
     "Spokane",
@@ -15,6 +15,7 @@ tags:
     "Washington State",
     "Social Justice",
   ]
+published: true
 ---
 
 # Spokane's Food Desert Shame: Why City Residents Go Hungry While Suburbs Feast

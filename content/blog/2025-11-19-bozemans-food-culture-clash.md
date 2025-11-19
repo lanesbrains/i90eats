@@ -1,10 +1,10 @@
 ---
 title: "Bozeman's Food Culture Clash: Silicon Valley vs. Cowboy Country"
-description: "The explosive debate dividing Bozeman: Tech money vs. traditional ranching culture in Montana's food scene"
-image: "/images/bozeman-food-clash.jpg"
-alt: "Modern restaurant vs traditional cowboy cafe in Bozeman Montana"
-publishedAt: "2025-11-18"
+slug: "bozemans-food-culture-clash"
 author: "I-90 Eats"
+publishDate: "2025-11-18"
+excerpt: "The explosive debate dividing Bozeman: Tech money vs. traditional ranching culture in Montana's food scene"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/2008-03-15_Montana_Grill_open_despite_the_tornado_damage.jpg/1280px-2008-03-15_Montana_Grill_open_despite_the_tornado_damage.jpg"
 tags:
   [
     "Bozeman",
@@ -15,6 +15,7 @@ tags:
     "Farm to Table",
     "Ranching Culture",
   ]
+published: true
 ---
 
 # Bozeman's Food Culture Clash: When Silicon Valley Meets Cowboy Country
