@@ -176,19 +176,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
 import { useI90Locations } from '~/composables/useI90Locations';
-// Add debugging
-console.log('🔍 Directory loaded - Subscription status:', isSubscribed.value);
 
+
+
+const { isSubscribed } = useSecureSubscription();
+const { allLocations } = useI90Locations();
 // Watch for changes
+console.log('🔍 Directory loaded - Subscription status:', isSubscribed.value);
 watch(isSubscribed, (newVal) => {
   console.log('📡 Subscription status changed to:', newVal);
 });
-const { isSubscribed } = useSecureSubscription();
-const { allLocations } = useI90Locations();
-
 // Configuration for partial access
 const freePreviewCount = 3; // Show first 3 restaurants fully
 const previewLimit = 6; // Show first 6 restaurants, lock the rest
