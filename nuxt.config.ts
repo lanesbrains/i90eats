@@ -94,11 +94,6 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' 
         }
       ],
-      script: [
-        {
-          src: 'https://identity.netlify.com/v1/netlify-identity-widget.js'
-        }
-      ]
     }
   },
   plugins: [
@@ -128,13 +123,6 @@ export default defineNuxtConfig({
   },
   ssr: true,
   nitro: {
-    // prerender: {
-    //   routes: [
-    //     '/', '/subscribe', '/directory', '/join', '/join-success', '/blog'  // Core pages
-    //   ],
-    //   failOnError: false // Ignores missing files (like your blog prerenders)
-    // },
-    preset: 'netlify',
     experimental: {
       wasm: true
     }

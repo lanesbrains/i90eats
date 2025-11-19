@@ -7,10 +7,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@netlify/plugin-functions-install-core": "^1.0.0",
     "@nuxt/content": "^2.13.4",
     "@nuxt/image": "^1.11.0",
     "@nuxtjs/robots": "^5.5.6",
