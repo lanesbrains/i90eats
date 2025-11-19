@@ -1,82 +1,72 @@
 // server/api/subscribe.post.ts
 import { defineEventHandler, readBody, createError } from 'h3';
+import fs from 'fs';
+import path from 'path';
 
 export default defineEventHandler(async (event) => {
   const { beehiivApiKey, beehiivPublicationId } = useRuntimeConfig();
   const body = await readBody(event);
   const { email, locations } = body;
 
-  console.log('🔍 DEBUG: Starting subscription request');
-  console.log('📧 Email:', email);
-  console.log('📍 Locations:', locations);
-  console.log('🔑 API Key exists:', !!beehiivApiKey);
-  console.log('📄 Publication ID:', beehiivPublicationId);
-
-  // VALIDATION: Check required fields
+  // VALIDATION
   if (!email || !email.includes('@')) {
-    console.log('❌ Email validation failed');
-    throw createError({ 
-      statusCode: 400, 
-      statusMessage: 'Valid email is required' 
-    });
+    throw createError({ statusCode: 400, statusMessage: 'Valid email required' });
   }
-
   if (!locations || !Array.isArray(locations) || locations.length === 0) {
-    console.log('❌ Locations validation failed');
-    throw createError({ 
-      statusCode: 400, 
-      statusMessage: 'At least one location is required' 
-    });
+    throw createError({ statusCode: 400, statusMessage: 'Select at least one location' });
   }
 
   try {
-    console.log('🚀 Calling Beehiiv API...');
+    console.log('🚀 Subscribing to Beehiiv...');
     
-    const apiUrl = `https://api.beehiiv.com/v2/publications/${beehiivPublicationId}/subscriptions`;
-    console.log('🌐 API URL:', apiUrl);
-    
-    const requestBody = {
-      email,
-      send_welcome_email: true,
-      custom_fields: [{ name: 'locations', value: locations.join(',') }],
-      reactivate_existing: true,
-      utm_source: 'website_signup'
-    };
-    console.log('📤 Request body:', JSON.stringify(requestBody, null, 2));
-
-    // Calls Beehiiv API to add subscriber
-    const response = await $fetch(apiUrl, {
+    // Call Beehiiv API
+    const beehiivResponse = await $fetch(`https://api.beehiiv.com/v2/publications/${beehiivPublicationId}/subscriptions`, {
       method: 'POST',
       headers: { 
         Authorization: `Bearer ${beehiivApiKey}`, 
         'Content-Type': 'application/json' 
       },
-      body: requestBody
+      body: {
+        email,
+        send_welcome_email: true,
+        custom_fields: [{ name: 'locations', value: locations.join(',') }],
+        reactivate_existing: true,
+        utm_source: 'website_signup'
+      }
     });
-  
-    console.log('✅ Beehiiv API success:', response);
-    return { ok: true, data: response };
-  } catch (error) {
-    console.error('❌ Beehiiv API error details:', {
-      message: error.message,
-      status: error.status,
-      statusText: error.statusText,
-      data: error.data,
-      stack: error.stack
-    });
+
+    console.log('✅ Beehiiv subscription successful');
+
+    // 📝 STORE LOCALLY (for verification)
+    const subscriptionsPath = path.join(process.cwd(), 'server', 'subscriptions.json');
     
-    // Check for common issues
-    if (error.status === 401) {
-      console.error('🚫 AUTH ISSUE: Check your BEEHIIV_API_KEY');
-    } else if (error.status === 404) {
-      console.error('🚫 NOT FOUND: Check your BEEHIIV_PUBLICATION_ID');
-    } else if (error.status === 422) {
-      console.error('🚫 VALIDATION: Check request format');
+    // Read existing subscriptions
+    let subscriptions = { subscribers: {} };
+    try {
+      const data = fs.readFileSync(subscriptionsPath, 'utf8');
+      subscriptions = JSON.parse(data);
+    } catch (err) {
+      // File doesn't exist yet, use default
     }
-    
+
+    // Add/update subscriber
+    subscriptions.subscribers[email.toLowerCase()] = {
+      subscribedAt: new Date().toISOString(),
+      locations: locations,
+      verified: true,
+      beehiivId: beehiivResponse?.id || null
+    };
+
+    // Save back to file
+    fs.writeFileSync(subscriptionsPath, JSON.stringify(subscriptions, null, 2));
+    console.log('💾 Local subscription recorded');
+
+    return { ok: true, data: beehiivResponse };
+  } catch (error) {
+    console.error('❌ Subscription error:', error);
     throw createError({ 
       statusCode: 500, 
-      statusMessage: `Newsletter subscription failed: ${error.message || 'Unknown error'}` 
+      statusMessage: `Subscription failed: ${error.message || 'Unknown error'}` 
     });
   }
 });

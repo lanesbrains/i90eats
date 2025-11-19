@@ -1,0 +1,4 @@
+{
+    "subscribers": {},
+    "_note": "Format: 'email': { subscribedAt: timestamp, verified: true }"
+  }
