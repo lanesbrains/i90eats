@@ -8,7 +8,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-8">
               <!-- Restaurant Image -->
               <div class="w-full lg:w-96 h-64 lg:h-96 rounded-xl overflow-hidden bg-white/10 backdrop-blur-sm">
-                <NuxtImg 
+                <img 
                   v-if="restaurant.image" 
                   :src="restaurant.image" 
                   :alt="restaurant.title"

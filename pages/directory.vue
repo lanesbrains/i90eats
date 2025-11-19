@@ -100,7 +100,7 @@
 
               <!-- Restaurant Card Content -->
               <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-                <NuxtImg 
+                <img 
                   v-if="restaurant.image" 
                   :src="restaurant.image" 
                   :alt="restaurant.title"

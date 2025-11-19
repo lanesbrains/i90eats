@@ -145,8 +145,15 @@
             :key="restaurant.slug"
             class="card"
           >
-            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+          <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+              <img
+                v-if="restaurant.image"
+                :src="restaurant.image"
+                :alt="restaurant.title"
+                class="w-full h-48 object-cover"
+              />
               <div
+                v-else
                 class="w-full h-48 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center"
               >
                 <svg

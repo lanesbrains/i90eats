@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     debug: true
   },
   image: {
-    provider: 'static',
+    // provider: 'static',
     domains: ['i90eats.com', 'images.unsplash.com'],
     format: ['webp', 'avif', 'png', 'jpg'],
     quality: 80
