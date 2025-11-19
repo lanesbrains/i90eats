@@ -99,24 +99,21 @@ const handleSubmit = async () => {
   success.value = false;
   
   try {
-    // Call Beehiiv directly from the client
-    const response = await $fetch('https://api.beehiiv.com/v2/publications/f1525f16-155c-471a-b3f3-f99951f54b6c/subscriptions', {
+    // Use YOUR server API (not Beehiiv directly)
+    const response = await $fetch('/api/subscribe', {
       method: 'POST',
-      headers: { 
-        'Authorization': `Bearer ${process.env.BEEHIIV_API_KEY}`,
-        'Content-Type': 'application/json' 
-      },
-      body: {
-        email: email.value,
-        send_welcome_email: true,
-        custom_fields: [{ name: 'locations', value: selectedLocations.value.join(',') }],
-        reactivate_existing: true,
-        utm_source: 'website_signup'
+      body: { 
+        email: email.value, 
+        locations: selectedLocations.value 
       }
     });
     
-    await signupAndVerify(email.value);
-    success.value = true;
+    if (response.ok) {
+      await signupAndVerify(email.value);
+      success.value = true;
+    } else {
+      throw new Error(response.error || 'Subscription failed');
+    }
   } catch (err) {
     error.value = err.message || 'Subscription failed';
   } finally {
