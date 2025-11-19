@@ -159,8 +159,19 @@ const { data: restaurant } = await useAsyncData(`restaurant-${slug}`, async () =
 
 const formattedDeals = computed(() => {
   if (!restaurant.value) return ''
-  const deals = restaurant.value.deals || (restaurant.value.body && restaurant.value.body.match(/### Deals\n([\s\S]*?)(?=###|$)/)?.[1]) || ''
-  return marked(deals || '')
+  console.log('📝 Formatting deals for:', restaurant.value.title)
+  
+  // Use the deals field from frontmatter
+  const deals = restaurant.value.deals || 'No deals currently available.'
+  console.log('🍽️ Deals content:', deals ? 'Found' : 'Not found')
+  
+  // If deals is already HTML/markdown, return as-is
+  if (deals.includes('#') || deals.includes('<')) {
+    return marked(deals)
+  }
+  
+  // Otherwise, treat as plain text
+  return `<div class="prose prose-lg">${deals.replace(/\n/g, '<br>')}</div>`
 })
 
 // Add SEO meta tags

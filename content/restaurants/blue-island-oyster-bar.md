@@ -10,6 +10,18 @@ description: "Blue Island Oyster Bar has been Chicago's premier seafood destinat
 premium: false
 createdAt: "2024-01-01"
 updatedAt: "2024-12-01"
+deals: |
+  ## 🦪 Oyster & Seafood Specials
+
+  ### Oyster Happy Hour
+  - **50% off** all oysters (normally $2.50-$3.50 each)
+  - **Valid:** Monday-Friday, 3 PM - 6 PM
+  - **Fresh daily selection**
+
+  ### Seafood Tower Deal
+  - **$15 off** our signature seafood tower
+  - **Valid:** Weekend evenings
+  - **Serves 2-4 people**
 ---
 
 # Blue Island Oyster Bar & Seafood

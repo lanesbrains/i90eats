@@ -10,6 +10,18 @@ description: "A hidden gem in Pike Place Market, The Pink Door offers authentic 
 premium: true
 createdAt: "2024-01-01"
 updatedAt: "2024-12-01"
+deals: |
+  ## 🎭 Sicilian-Inspired Deals
+
+  ### Pasta Night Special
+  - **Buy one pasta, get second 50% off**
+  - **Valid:** Tuesday evenings
+  - **All pasta dishes included**
+
+  ### Wine & Dine Deal
+  - **$10 off** wine bottles with dinner
+  - **Valid:** Wednesday-Friday
+  - **Italian wine selection**
 ---
 
 # The Pink Door

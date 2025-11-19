@@ -6,10 +6,27 @@ cuisine: "Contemporary American"
 address: "1723 N Halsted St, Chicago, IL 60614"
 phone: "(312) 867-0110"
 website: "https://alinearestaurant.com"
-description: "Alinea represents the pinnacle of culinary innovation in Chicago, offering a multi-course tasting experience that pushes the boundaries of gastronomy. Each dish is a work of art, crafted by Chef Grant Achatz and his team."
+description: "Alinea represents the pinnacle of culinary innovation in Chicago..."
 premium: true
 createdAt: "2024-01-01"
 updatedAt: "2024-12-01"
+deals: |
+  ## 🎉 Exclusive I-90 Eats Deals
+
+  ### Tasting Menu Special
+  - **25% off** our 12-course tasting menu (normally $395)
+  - **Valid:** Monday-Thursday evenings
+  - **Minimum 2 guests**
+
+  ### Wine Pairing Discount
+  - **$75 off** our wine pairing experience (normally $195)
+  - **Includes:** 12 carefully selected wines with courses
+  - **Valid:** Weekend reservations
+
+  ### Early Bird Special
+  - **$50 off** reservations before 5:30 PM
+  - **Valid:** Tuesday-Friday
+  - **Subject to availability**
 ---
 
 # Alinea

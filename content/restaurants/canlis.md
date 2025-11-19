@@ -10,6 +10,18 @@ description: "Canlis has been a Pacific Northwest institution since 1950, offeri
 premium: true
 createdAt: "2024-01-01"
 updatedAt: "2024-12-01"
+deals: |
+  ## 🍽️ Canlis Special Offers
+
+  ### Waterfront Dining Deal
+  - **20% off** lunch tasting menu (normally $125)
+  - **Valid:** Monday-Friday, 11 AM - 2 PM
+  - **Lake view guaranteed**
+
+  ### Wine Tasting Special
+  - **$25 off** wine pairings with dinner
+  - **Valid:** Tuesday evenings
+  - **Includes 6 wine selections**
 ---
 
 # Canlis

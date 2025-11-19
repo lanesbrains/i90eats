@@ -10,6 +10,18 @@ description: "The Capital Grille brings classic steakhouse dining to Boston's Ba
 premium: true
 createdAt: "2024-01-01"
 updatedAt: "2024-12-01"
+deals: |
+  ## 🥩 Steakhouse Specials
+
+  ### Power Lunch Deal
+  - **$20 off** lunch entrees over $35
+  - **Valid:** Monday-Friday, 11 AM - 3 PM
+  - **Includes soup or salad**
+
+  ### Steak & Wine Pairing
+  - **$30 off** our steak & wine experience
+  - **Valid:** Thursday evenings
+  - **Premium cut selection**
 ---
 
 # The Capital Grille
