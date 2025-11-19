@@ -88,9 +88,7 @@ const locations = allLocations;
 
 const isFormValid = computed(() => email.value.trim() && selectedLocations.value.length > 0 && acceptTerms.value);
 
-// In pages/subscribe.vue, replace the handleSubmit function:
-
-// In pages/subscribe.vue, replace the handleSubmit function:
+// ... existing code ...
 
 const handleSubmit = async () => {
   if (!isFormValid.value) return;
@@ -99,7 +97,6 @@ const handleSubmit = async () => {
   success.value = false;
   
   try {
-    // Use YOUR server API (not Beehiiv directly)
     const response = await $fetch('/api/subscribe', {
       method: 'POST',
       body: { 
@@ -111,6 +108,11 @@ const handleSubmit = async () => {
     if (response.ok) {
       await signupAndVerify(email.value);
       success.value = true;
+      
+      // 🚀 REDIRECT TO DIRECTORY AFTER 2 SECONDS
+      setTimeout(() => {
+        await navigateTo('/directory');
+      }, 2000);
     } else {
       throw new Error(response.error || 'Subscription failed');
     }

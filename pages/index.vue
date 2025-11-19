@@ -20,10 +20,13 @@
           to Boston. Get weekly newsletters with local dining specials and save
           money on great food.
         </p>
+        <!-- Hero Section Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <NuxtLink to="/subscribe" class="btn-accent text-lg px-8 py-4">
-            Subscribe Now - $2.99/month
+          <!-- Hide subscribe button if already subscribed -->
+          <NuxtLink v-if="!isSubscribed" to="/subscribe" class="btn-accent text-lg px-8 py-4">
+            Subscribe FREE - Unlock All Restaurants
           </NuxtLink>
+          
           <NuxtLink to="/directory" class="btn-secondary text-lg px-8 py-4">
             Browse Restaurants
           </NuxtLink>
@@ -267,8 +270,8 @@
           Join hundreds of travelers who are already saving money on great food
           along I-90
         </p>
-        <NuxtLink to="/subscribe" class="btn-accent text-lg px-8 py-4">
-          Subscribe Now - $2.99/month
+        <NuxtLink v-if="!isSubscribed" to="/subscribe" class="btn-primary">
+          Subscribe FREE - Unlock All Restaurants
         </NuxtLink>
       </div>
     </section>
@@ -277,6 +280,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { useSecureSubscription } from '~/composables/useSecureSubscription';
+
+// Add subscription status
+const { isSubscribed } = useSecureSubscription();
 
 // Hero background image is now inline in template
 

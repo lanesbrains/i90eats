@@ -112,8 +112,8 @@
             </svg>
             Processing...
           </span>
-          <span v-else>Subscribe Now - $2.99/month</span>
-        </button>
+          <!-- Change button text -->
+          <span v-else>Subscribe FREE - Unlock All Restaurants</span>        </button>
       </div>
     </form>
   </div>
