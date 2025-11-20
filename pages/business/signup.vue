@@ -208,18 +208,18 @@ const handleSignup = async () => {
   isSubmitting.value = true;
 
   try {
-    const { data } = await $fetch("/api/join", {
-      method: "POST",
-      body: {
-        ...form.value,
-        plan: selectedPlan.value,
-        priceId: selectedPlan.value === "premium" ? "price_1SVfPBCNH3O77AidIiQqY2EP" : "price_1SVfN4CNH3O77AideawVMgS6",
-      },
-    });
+    const response = await $fetch("/api/join", {
+    method: "POST",
+    body: {
+      ...form.value,
+      plan: selectedPlan.value, 
+      priceId: selectedPlan.value === "premium" ? "price_1SVfPBCNH3O77AidIiQqY2EP" : "price_1SVfN4CNH3O77AideawVMgS6",
+    },
+  });
 
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-    }
+  if (response.checkout_url) {
+    window.location.href = response.checkout_url;
+  }
   } catch (error) {
     console.error("Business signup error:", error);
     alert("There was an error processing your signup. Please try again.");
