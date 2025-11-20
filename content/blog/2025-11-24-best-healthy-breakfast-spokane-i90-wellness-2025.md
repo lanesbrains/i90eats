@@ -3,7 +3,7 @@ title: "Best Healthy Breakfast in Spokane Along I-90: Wellness-Focused Starts in
 slug: best-healthy-breakfast-spokane-i90-wellness-2025
 author: Wellness Wanderer
 publishDate: 2025-11-24
-image: https://spokaneeats.net/wp-content/uploads/2016/08/20170924-IMG_6967.jpg
+image: "https://spokaneeats.net/wp-content/uploads/2016/08/20170924-IMG_6967.jpg"
 excerpt: "Fueling up on I-90? Spokane's healthy breakfast options emphasize nutrition, with gluten-free and plant-based choices for mindful travelers."
 tags:
   - Spokane healthy breakfast

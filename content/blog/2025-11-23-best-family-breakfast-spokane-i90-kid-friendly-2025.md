@@ -3,7 +3,7 @@ title: "Best Family Breakfast in Spokane Along I-90: Kid-Friendly Morning Meals 
 slug: best-family-breakfast-spokane-i90-kid-friendly-2025
 author: Family Food Finder
 publishDate: 2025-11-23
-image: https://unsplash.com/photos/a-table-topped-with-plates-of-food-and-drinks-v2aKnjMBTXA
+image: "https://i0.wp.com/eatgoodgroup.com/wp-content/uploads/2023/09/yards-scaled.jpeg?ssl=1"
 excerpt: "Traveling I-90 with the family? These Spokane spots serve up fun, affordable breakfasts that please all ages, with playground vibes and quick service."
 tags:
   - Spokane family breakfast
