@@ -18,11 +18,46 @@
 </template>
 
 <script setup>
-// This page shows after successful Stripe payment
-// Restaurant creation is handled by webhook
+const route = useRoute();
+const { setBusinessAuth } = useBusinessAuth();
 
-// Set business owner flag when signup is successful
-if (process.client) {
-  localStorage.setItem('i90_business_owner', 'true')
-}
+// Extract data from URL parameters
+onMounted(async () => {
+  if (process.client) {
+    const { ownerEmail, slug, name, location, plan } = route.query;
+    
+    if (ownerEmail && slug) {
+      try {
+        console.log('🔐 Setting up business authentication for:', { ownerEmail, slug });
+        
+        // Create authentication token
+        const tokenResponse = await $fetch('/api/business/create-token', {
+          method: 'POST',
+          body: {
+            email: ownerEmail,
+            restaurantSlug: slug
+          }
+        });
+        
+        if (tokenResponse.token) {
+          // Set business authentication
+          setBusinessAuth(tokenResponse.token, ownerEmail, {
+            slug,
+            title: name,
+            location,
+            plan
+          });
+          
+          console.log('✅ Business authentication established');
+        } else {
+          console.error('❌ Failed to create authentication token');
+        }
+      } catch (error) {
+        console.error('❌ Business authentication setup failed:', error);
+      }
+    } else {
+      console.log('⚠️ Missing authentication data in URL');
+    }
+  }
+});
 </script>

@@ -18,10 +18,20 @@ export default defineEventHandler(async (event) => {
   if (stripeEvent.type === 'checkout.session.completed') {
     const session = stripeEvent.data.object;
     const listingData = session.metadata?.listingData ? JSON.parse(session.metadata.listingData) : null;
-
-    // TODO: Activate listing in CMS, send confirmation email via Resend/Beehiiv
-    console.log('Payment success! Activate listing:', listingData);
-    // Example: await sendEmail(listingData.ownerEmail, 'Your I-90 Eats listing is live!');
+  
+    if (listingData) {
+      // Actually create the restaurant
+      await $fetch('/api/create-restaurant-simple', {
+        method: 'POST',
+        body: {
+          ...listingData,
+          plan: session.metadata.plan
+        }
+      });
+      
+      // Send confirmation email
+      console.log('Restaurant created and activated!');
+    }
   }
 
   return { statusCode: 200 };

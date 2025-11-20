@@ -1,4 +1,3 @@
-// server/api/join.post.ts
 import { defineEventHandler, readBody, createError } from 'h3';
 import Stripe from 'stripe';
 
@@ -38,15 +37,36 @@ export default defineEventHandler(async (event) => {
       console.log('🏷️ Price ID:', priceId);
       
       try {
+        // Generate slug for restaurant
+        const restaurantSlug = listingData.restaurantName
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        
+        // Prepare pending data for success page
+        const pendingData = {
+          ownerEmail: listingData.email || listingData.ownerEmail,
+          restaurantName: listingData.restaurantName,
+          location: listingData.location,
+          slug: restaurantSlug,
+          plan: plan
+        };
+        
+        console.log('📝 Pending restaurant data prepared:', pendingData);
+        
+        // Create enhanced success URL with authentication data
+        const successUrl = `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.vercel.app'}/business/success?ownerEmail=${encodeURIComponent(pendingData.ownerEmail)}&slug=${encodeURIComponent(pendingData.slug)}&name=${encodeURIComponent(pendingData.restaurantName)}&location=${encodeURIComponent(pendingData.location)}&plan=${encodeURIComponent(pendingData.plan)}`;
+        
         const sessionConfig = {
           mode: 'subscription',
           payment_method_types: ['card'],
           line_items: [{ price: priceId, quantity: 1 }],
-          success_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.vercel.app'}/business/success?session_id={CHECKOUT_SESSION_ID}`,
+          success_url: successUrl,
           cancel_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.vercel.app'}/business/signup?canceled=1`,
           metadata: { 
             listingData: JSON.stringify(listingData),
-            plan: plan
+            plan: plan,
+            restaurantSlug: restaurantSlug
           }
         };
         
