@@ -3,6 +3,7 @@ title: "The Ultimate Guide to Seattle's Best Seafood Spots"
 slug: "ultimate-guide-seattle-seafood"
 author: "Sarah Johnson"
 publishDate: "2024-01-15"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Pike_Place_Market_Seafood.jpg/1600px-Pike_Place_Market_Seafood.jpg?20060511063208"
 excerpt: "Discover the freshest seafood restaurants along Seattle's waterfront, from casual oyster bars to upscale dining experiences."
 tags: ["Seattle", "Seafood", "Waterfront", "Restaurants"]
 published: true

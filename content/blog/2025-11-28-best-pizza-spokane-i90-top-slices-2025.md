@@ -3,7 +3,7 @@ title: "Best Pizza in Spokane Along I-90: Top Slices for Inland Northwest Cravin
 slug: best-pizza-spokane-i90-top-slices-2025
 author: "Pizza Paladin"
 publishDate: 2025-11-28
-image: https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80
+image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/aa/9a/0c/pizza-pretty-good-service.jpg?w=1800&h=1000&s=1"
 excerpt: "Pie-ing through Spokane on I-90? These pizzerias deliver dough-lightful experiences that'll satisfy your Inland Northwest hunger. Reddit and Yelp for saucy selections."
 tags:
   - Spokane pizza

@@ -3,7 +3,7 @@ title: "Best Farm-to-Table Breakfast in Bozeman Along I-90: Sustainable Starts i
 slug: best-farm-to-table-breakfast-bozeman-i90-sustainable-2025
 author: Sustainable Sipper
 publishDate: 2025-11-27
-image: https://unsplash.com/photos/assorted-breakfast-on-table-4_jhDO54BYg
+image: "https://blog.visit-bozeman.com/hs-fs/hubfs/CVB_farm-to-table-dining-blog3.jpg?width=2894&height=1929&name=CVB_farm-to-table-dining-blog3.jpg"
 excerpt: "Eco-driving on I-90? Bozeman's farm-to-table breakfasts highlight local, sustainable eats for conscious travelers."
 tags:
   - Bozeman farm-to-table breakfast

@@ -1,4 +1,5 @@
-import { defineEventHandler, readBody } from 'h3';
+// server/api/join.post.ts
+import { defineEventHandler, readBody, createError } from 'h3';  // ← Add createError import
 import Stripe from 'stripe';
 
 export default defineEventHandler(async (event) => {
@@ -7,8 +8,12 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { plan, priceId, ...listingData } = body;
 
+  console.log('🏪 Business signup attempt:', { plan, priceId });
+
   if (plan === 'basic' || plan === 'premium') {
     try {
+      console.log('💳 Creating Stripe checkout session...');
+      
       const session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         payment_method_types: ['card'],
@@ -20,9 +25,11 @@ export default defineEventHandler(async (event) => {
           plan: plan
         }
       });
+
+      console.log('✅ Checkout session created:', session.id);
       return { checkout_url: session.url };
     } catch (error) {
-      console.error('Stripe error:', error);
+      console.error('❌ Stripe error:', error);
       throw createError({ 
         statusCode: 500, 
         statusMessage: 'Payment processing failed' 
@@ -30,5 +37,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  console.log('❌ Invalid plan:', plan);
   throw createError({ statusCode: 400, statusMessage: 'Invalid plan' });
 });
