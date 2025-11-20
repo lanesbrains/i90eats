@@ -62,36 +62,36 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
-  
-  const router = useRouter()
-  const form = ref({
-    email: '',
-    password: ''
-  })
-  const loading = ref(false)
-  const error = ref('')
-  
-  const login = async () => {
-    loading.value = true
-    error.value = ''
-  
-    try {
-      const response = await $fetch('/api/business/login', {
-        method: 'POST',
-        body: form.value
-      })
-  
-      // Store token (e.g., in localStorage or cookie)
-      localStorage.setItem('business_token', response.token)
-      
-      // Redirect to dashboard
-      router.push('/business/dashboard')
-    } catch (err) {
-      error.value = err.data?.message || 'Invalid credentials'
-    } finally {
-      loading.value = false
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuth } from '~/composables/useAuth';
+
+const { signInBusiness } = useAuth();
+const router = useRouter();
+
+const form = ref({
+  email: ''
+});
+
+const loading = ref(false);
+const error = ref('');
+
+const login = async () => {
+  loading.value = true;
+  error.value = '';
+
+  try {
+    const result = await signInBusiness(form.value.email);
+    
+    if (result.success) {
+      router.push('/business/dashboard');
+    } else {
+      error.value = result.error;
     }
+  } catch (err) {
+    error.value = 'Unable to verify business ownership.';
+  } finally {
+    loading.value = false;
   }
-  </script>
+};
+</script>

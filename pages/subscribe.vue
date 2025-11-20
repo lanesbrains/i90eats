@@ -72,6 +72,7 @@
 import { ref, computed } from 'vue';
 import { useSecureSubscription } from '~/composables/useSecureSubscription';
 import { useI90Locations } from '~/composables/useI90Locations';
+import { useAuth } from '~/composables/useAuth';const { signInSubscriber } = useAuth();
 const { signupAndVerify, setSubscriptionToken } = useSecureSubscription();
 const { allLocations } = useI90Locations();
 const email = ref('');
@@ -95,26 +96,17 @@ const handleSubmit = async () => {
   success.value = false;
   
   try {
-    const response = await $fetch('/api/subscribe', {
-      method: 'POST',
-      body: { 
-        email: email.value, 
-        locations: selectedLocations.value 
-      }
-    });
+    const result = await signInSubscriber(email.value);
     
-    if (response.ok && response.subscriptionToken) {
-      // Store the secure token
-      await setSubscriptionToken(response.subscriptionToken);
-      await signupAndVerify(email.value);
+    if (result.success) {
       success.value = true;
       
-      // Redirect after success
+      // Redirect after 2 seconds
       setTimeout(async () => {
         await navigateTo('/directory');
       }, 2000);
     } else {
-      throw new Error(response.message || 'Subscription failed');
+      throw new Error(result.error || 'Subscription failed');
     }
   } catch (err) {
     error.value = err.message || 'Subscription failed';

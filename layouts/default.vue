@@ -60,7 +60,7 @@
             >
               List Restaurant
             </NuxtLink>
-            <NuxtLink to="/subscribe" class="btn-primary"> Subscribe </NuxtLink>
+            <AuthNav />
           </div>
 
           <!-- Mobile Menu Button -->
@@ -111,13 +111,7 @@
             >
               Blog
             </NuxtLink>
-            <NuxtLink
-              to="/subscribe"
-              @click="closeMobileMenu"
-              class="btn-primary inline-block text-center"
-            >
-              Subscribe
-            </NuxtLink>
+            <AuthNav />
           </div>
         </div>
       </div>

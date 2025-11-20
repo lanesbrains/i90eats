@@ -19,44 +19,18 @@
 
 <script setup>
 const route = useRoute();
-const { setBusinessAuth } = useBusinessAuth();
+const { signInBusiness } = useAuth();
 
 // Extract data from URL parameters
 onMounted(async () => {
   if (process.client) {
-    const { ownerEmail, slug, name, location, plan } = route.query;
+    const { ownerEmail } = route.query;
     
-    if (ownerEmail && slug) {
-      try {
-        console.log('🔐 Setting up business authentication for:', { ownerEmail, slug });
-        
-        // Create authentication token
-        const tokenResponse = await $fetch('/api/business/create-token', {
-          method: 'POST',
-          body: {
-            email: ownerEmail,
-            restaurantSlug: slug
-          }
-        });
-        
-        if (tokenResponse.token) {
-          // Set business authentication
-          setBusinessAuth(tokenResponse.token, ownerEmail, {
-            slug,
-            title: name,
-            location,
-            plan
-          });
-          
-          console.log('✅ Business authentication established');
-        } else {
-          console.error('❌ Failed to create authentication token');
-        }
-      } catch (error) {
-        console.error('❌ Business authentication setup failed:', error);
+    if (ownerEmail) {
+      const result = await signInBusiness(ownerEmail);
+      if (result.success) {
+        console.log('✅ Business authentication established');
       }
-    } else {
-      console.log('⚠️ Missing authentication data in URL');
     }
   }
 });
