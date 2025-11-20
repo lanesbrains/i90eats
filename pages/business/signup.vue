@@ -213,7 +213,7 @@ const handleSignup = async () => {
       body: {
         ...form.value,
         plan: selectedPlan.value,
-        priceId: selectedPlan.value === "premium" ? "price_business_premium" : "price_business_basic",
+        priceId: selectedPlan.value === "premium" ? "price_1SVfPBCNH3O77AidIiQqY2EP" : "price_1SVfN4CNH3O77AideawVMgS6",
       },
     });
 
