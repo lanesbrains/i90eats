@@ -6,25 +6,27 @@ export default defineEventHandler(async (event) => {
   console.log('🚀 JOIN API: Request received');
   
   try {
-    // DEBUG: Check runtime config
-    const runtimeConfig = useRuntimeConfig();
-    console.log('🔧 Runtime config keys:', Object.keys(runtimeConfig));
-    console.log('💳 Stripe config available:', !!runtimeConfig.stripe);
-    console.log('🔑 Stripe secret key exists:', !!runtimeConfig.stripe?.secretKey);
-    console.log('🌐 Site URL:', process.env.NUXT_PUBLIC_SITE_URL);
+    // DEBUG: Check environment variables directly
+    console.log('🔧 STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
+    console.log('🔧 STRIPE_SECRET_KEY starts with:', process.env.STRIPE_SECRET_KEY?.substring(0, 7));
+    console.log('🌐 NUXT_PUBLIC_SITE_URL:', process.env.NUXT_PUBLIC_SITE_URL);
     
-    const { stripe } = runtimeConfig;
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
     
-    if (!stripe?.secretKey) {
-      console.error('❌ CRITICAL: Stripe secret key not found!');
+    if (!stripeSecretKey) {
+      console.error('❌ CRITICAL: STRIPE_SECRET_KEY environment variable not found!');
       throw createError({ 
         statusCode: 500, 
-        statusMessage: 'Server configuration error' 
+        statusMessage: 'Server configuration error: Missing Stripe key' 
       });
     }
     
-    const stripeInstance = new Stripe(stripe.secretKey);
-    console.log('✅ Stripe instance created successfully');
+    if (!stripeSecretKey.startsWith('sk_test_')) {
+      console.warn('⚠️ WARNING: Not using test key - this might cause issues in test mode');
+    }
+    
+    const stripeInstance = new Stripe(stripeSecretKey);
+    console.log('✅ Stripe instance created with test key');
     
     const body = await readBody(event);
     const { plan, priceId, ...listingData } = body;
@@ -40,15 +42,15 @@ export default defineEventHandler(async (event) => {
           mode: 'subscription',
           payment_method_types: ['card'],
           line_items: [{ price: priceId, quantity: 1 }],
-          success_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/business/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/business/signup?canceled=1`,
+          success_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.vercel.app'}/business/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.vercel.app'}/business/signup?canceled=1`,
           metadata: { 
             listingData: JSON.stringify(listingData),
             plan: plan
           }
         };
         
-        console.log('🔧 Session config:', JSON.stringify(sessionConfig, null, 2));
+        console.log('🔧 Session config created');
         
         const session = await stripeInstance.checkout.sessions.create(sessionConfig);
         
@@ -63,8 +65,17 @@ export default defineEventHandler(async (event) => {
           type: stripeError.type,
           code: stripeError.code,
           statusCode: stripeError.statusCode,
-          requestId: stripeError.requestId
+          requestId: stripeError.requestId,
+          raw: stripeError
         });
+        
+        // Handle specific Stripe errors
+        if (stripeError.code === 'resource_missing') {
+          throw createError({ 
+            statusCode: 400, 
+            statusMessage: `Price ID not found: ${priceId}. Check if it exists in test mode.` 
+          });
+        }
         
         throw createError({ 
           statusCode: 500, 
@@ -73,14 +84,14 @@ export default defineEventHandler(async (event) => {
       }
     }
     
-    console.log('❌ Invalid plan submitted:', plan);
+    console.log('❌ Invalid plan:', plan);
     throw createError({ statusCode: 400, statusMessage: 'Invalid plan' });
     
   } catch (error) {
     console.error('💥 UNEXPECTED ERROR in join API:', error);
     throw createError({ 
       statusCode: 500, 
-      statusMessage: 'Internal server error' 
+      statusMessage: `Internal server error: ${error.message}` 
     });
   }
 });
