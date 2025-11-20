@@ -1,10 +1,11 @@
 // server/api/join.post.ts
-import { defineEventHandler, readBody, createError } from 'h3';  // ← Add createError import
+import { defineEventHandler, readBody, createError } from 'h3';
 import Stripe from 'stripe';
 
 export default defineEventHandler(async (event) => {
-  const { stripeSecretKey } = useRuntimeConfig();
-  const stripe = new Stripe(stripeSecretKey);
+  const { stripe } = useRuntimeConfig();  // ← Get stripe object
+  const stripeInstance = new Stripe(stripe.secretKey);  // ← Use stripe.secretKey
+  
   const body = await readBody(event);
   const { plan, priceId, ...listingData } = body;
 
@@ -14,7 +15,7 @@ export default defineEventHandler(async (event) => {
     try {
       console.log('💳 Creating Stripe checkout session...');
       
-      const session = await stripe.checkout.sessions.create({
+      const session = await stripeInstance.checkout.sessions.create({  // ← Use stripeInstance
         mode: 'subscription',
         payment_method_types: ['card'],
         line_items: [{ price: priceId, quantity: 1 }],

@@ -3,7 +3,7 @@ title: "Best Breakfast in Spokane Along I-90: Top Spots for Inland Northwest Mor
 slug: best-breakfast-spokane-i90-top-spots-2025
 author: Breakfast King
 publishDate: 2025-11-22
-image: https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/b1/17/c0/the-club-tavern-grill.jpg?w=1200&h=-1&s=1
+image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/b1/17/c0/the-club-tavern-grill.jpg?w=1200&h=-1&s=1"
 excerpt: "Navigating I-90 through Spokane? These breakfast establishments offer quality starts to your day, sourced from local reviews and sustainable practices."
 tags:
   - Spokane breakfast
