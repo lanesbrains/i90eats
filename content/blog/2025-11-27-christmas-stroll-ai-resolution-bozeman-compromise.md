@@ -4,7 +4,7 @@ slug: "christmas-stroll-ai-resolution-bozeman-compromise"
 author: "I-90 Eats"
 publishDate: "2025-11-27"
 excerpt: "After intense community debate, Bozeman reaches compromise on AI poster controversy, allowing both traditional and digital artists to participate in Christmas Stroll."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Missoula_Montana_downtown.jpg/1280px-Missoula_Montana_downtown.jpg"
+image: "https://assets.isu.pub/document-structure/221128230301-53419abd5f37dda58fe07cf549dd4efc/v1/c576c49a46f941f1bcdd59cbb64546d0.jpeg"
 tags:
   [
     "Bozeman Christmas Stroll",
@@ -85,6 +85,7 @@ _What do you think of Bozeman's compromise? Is this the right way to handle AI i
 ## The Compromise Details
 
 **Key Agreement Points**:
+
 - **Separate contest categories** for traditional and digital art
 - **Equal recognition** for winners in both categories
 - **Artist education programs** on digital tools

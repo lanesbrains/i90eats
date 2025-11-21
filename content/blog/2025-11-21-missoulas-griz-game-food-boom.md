@@ -4,7 +4,7 @@ slug: "missoulas-griz-game-food-boom"
 author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "The Montana-Grizzlies rivalry game transforms Missoula into a food mecca, but is the economic windfall worth the exploitation of local restaurants and inflated prices?"
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/University_of_Montana_campus.jpg/1280px-University_of_Montana_campus.jpg"
+image: "https://www.murdochs.com/globalassets/themes/2025/theme-11-nov/can-griz-cats-800x375.jpg"
 tags:
   [
     "Missoula",
