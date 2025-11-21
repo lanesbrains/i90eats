@@ -169,9 +169,9 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useI90Locations } from '~/composables/useI90Locations';
 
-// Mock allLocations
-const allLocations = ['Seattle, WA', 'Chicago, IL', 'Boston, MA', 'Denver, CO', 'Portland, OR', 'Spokane, WA', 'Billings, MT', 'Rapid City, SD', 'Des Moines, IA', 'Cleveland, OH'];
+const { allLocations } = useI90Locations();
 
 const selectedPlan = ref("premium");
 const isSubmitting = ref(false);

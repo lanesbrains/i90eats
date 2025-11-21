@@ -23,7 +23,7 @@
         <!-- Hero Section Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <!-- Hide subscribe button if already subscribed -->
-          <NuxtLink v-if="!isSubscribed" to="/subscribe" class="btn-accent text-lg px-8 py-4">
+          <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent text-lg px-8 py-4">
             Subscribe FREE - Unlock All Restaurants
           </NuxtLink>
           
@@ -277,7 +277,7 @@
           Join hundreds of travelers who are already saving money on great food
           along I-90
         </p>
-        <NuxtLink v-if="!isSubscribed" to="/subscribe" class="btn-primary">
+        <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-primary">
           Subscribe FREE - Unlock All Restaurants
         </NuxtLink>
       </div>
@@ -287,10 +287,8 @@
 
 <script setup>
 import { ref } from "vue";
-import { useSecureSubscription } from '~/composables/useSecureSubscription';
-
-// Add subscription status
-const { isSubscribed } = useSecureSubscription();
+import { useAuth } from '~/composables/useAuth';
+const { isSubscriber } = useAuth();
 
 // Hero background image is now inline in template
 

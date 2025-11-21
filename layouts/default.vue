@@ -7,23 +7,11 @@
           <!-- Logo -->
           <NuxtLink to="/" class="flex items-center space-x-2">
             <div
-              class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center"
+              class="w-20 h-16 rounded-lg flex items-center justify-center"
             >
-              <svg
-                class="w-5 h-5 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                />
-              </svg>
+              <img src="../assets/images/i90eats-logo.webp" alt="i 90 eats logo" />
             </div>
-            <span class="text-xl font-bold text-gray-900">I-90 Eats</span>
+            <!-- <span class="text-xl font-bold text-gray-900">I-90 Eats</span> -->
           </NuxtLink>
 
           <!-- Desktop Navigation -->
@@ -46,6 +34,12 @@
             >
               Blog
             </NuxtLink>
+            <NuxtLink
+              to="/collaborate"
+              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              Collaborate
+            </NuxtLink>
             <!-- Only show Business Dashboard for business users -->
             <NuxtLink
               v-if="isBusinessUser"
@@ -53,12 +47,6 @@
               class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
             >
               Business
-            </NuxtLink>
-            <NuxtLink
-              to="/business/signup"
-              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-            >
-              List Restaurant
             </NuxtLink>
             <AuthNav />
           </div>
@@ -110,6 +98,13 @@
               class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
             >
               Blog
+            </NuxtLink>
+            <NuxtLink
+              to="/collaborate"
+              @click="closeMobileMenu"
+              class="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              Collaborate
             </NuxtLink>
             <AuthNav />
           </div>
@@ -208,6 +203,14 @@
                   class="text-gray-300 hover:text-white transition-colors"
                   >Subscribe</NuxtLink
                 >
+              </li>
+              <li>
+                <NuxtLink
+                  to="/collaborate"
+                  class="text-gray-300 hover:text-white transition-colors"
+                >
+                  Collaborate
+                </NuxtLink>
               </li>
             </ul>
           </div>

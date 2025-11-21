@@ -168,10 +168,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useBusinessAuth } from '~/composables/useBusinessAuth'
 import { useI90Locations } from '~/composables/useI90Locations'
-
-const { isBusinessOwner, ownedRestaurant } = useBusinessAuth()
+import { useAuth } from '~/composables/useAuth';
+const { isBusinessOwner, ownedRestaurant } = useAuth();
 const { allLocations } = useI90Locations()
 
 // Reactive data - NO MOCK DATA
@@ -200,11 +199,11 @@ const dealForm = ref({
 onMounted(async () => {
   if (isBusinessOwner.value && ownedRestaurant.value) {
     try {
-      loading.value = true
-      console.log('📊 Loading restaurant data for:', ownedRestaurant.value.slug)
+      loading.value = true;
+      console.log('📊 Loading restaurant data for:', ownedRestaurant.value.slug);
       
       // Load restaurant data
-      const restaurantData = await $fetch(`/api/business/restaurant/${ownedRestaurant.value.slug}`)
+      const restaurantData = await $fetch(`/api/business/restaurant/${ownedRestaurant.value.slug}`);
       
       restaurantForm.value = {
         title: restaurantData.title || '',
@@ -214,33 +213,33 @@ onMounted(async () => {
         address: restaurantData.address || '',
         website: restaurantData.website || '',
         description: restaurantData.description || ''
-      }
+      };
       
       // Load deals from restaurant data
-      deals.value = restaurantData.deals || []
+      deals.value = restaurantData.deals || [];
       
       // Set plan based on premium status
-      plan.value = restaurantData.premium ? 'Premium' : 'Basic'
+      plan.value = restaurantData.premium ? 'Premium' : 'Basic';
       
-      // Generate mock stats (replace with real analytics later)
+      // Mock stats (replace with real analytics later)
       stats.value = {
         views: Math.floor(Math.random() * 1000) + 100,
         activeDeals: deals.value.filter(d => d.active).length,
         subscribers: Math.floor(Math.random() * 500) + 50
-      }
+      };
       
-      console.log('✅ Dashboard data loaded successfully')
+      console.log('✅ Dashboard data loaded successfully');
     } catch (error) {
-      console.error('❌ Failed to load dashboard data:', error)
-      alert('Failed to load restaurant data. Please try refreshing the page.')
+      console.error('❌ Failed to load dashboard data:', error);
+      alert('Failed to load restaurant data. Please try refreshing the page.');
     } finally {
-      loading.value = false
+      loading.value = false;
     }
   } else {
-    console.log('❌ Not authenticated as business owner, redirecting to login')
-    await navigateTo('/business/login')
+    console.log('❌ Not authenticated as business owner, redirecting to login');
+    await navigateTo('/business/login');
   }
-})
+});
 
 const updateRestaurant = async () => {
   if (!ownedRestaurant.value || saving.value) return

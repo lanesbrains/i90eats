@@ -70,10 +70,9 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useSecureSubscription } from '~/composables/useSecureSubscription';
 import { useI90Locations } from '~/composables/useI90Locations';
-import { useAuth } from '~/composables/useAuth';const { signInSubscriber } = useAuth();
-const { signupAndVerify, setSubscriptionToken } = useSecureSubscription();
+import { useAuth } from '~/composables/useAuth';
+const { signInSubscriber } = useAuth();
 const { allLocations } = useI90Locations();
 const email = ref('');
 const selectedLocations = ref([]);

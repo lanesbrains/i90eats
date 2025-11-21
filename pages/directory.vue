@@ -53,7 +53,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
           <p class="text-gray-600">
             Showing {{ visibleRestaurants.length }} of {{ filteredRestaurants.length }} restaurants
-            <span v-if="!isSubscribed && filteredRestaurants.length > previewLimit" class="text-primary-600 font-medium">
+            <span v-if="!isSubscriber && filteredRestaurants.length > previewLimit" class="text-primary-600 font-medium">
               ({{ Math.max(0, filteredRestaurants.length - previewLimit) }} more with subscription)
             </span>
           </p>
@@ -83,10 +83,10 @@
               v-for="(restaurant, index) in visibleRestaurants" 
               :key="restaurant.slug"
               class="card hover:shadow-xl transition-shadow duration-300"
-              :class="{ 'relative': !isSubscribed && index >= freePreviewCount }"
+              :class="{ 'relative': !isSubscriber && index >= freePreviewCount }"
             >
               <!-- Lock Overlay for Non-Subscribed Users -->
-              <div v-if="!isSubscribed && index >= freePreviewCount" class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10 rounded-lg">
+              <div v-if="!isSubscriber && index >= freePreviewCount" class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10 rounded-lg">
                 <div class="text-center p-6">
                   <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@
                 </div>
                 
                 <!-- Deals Preview (only for subscribers) -->
-                <div v-if="isSubscribed && restaurant.dealCount > 0" class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                <div v-if="isSubscriber && restaurant.dealCount > 0" class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
                   <div class="flex items-center gap-2">
                     <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -140,7 +140,7 @@
                 </div>
 
                 <!-- Locked Deals Message -->
-                <div v-else-if="!isSubscribed && restaurant.dealCount > 0" class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <div v-else-if="!isSubscriber && restaurant.dealCount > 0" class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
                   <div class="flex items-center gap-2">
                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -153,7 +153,7 @@
           </div>
 
           <!-- Show More CTA for Non-Subscribed Users -->
-          <div v-if="!isSubscribed && filteredRestaurants.length > previewLimit" class="text-center mt-12">
+          <div v-if="!isSubscriber && filteredRestaurants.length > previewLimit" class="text-center mt-12">
             <div class="card p-8 max-w-2xl mx-auto">
               <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,16 +177,13 @@
 
 <script setup>
 import { ref, computed, watch } from "vue";
-import { useSecureSubscription } from '~/composables/useSecureSubscription';
 import { useI90Locations } from '~/composables/useI90Locations';
-
-
-
-const { isSubscribed } = useSecureSubscription();
+import { useAuth } from '~/composables/useAuth';
+const { isSubscriber } = useAuth();
 const { allLocations } = useI90Locations();
 // Watch for changes
-console.log('🔍 Directory loaded - Subscription status:', isSubscribed.value);
-watch(isSubscribed, (newVal) => {
+console.log('🔍 Directory loaded - Subscription status:', isSubscriber.value);
+watch(isSubscriber, (newVal) => {
   console.log('📡 Subscription status changed to:', newVal);
 });
 // Configuration for partial access
@@ -253,7 +250,7 @@ const filteredRestaurants = computed(() => {
 // Show different amounts based on subscription status
 const visibleRestaurants = computed(() => {
   const filtered = filteredRestaurants.value;
-  if (isSubscribed.value) {
+  if (isSubscriber.value) {
     return filtered; // Show all for subscribers
   } else {
     return filtered.slice(0, previewLimit); // Show limited preview for non-subscribers
