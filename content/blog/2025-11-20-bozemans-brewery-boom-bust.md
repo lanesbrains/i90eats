@@ -4,7 +4,7 @@ slug: "bozemans-brewery-boom-bust"
 author: "I-90 Eats"
 publishDate: "2025-11-20"
 excerpt: "Bozeman's craft beer explosion brings economic growth but raises concerns about public safety, local culture, and whether the party is worth the cleanup."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Montana_State_University_-_Bozeman.jpg/1280px-Montana_State_University_-_Bozeman.jpg"
+image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnJBbTFehLp-msdiOldj8k0BxPO7oKQpO7zg&s"
 tags:
   [
     "Bozeman",
@@ -96,5 +96,7 @@ _What's your perspective? Is Bozeman's brewery boom a net positive or a growing 
 Bozeman's brewery boom reflects broader questions about balancing economic development with community well-being. As craft beer tourism grows across America, cities must decide how to harness the economic benefits while protecting residents from the inevitable social costs.
 
 **Have you experienced Bozeman's brewery scene? Is the party atmosphere enhancing or detracting from the community?**
+
 ```
 
+```

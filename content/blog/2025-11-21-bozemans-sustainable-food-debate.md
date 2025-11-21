@@ -4,7 +4,7 @@ slug: "bozemans-sustainable-food-debate"
 author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "Bozeman's push for sustainable, local food systems reduces environmental impact but raises questions about affordability, choice, and whether eco-friendly policies burden low-income families."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Bozeman_Farmers_Market.jpg/1280px-Bozeman_Farmers_Market.jpg"
+image: "https://s3-us-west-2.amazonaws.com/montana-surveytoolimages/general/full-size/635560705158290153.jpg"
 tags:
   [
     "Bozeman",
@@ -99,5 +99,7 @@ _What's your take on Bozeman's sustainable food policies? Are they equitable env
 Bozeman's sustainable food crusade reflects broader national debates about balancing environmental responsibility with social equity. As climate concerns intensify, cities must develop food policies that protect the planet while ensuring that sustainable eating remains accessible to all community members, regardless of income.
 
 **Have you experienced Bozeman's sustainable food scene? Do the environmental benefits justify the economic costs?**
+
 ```
 
+```

@@ -4,7 +4,7 @@ slug: "christmas-stroll-poster-fallout-bozeman-artists"
 author: "I-90 Eats"
 publishDate: "2025-11-25"
 excerpt: "Leading Bozeman artists announce boycott of Christmas Stroll over AI-generated winning poster, sparking broader debate about technology's role in local creative communities."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Bozeman_Gallery_District.jpg/1280px-Bozeman_Gallery_District.jpg"
+image: "https://blog.visit-bozeman.com/hubfs/CVB_downtown21-1.jpg"
 tags:
   [
     "Bozeman Christmas Stroll",
@@ -84,6 +84,7 @@ _Which side of the AI art debate are you on? Should traditional artists boycott 
 ## The Boycott Impact
 
 **Artists participating in the boycott**:
+
 - Bozeman Arts Alliance (27 members)
 - Local galleries and studios
 - University art faculty
@@ -94,5 +95,7 @@ _Which side of the AI art debate are you on? Should traditional artists boycott 
 **Alternative events planned**: "Authentic Bozeman Arts Festival" featuring traditional artists
 
 **Will the boycott hurt or help Bozeman's art community?**
+
 ```
 
+```

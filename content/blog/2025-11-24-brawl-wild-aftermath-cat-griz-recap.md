@@ -4,7 +4,7 @@ slug: "brawl-wild-aftermath-cat-griz-recap"
 author: "I-90 Eats"
 publishDate: "2025-11-24"
 excerpt: "Montana State Bobcats secure a dramatic victory over rival Grizzlies in the Brawl of the Wild, sending shockwaves through college football and Bozeman into euphoric celebration."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Montana_State_University_-_Bozeman.jpg/1280px-Montana_State_University_-_Bozeman.jpg"
+image: "https://msubobcats.com/images/2023/11/17/CP20221119_Brawl_of_the_Wild_Game_008toned.jpg"
 tags:
   [
     "Brawl of the Wild",
@@ -82,6 +82,7 @@ _What was your favorite moment from the Brawl of the Wild? Share your thoughts b
 **Final Score**: Montana State 31, Montana 28
 
 **Key Performers**:
+
 - **Jaxson Dart (MSU)**: 28/41, 387 yards, 2 TDs
 - **Tucker Tyner (MSU)**: 145 rushing yards, 2 TDs
 - **Reese Phillips (UM)**: 32/48, 412 yards, 3 TDs

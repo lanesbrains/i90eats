@@ -4,7 +4,7 @@ slug: "bozemans-cat-game-economic-surge"
 author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "Montana State University's rivalry victory against UM could supercharge Bozeman's economy, but residents question if the short-term boom justifies long-term quality of life costs."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Bozeman_Montana_State_University.jpg/1280px-Bozeman_Montana_State_University.jpg"
+image: "https://www.explorebigsky.com/wp-content/uploads/2023/11/Sean-Chambers-runs-away-from-a-hoard-of-Griz-defenders-Cat-Griz-Robby-Hauck-Jacob-McGourin-and-Corbin-Walker-scaled-1.jpeg"
 tags:
   [
     "Bozeman",

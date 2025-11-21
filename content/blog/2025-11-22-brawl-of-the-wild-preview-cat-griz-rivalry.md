@@ -4,7 +4,7 @@ slug: "brawl-of-the-wild-preview-cat-griz-rivalry"
 author: "I-90 Eats"
 publishDate: "2025-11-22"
 excerpt: "Montana State Bobcats face off against University of Montana Grizzlies in the annual Brawl of the Wild rivalry game, with bragging rights and recruiting momentum on the line for both programs."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Montana_State_vs_Montana_football_game.jpg/1280px-Montana_State_vs_Montana_football_game.jpg"
+image: "https://msubobcats.com/images/2024/11/23/adam_jones_vs._griz.jpg"
 tags:
   [
     "Brawl of the Wild",

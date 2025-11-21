@@ -4,7 +4,7 @@ slug: "missoulas-artisan-food-revolution-controversy"
 author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "Missoula's explosion of artisan food producers promises culinary innovation, but critics accuse it of pricing out traditional Montanans and homogenizing local flavors."
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Missoula_Montana_downtown.jpg/1280px-Missoula_Montana_downtown.jpg"
+image: "https://www.missoulafarmersmarket.org/uploads/1/4/0/4/140495882/published/bustlingmarket.jpg?1678462847"
 tags:
   [
     "Missoula",
@@ -97,5 +97,7 @@ _What's your stance on Missoula's artisan revolution? Is it inclusive innovation
 Missoula's artisan food revolution reflects broader questions about innovation, equity, and cultural preservation in America's food landscape. As specialty food movements grow nationwide, cities must balance culinary advancement with ensuring that food culture remains accessible to all community members.
 
 **Have you experienced Missoula's artisan food scene? Is the revolution benefiting everyone or just the elite?**
+
 ```
 
+```
