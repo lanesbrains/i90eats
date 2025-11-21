@@ -59,10 +59,10 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import { useSecureSubscription } from '~/composables/useSecureSubscription'
+import { useAuth } from '~/composables/useAuth'
 
 // Set subscription status on success page load
-const { signupAndVerify } = useSecureSubscription()
+const { signInSubscriber } = useAuth()
 
 onMounted(async () => {
   // Extract email from URL or localStorage
@@ -70,7 +70,7 @@ onMounted(async () => {
   const email = urlParams.get('email') || localStorage.getItem('i90_email')
   
   if (email) {
-    await signupAndVerify(email)
+    await signInSubscriber(email)
   }
 })
 </script>
