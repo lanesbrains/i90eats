@@ -277,7 +277,7 @@
           Join hundreds of travelers who are already saving money on great food
           along I-90
         </p>
-        <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-primary">
+        <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent">
           Subscribe FREE - Unlock All Restaurants
         </NuxtLink>
       </div>
