@@ -258,6 +258,40 @@ useHead(() => ({
     { rel: 'canonical', href: currentUrl.value }
   ]
 }))
+
+// Add Article structured data
+useHead(() => {
+  if (!post.value) return {}
+  
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.value.title,
+    "description": post.value.excerpt,
+    "image": post.value.image || `${config.public.siteUrl}/og-image.jpg`,
+    "datePublished": post.value.publishDate,
+    "dateModified": post.value.publishDate,
+    "author": {
+      "@type": "Person",
+      "name": post.value.author || "I-90 Eats"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "I-90 Eats",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${config.public.siteUrl}/i90eats-logo.webp`
+      }
+    }
+  }
+  
+  return {
+    script: [
+      { type: 'application/ld+json', innerHTML: JSON.stringify(articleSchema) }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
+  }
+})
 </script>
 
 <style scoped>

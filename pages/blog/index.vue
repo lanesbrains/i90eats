@@ -1,23 +1,43 @@
 <template>
   <div>
     <!-- Page Header -->
-    <section class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
-      <div class="container-max text-center">
-        <h1 class="text-4xl font-bold mb-4">I-90 Food Blog</h1>
-        <p class="text-xl text-primary-100">
+    <section class="relative bg-gray-900 text-white py-20 overflow-hidden">
+      <!-- Background Image -->
+      <img
+        src="/i90-bg.webp"
+        class="absolute inset-0 w-full h-full object-cover opacity-60"
+        alt="I-90 Background"
+        loading="eager"
+        sizes="100vw"
+      />
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 via-accent-900/70 to-primary-800/80"></div>
+      <!-- Content -->
+      <div class="relative z-10 container-max text-center px-4">
+        <div class="inline-block mb-6">
+          <span class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/30">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+              <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+            </svg>
+            Food News & Insights
+          </span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">I-90 Food Blog</h1>
+        <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
           Food news, travel tips, and insights from along Interstate 90
         </p>
       </div>
     </section>
 
     <!-- Blog Posts Grid -->
-    <section class="py-16">
-      <div class="container-max">
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+      <div class="container-max px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <article 
             v-for="post in blogPosts" 
             :key="post.slug"
-            class="card hover:shadow-xl transition-shadow duration-300"
+            class="card hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
           >
             <div class="aspect-w-16 aspect-h-9 bg-gray-200">
               <img 
@@ -72,13 +92,18 @@
         </div>
         
         <!-- Newsletter CTA -->
-        <div class="mt-16 text-center">
-          <div class="bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-8 border border-primary-200">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Stay Updated</h2>
-            <p class="text-gray-600 mb-6">
+        <div class="mt-20 text-center">
+          <div class="card p-8 md:p-12 shadow-2xl max-w-3xl mx-auto">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl mb-6 shadow-lg">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Stay Updated</h2>
+            <p class="text-xl text-gray-600 mb-8">
               Subscribe to our newsletter for the latest food news and travel tips along I-90
             </p>
-            <NuxtLink to="/subscribe" class="btn-primary">
+            <NuxtLink to="/subscribe" class="btn-primary text-lg px-8 py-4 hover:scale-105 transition-transform inline-block">
               Subscribe to Newsletter
             </NuxtLink>
           </div>

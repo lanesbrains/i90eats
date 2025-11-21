@@ -1,5 +1,18 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-50 relative">
+    <!-- Static Background Image -->
+    <div class="fixed inset-0 -z-10 pointer-events-none">
+      <img
+        :src="foodBgImage"
+        alt="Food background"
+        class="w-full h-full object-cover opacity-[0.04] blur-[2px]"
+        loading="eager"
+        sizes="100vw"
+      />
+      <!-- Additional overlay to ensure content readability -->
+      <div class="absolute inset-0 bg-white/50"></div>
+    </div>
+    
     <!-- Navigation -->
     <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
       <div class="container-max">
@@ -263,6 +276,7 @@
 
 <script setup>
 import { ref } from "vue";
+import foodBgImage from "~/assets/images/food-bg.webp";
 
 const showMobileMenu = ref(false);
 

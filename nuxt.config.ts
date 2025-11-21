@@ -123,9 +123,25 @@ export default defineNuxtConfig({
   },
   ssr: true,
   nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/sitemap.xml']
+    },
     experimental: {
       wasm: true
     }
+  },
+  sitemap: {
+    hostname: process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com',
+    gzip: true,
+    // The dynamic sitemap is now handled by server/routes/sitemap.xml.get.ts
+  },
+  
+  robots: {
+    UserAgent: '*',
+    Allow: '/',
+    Disallow: ['/admin', '/business/dashboard', '/api/'],
+    Sitemap: `${process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com'}/sitemap.xml`
   },
   compatibilityDate: '2025-09-03'
 })
