@@ -1,10 +1,29 @@
 <template>
   <div>
     <!-- Page Header -->
-    <section class="bg-gradient-to-r from-primary-600 to-accent-600 text-white py-16">
-      <div class="container-max text-center">
-        <h1 class="text-4xl font-bold mb-4">Restaurant Directory</h1>
-        <p class="text-xl text-primary-100">Discover amazing restaurants along Interstate 90</p>
+    <section class="relative bg-gray-900 text-white py-20 overflow-hidden">
+      <!-- Background Image -->
+      <img
+        src="/i90-bg.webp"
+        class="absolute inset-0 w-full h-full object-cover opacity-60"
+        alt="I-90 Background"
+        loading="eager"
+        sizes="100vw"
+      />
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/80 via-accent-900/70 to-primary-800/80"></div>
+      <!-- Content -->
+      <div class="relative z-10 container-max text-center px-4">
+        <div class="inline-block mb-6">
+          <span class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium border border-white/30">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg>
+            Explore Restaurants
+          </span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Restaurant Directory</h1>
+        <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">Discover amazing restaurants along Interstate 90</p>
       </div>
     </section>
 
