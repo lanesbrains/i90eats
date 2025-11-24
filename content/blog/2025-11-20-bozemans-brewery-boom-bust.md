@@ -1,7 +1,7 @@
 ---
 title: "Bozeman's Brewery Boom: Craft Beer Revolution or Tourist-Fueled Hangover?"
 slug: "bozemans-brewery-boom-bust"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-20"
 excerpt: "Bozeman's craft beer explosion brings economic growth but raises concerns about public safety, local culture, and whether the party is worth the cleanup."
 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnJBbTFehLp-msdiOldj8k0BxPO7oKQpO7zg&s"

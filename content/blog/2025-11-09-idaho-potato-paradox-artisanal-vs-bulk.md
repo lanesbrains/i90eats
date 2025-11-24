@@ -1,7 +1,7 @@
 ---
 title: "Idaho's Potato Paradox: Should Spuds Be Artisanal? The $8 Heirloom Feud"
 slug: "idaho-potato-paradox-artisanal-vs-bulk-farming-controversy"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-09"
 excerpt: "The battle for Idaho's soul: Traditional bulk farming vs. the new, high-cost artisanal spud movement backed by outside money. Is the potato a commodity or a luxury vegetable?"
 image: "https://idahofarming.com/images/potato-field-contrast-wide.jpg"

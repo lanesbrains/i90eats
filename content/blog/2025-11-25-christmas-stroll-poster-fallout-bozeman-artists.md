@@ -1,7 +1,7 @@
 ---
 title: "Christmas Stroll Poster Fallout: Bozeman Artists Boycott Event Over AI Controversy, Community Divided"
 slug: "christmas-stroll-poster-fallout-bozeman-artists"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-25"
 excerpt: "Leading Bozeman artists announce boycott of Christmas Stroll over AI-generated winning poster, sparking broader debate about technology's role in local creative communities."
 image: "https://blog.visit-bozeman.com/hubfs/CVB_downtown21-1.jpg"

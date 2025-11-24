@@ -1,7 +1,7 @@
 ---
 title: "Seattle's Pho Wars: The $25 Bowl Dividing the City"
 slug: "seattle-pho-wars-25-dollar-bowl-gentrification"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-03"
 excerpt: "Is the classic Vietnamese noodle soup becoming a luxury item? The clash between International District tradition and Capitol Hill's new, artisanal $25 Pho."
 image: "https://images.unsplash.com/photo-1629828394443-4b5c7e1b439c"

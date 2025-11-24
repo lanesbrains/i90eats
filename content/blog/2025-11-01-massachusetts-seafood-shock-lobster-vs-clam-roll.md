@@ -1,7 +1,7 @@
 ---
 title: "Massachusetts Seafood Shock: Lobster Roll vs. Fried Clam Roll—The True Coast King"
 slug: "massachusetts-seafood-shock-lobster-vs-fried-clam-roll"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-01"
 excerpt: "The Atlantic coast rivalry you didn't see coming: Is the Lobster Roll the true icon, or is the messy, regional genius of the Fried Clam Roll the superior choice? A deep dive into New England's coastal conflict."
 image: "https://coastalviews.com/images/new-england-roll-dilemma-wide.jpg"

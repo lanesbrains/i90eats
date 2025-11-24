@@ -1,7 +1,7 @@
 ---
 title: "Cleveland's Pierogi Pressure: Old World vs. New Fusion—Is Thai Peanut Sacrilege?"
 slug: "cleveland-pierogi-pressure-old-world-new-fusion"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-05"
 excerpt: "Cleveland's Eastern European heart is being challenged. Traditionalists are battling 'Chef-Driven' pierogi shops offering Buffalo Chicken and BBQ fusion fillings. A look into the battle for the city's doughy soul."
 image: "https://midwestfoodguide.com/pierogi-dilemma-cleveland-fusion.jpg"

@@ -1,7 +1,7 @@
 ---
 title: "Spokane's Chain Store War: Big Box Invasion vs. Local Business Survival"
 slug: "spokanes-chain-store-controversy"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "The heated battle over chain restaurants in Spokane - are national brands destroying local character or bringing needed competition?"
 image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/MK02733_Spokane_Upper_Falls_3x2_crop.jpg/1280px-MK02733_Spokane_Upper_Falls_3x2_crop.jpg"

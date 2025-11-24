@@ -1,7 +1,7 @@
 ---
 title: "Detroit's Coney Dog Crisis: American vs. Lafayette—The Eternal Battle"
 slug: "detroit-coney-dog-crisis-american-lafayette-battle"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "The most heated rivalry in American street food: Two legendary, next-door Detroit chili dog spots and the city's eternal dilemma."
 image: "https://images.unsplash.com/photo-1541819614-72750392fa9d"

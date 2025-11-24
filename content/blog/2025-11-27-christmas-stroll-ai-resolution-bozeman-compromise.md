@@ -1,7 +1,7 @@
 ---
 title: "Christmas Stroll AI Resolution: Bozeman Reaches Compromise, Traditional Artists Return to Holiday Celebration"
 slug: "christmas-stroll-ai-resolution-bozeman-compromise"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-27"
 excerpt: "After intense community debate, Bozeman reaches compromise on AI poster controversy, allowing both traditional and digital artists to participate in Christmas Stroll."
 image: "https://assets.isu.pub/document-structure/221128230301-53419abd5f37dda58fe07cf549dd4efc/v1/c576c49a46f941f1bcdd59cbb64546d0.jpeg"

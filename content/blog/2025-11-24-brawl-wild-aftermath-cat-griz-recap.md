@@ -1,7 +1,7 @@
 ---
 title: "Brawl of the Wild Aftermath: Bobcats Claw Grizzlies in 31-28 Thriller, Bozeman Explodes in Celebration"
 slug: "brawl-wild-aftermath-cat-griz-recap"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-24"
 excerpt: "Montana State Bobcats secure a dramatic victory over rival Grizzlies in the Brawl of the Wild, sending shockwaves through college football and Bozeman into euphoric celebration."
 image: "https://msubobcats.com/images/2023/11/17/CP20221119_Brawl_of_the_Wild_Game_008toned.jpg"

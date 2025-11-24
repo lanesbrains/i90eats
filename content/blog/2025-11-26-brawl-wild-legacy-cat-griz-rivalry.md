@@ -1,7 +1,7 @@
 ---
 title: "Brawl of the Wild Legacy: How One Victory Reshaped Montana Football and Bozeman's Identity"
 slug: "brawl-wild-legacy-cat-griz-rivalry"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-26"
 excerpt: "The Bobcats' victory in the Brawl of the Wild extends far beyond the scoreboard, influencing recruiting, community pride, and the future of Montana college football."
 image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/2008-03-15_Montana_Grill_open_despite_the_tornado_damage.jpg/1280px-2008-03-15_Montana_Grill_open_despite_the_tornado_damage.jpg"
@@ -94,5 +94,7 @@ _What do you think this victory means for Montana State football? Share your pre
 **Economic Ripple**: Estimated $50 million in long-term economic benefit
 
 **How will this victory change MSU's trajectory?**
+
 ```
 
+```

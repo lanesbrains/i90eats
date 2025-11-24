@@ -1,7 +1,7 @@
 ---
 title: "Spokane's Great Food Divide: North Hill vs. South Hill Snobbery and the Battle for the Dinner Plate"
 slug: "spokane-north-south-hill-food-snobbery-divide"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-08"
 excerpt: "The most intense, unspoken food feud in the Inland Northwest isn't between cities—it's between Spokane's North and South Hills. Old money, fine dining, and tradition clash with new development, ethnic cuisine, and craft breweries."
 image: "https://spokaneviews.com/images/hill-divider-food-map.jpg"

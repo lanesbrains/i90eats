@@ -1,7 +1,7 @@
 ---
 title: "Missoula's Vegan vs. Venison Vibe Check: The Primal Food Identity Crisis"
 slug: "missoula-vegan-vs-venison-food-identity-crisis-montana"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-06"
 excerpt: "The divide is stark in Missoula: The old guard's hunting and venison culture faces off against the new influx of progressive, plant-based diets. A deep look at the clash between tradition and ethics."
 image: "https://montanaoutfitter.com/images/venison-vs-veggie-clash.jpg"

@@ -1,7 +1,7 @@
 ---
 title: "Bozeman's Food Tourism Trap: World-Class Dining or Tourist Exploitation?"
 slug: "bozemans-food-tourism-trap"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-20"
 excerpt: "Is Bozeman's celebrated food scene genuine or just another tourist cash grab? The controversial truth behind Montana's culinary reputation"
 image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/BozemanMainStreetEast2011.jpg/960px-BozemanMainStreetEast2011.jpg?20110128213813"

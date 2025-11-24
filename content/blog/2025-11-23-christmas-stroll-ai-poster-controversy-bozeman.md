@@ -1,7 +1,7 @@
 ---
 title: "Bozeman's Christmas Stroll Poster Storm: AI-Generated Art Wins Contest, Sparking Community Debate"
 slug: "christmas-stroll-ai-poster-controversy-bozeman"
-author: "I-90 Eats"
+author: "The Breakfast King"
 publishDate: "2025-11-23"
 excerpt: "A controversial AI-generated poster wins Bozeman's Christmas Stroll contest, dividing the community between technological innovation and traditional artistic integrity."
 image: "https://townsquare.media/site/12/files/2019/12/Downtown-Bozeman-Christmas-Eve.jpg?w=780&q=75"
