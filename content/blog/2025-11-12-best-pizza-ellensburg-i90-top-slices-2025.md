@@ -3,7 +3,7 @@ title: "Best Pizza in Ellensburg Along I-90: Top Slices for Yakima Valley Vibes 
 slug: best-pizza-ellensburg-i90-top-slices-2025
 author: Pizza Pioneer
 publishDate: 2025-11-17
-image: https://s3-media0.fl.yelpcdn.com/bphoto/BMR1RhhDSsy5f2kor4oX4A/348s.jpg
+image: "https://s3-media0.fl.yelpcdn.com/bphoto/BMR1RhhDSsy5f2kor4oX4A/348s.jpg"
 excerpt: "Passing Ellensburg on I-90? These pizza places bake pies that'll break up your eastern WA drive. Yelp and local reviews for wood-fired winners."
 tags:
   - Ellensburg pizza

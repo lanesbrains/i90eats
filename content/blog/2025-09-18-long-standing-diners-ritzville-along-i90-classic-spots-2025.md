@@ -3,7 +3,7 @@ title: "Long-Standing Diners in Ritzville Along I-90: Classic Spots for 2025 Tra
 slug: long-standing-diners-ritzville-i90-classic-2025
 author: The Breakfast King
 publishDate: 2025-09-18
-image: https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg
+image: "https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg"
 excerpt: "Ritzville rest on I-90? These old-school diners dish comfort that'll time-warp your wheat fields drive. Palouse Reddit relics."
 tags:
   - Ritzville diners

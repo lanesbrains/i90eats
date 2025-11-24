@@ -4,7 +4,7 @@ slug: "chicago-deep-dish-dilemma-tavern-style-vs-stuffed"
 author: "The Breakfast King"
 publishDate: "2025-11-17"
 excerpt: "Is the iconic deep dish pizza a tourist trap? We explore the true Chicagoan's preference: the thin-crust, square-cut 'Tavern Style' pizza."
-image: "https://images.unsplash.com/photo-1543884841-32694119853a"
+image: "https://images.unsplash.com/photo-1543884841-32694119853a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 tags:
   - Chicago Pizza
   - Deep Dish Debate

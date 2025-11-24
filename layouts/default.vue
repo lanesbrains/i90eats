@@ -22,7 +22,7 @@
             <div
               class="w-20 h-16 rounded-lg flex items-center justify-center"
             >
-              <img src="../assets/images/i90eats-logo.webp" alt="i 90 eats logo" />
+              <img :src="logoImage" alt="i 90 eats logo" />
             </div>
             <!-- <span class="text-xl font-bold text-gray-900">I-90 Eats</span> -->
           </NuxtLink>
@@ -277,6 +277,7 @@
 <script setup>
 import { ref } from "vue";
 import foodBgImage from "~/assets/images/food-bg.webp";
+import logoImage from "~/assets/images/i90eats-logo.webp";
 
 const showMobileMenu = ref(false);
 

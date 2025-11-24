@@ -4,7 +4,7 @@ slug: "best-coffee-ellensburg-i90-2025"
 author: "The Breakfast King"
 publishDate: "2025-11-24"
 excerpt: "Heading through Ellensburg on I‑90? Skip the gas‑station brew. These local coffee joints offer real flavor, real vibes, and real caffeine."
-image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 tags:
   - Ellensburg coffee
   - I90 cafes

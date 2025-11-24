@@ -4,7 +4,7 @@ title: "Best Breakfast in Missoula Along I-90: Top Spots to Fuel Your Montana
 slug: best-breakfast-missoula-i90
 author: The Breakfast King
 publishDate: 2025-09-04
-image: https://pbs.twimg.com/media/GzkoY3ObkAE3nAh.jpg
+image: "https://pbs.twimg.com/media/GzkoY3ObkAE3nAh.jpg"
 excerpt: Rolling through Missoula on I-90? These breakfast havens serve up
   pancakes, burritos, and more that'll kickstart your day better than caffeine.
   Real reviews from locals and travelers.

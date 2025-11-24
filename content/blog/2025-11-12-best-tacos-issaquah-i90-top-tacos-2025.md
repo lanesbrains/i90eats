@@ -3,7 +3,7 @@ title: "Best Tacos in Issaquah Along I-90: Top Tacos for Highland Bites in 2025"
 slug: best-tacos-issaquah-i90-top-tacos-2025
 author: Taco Trailblazer
 publishDate: 2025-11-14
-image: https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Hitting I-90 near Issaquah? These taco spots serve shells that'll spice up your cascade commute. Local Yelp and Reddit recs for authentic flavors."
 tags:
   - Issaquah tacos

@@ -3,7 +3,7 @@ title: "Best Burgers in Ellensburg Along I-90: Top Patties for CWU Cravings in 2
 slug: best-burgers-ellensburg-i90-top-patties-2025
 author: The Breakfast King
 publishDate: 2025-08-15
-image: https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg
+image: "https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg"
 excerpt: "Ellensburg exit on I-90 calling? These burger spots stack patties that'll outshine the valley sun. College-town Reddit stacks."
 tags:
   - Ellensburg burgers

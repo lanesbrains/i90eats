@@ -3,7 +3,7 @@ title: "Best Breakfast in Seattle Along I-90: Top Spots to Start Your PNW Day in
 slug: best-breakfast-seattle-i90-top-spots-2025
 author: The Breakfast King
 publishDate: 2025-07-20
-image: https://pbs.twimg.com/media/GzDGyGZWUAAskn3.jpg
+image: "https://pbs.twimg.com/media/GzDGyGZWUAAskn3.jpg"
 excerpt: "Rolling into Seattle on I-90? These breakfast spots sling eggs and stacks that'll fuel your ferry hop better than jet fuel. Local Reddit and X picks."
 tags:
   - Seattle breakfast

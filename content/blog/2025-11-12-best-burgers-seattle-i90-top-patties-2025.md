@@ -3,7 +3,7 @@ title: "Best Burgers in Seattle Along I-90: Top Patties for Emerald City Eats in
 slug: best-burgers-seattle-i90-top-patties-2025
 author: The Burger Boss
 publishDate: 2025-11-12
-image: https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Zooming through Seattle on I-90? These burger joints flip patties that'll make your road trip legendary. Local Reddit and Eater picks for juicy, sustainable bites."
 tags:
   - Seattle burgers

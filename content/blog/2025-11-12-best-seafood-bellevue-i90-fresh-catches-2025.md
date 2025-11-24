@@ -3,7 +3,7 @@ title: "Best Seafood in Bellevue Along I-90: Fresh Catches for Eastside Feasts i
 slug: best-seafood-bellevue-i90-fresh-catches-2025
 author: Seafood Sovereign
 publishDate: 2025-11-13
-image: https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Cruising I-90 into Bellevue? These seafood spots haul in catches that'll make your stop oceanic. Yelp and OpenTable picks for sustainable, fresh fare."
 tags:
   - Bellevue seafood

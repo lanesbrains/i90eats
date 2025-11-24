@@ -3,7 +3,7 @@ title: "Top BBQ Spots in Snoqualmie Along I-90: Smoky Stops for 2025 Pit Masters
 slug: top-bbq-snoqualmie-i90-smoky-stops-2025
 author: i90 Easy Rider
 publishDate: 2025-08-10
-image: https://pbs.twimg.com/media/Gz5ziGhXQAAMjXd.jpg
+image: "https://pbs.twimg.com/media/Gz5ziGhXQAAMjXd.jpg"
 excerpt: "Smoking through Snoqualmie on I-90? These BBQ joints rub ribs that'll slow your roll in the best way. Falls-area Reddit smokes."
 tags:
   - Snoqualmie BBQ

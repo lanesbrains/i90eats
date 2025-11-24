@@ -3,7 +3,7 @@ title: "Top Breweries in Issaquah Along I-90: Best Pints for Highland Hops in 20
 slug: top-breweries-issaquah-i90-best-pints-2025
 author: Brew Baron
 publishDate: 2025-11-21
-image: https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Hopping through Issaquah on I-90? These breweries tap brews that'll quench your cascade quest. Untappd and Reddit for craft kings."
 tags:
   - Issaquah breweries

@@ -3,7 +3,7 @@ title: "Best Pizza in Spokane Along I-90: Top 5 Spots for Road-Trip Cravings in 
 slug: best-pizza-spokane-i90-top-5
 author: The Breakfast King
 publishDate: 2025-09-04
-image: https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg
+image: "https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg"
 excerpt: Cruising I-90 through Spokane? Skip the chains and hit these top 5 pizza joints for authentic slices that'll make your pit stop legendary. From wood-fired to classic thick-crust, we've got the lowdown based on real reviews.
 tags:
   - Spokane pizza

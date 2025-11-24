@@ -3,7 +3,7 @@ title: "Best Pizza in Issaquah Along I-90: Top Slices for Highland Eats in 2025"
 slug: best-pizza-issaquah-i90-top-slices-2025
 author: The Breakfast King
 publishDate: 2025-08-01
-image: https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg
+image: "https://pbs.twimg.com/media/GSSfNLsWYAA-gsg.jpg"
 excerpt: "Cruising I-90 to Issaquah? These pizza joints crank out crusts that'll make your pre-hike stop legendary. Local X and Reddit dough-down."
 tags:
   - Issaquah pizza

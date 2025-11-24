@@ -3,7 +3,7 @@ title: "Best Tacos in Spokane Along I-90: Top Folds for Inland Eats in 2025"
 slug: best-tacos-spokane-i90-top-folds-2025
 author: i90 Easy Rider
 publishDate: 2025-09-25
-image: https://pbs.twimg.com/media/Gz5ziGhXQAAMjXd.jpg
+image: "https://pbs.twimg.com/media/Gz5ziGhXQAAMjXd.jpg"
 excerpt: "Spokane taco time on I-90? These taquerias fold flavors that'll spice your Lilac City layover. Riverfront Reddit rolls."
 tags:
   - Spokane tacos

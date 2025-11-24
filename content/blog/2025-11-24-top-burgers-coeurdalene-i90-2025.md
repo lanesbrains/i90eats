@@ -4,7 +4,7 @@ slug: "top-burgers-coeurdalene-i90-2025"
 author: "The Breakfast King"
 publishDate: "2025-11-24"
 excerpt: "Whether you're craving smash‑style, gourmet, or down‑home classics, these CDA burger joints are absolutely worth the exit."
-image: "https://images.unsplash.com/photo-1550317138-10000687a72b"
+image: "https://images.unsplash.com/photo-1550317138-10000687a72b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 tags:
   - Coeur d'Alene food
   - best burgers Idaho

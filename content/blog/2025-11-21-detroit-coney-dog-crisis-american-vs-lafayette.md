@@ -4,7 +4,7 @@ slug: "detroit-coney-dog-crisis-american-lafayette-battle"
 author: "The Breakfast King"
 publishDate: "2025-11-21"
 excerpt: "The most heated rivalry in American street food: Two legendary, next-door Detroit chili dog spots and the city's eternal dilemma."
-image: "https://images.unsplash.com/photo-1541819614-72750392fa9d"
+image: "https://images.unsplash.com/photo-1541819614-72750392fa9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 tags:
   - Detroit Food
   - Coney Dog Rivalry

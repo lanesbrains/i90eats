@@ -4,7 +4,7 @@ slug: "seattle-pho-wars-25-dollar-bowl-gentrification"
 author: "The Breakfast King"
 publishDate: "2025-11-03"
 excerpt: "Is the classic Vietnamese noodle soup becoming a luxury item? The clash between International District tradition and Capitol Hill's new, artisanal $25 Pho."
-image: "https://images.unsplash.com/photo-1629828394443-4b5c7e1b439c"
+image: "https://images.unsplash.com/photo-1629828394443-4b5c7e1b439c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 tags:
   - Seattle Food
   - Pho Controversy

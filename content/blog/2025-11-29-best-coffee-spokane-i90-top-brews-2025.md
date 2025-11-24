@@ -3,7 +3,7 @@ title: "Best Coffee Shops in Spokane Along I-90: Top Brews for Inland Northwest 
 slug: best-coffee-spokane-i90-top-brews-2025
 author: "Caffeine Commander"
 publishDate: 2025-11-29
-image: https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Perking through Spokane on I-90? These coffee havens brew bold cups that'll power your Inland Northwest adventures. Reddit and TripAdvisor for steamy selections."
 tags:
   - Spokane coffee

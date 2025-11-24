@@ -3,7 +3,7 @@ title: "Famous Desserts in Moses Lake Along I-90: Sweet Stops for Basin Bites in
 slug: famous-desserts-moses-lake-i90-sweet-stops-2025
 author: i90 Easy Rider
 publishDate: 2025-09-12
-image: https://pbs.twimg.com/media/GzkoY3ObkAE3nAh.jpg
+image: "https://pbs.twimg.com/media/GzkoY3ObkAE3nAh.jpg"
 excerpt: "Moses Lake sugar rush on I-90? These dessert dens dish pies that'll sweeten your basin blues. Local X sugar highs."
 tags:
   - Moses Lake desserts

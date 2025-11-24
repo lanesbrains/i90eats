@@ -3,7 +3,7 @@ title: "Best Cozy Breakfast in Bozeman Along I-90: Local Favorites for Relaxed M
 slug: best-cozy-breakfast-bozeman-i90-local-2025
 author: Cozy Corner Critic
 publishDate: 2025-11-26
-image: https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/ba/54/ca/great-happy-hour-4-6.jpg?w=1200&h=-1&s=1
+image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/ba/54/ca/great-happy-hour-4-6.jpg?w=1200&h=-1&s=1"
 excerpt: "Chilling on I-90 in Bozeman? These warm, inviting spots serve comforting breakfasts like a local's secret, from casual chats and reviews."
 tags:
   - Bozeman cozy breakfast

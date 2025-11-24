@@ -3,7 +3,7 @@ title: "Best Lakeside Dining in Coeur d'Alene Along I-90: Scenic Spots for 2025"
 slug: best-lakeside-dining-coeur-dalene-i90
 author: The Breakfast King
 publishDate: 2025-09-06
-image: https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg
+image: "https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg"
 excerpt: I-90 pit stop in Coeur d'Alene? These lakeside eateries offer views and
   vibes, with real 2025 reviews on seafood and more.
 tags:

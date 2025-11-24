@@ -3,7 +3,7 @@ title: "Best Desserts in Bellevue Along I-90: Sweet Treats for Eastside Indulgen
 slug: best-desserts-bellevue-i90-sweet-treats-2025
 author: Dessert Devotee
 publishDate: 2025-11-20
-image: https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Sweetening Bellevue on I-90? These dessert dens deliver delights that'll cap your tech town tour. Yelp and Instagram for sugary stars."
 tags:
   - Bellevue desserts

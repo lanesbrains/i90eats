@@ -3,7 +3,7 @@ title: "Best Vegan Food in Seattle Along I-90: Top Plant-Based Picks for Emerald
 slug: best-vegan-seattle-i90-top-plant-based-2025
 author: Vegan Voyager
 publishDate: 2025-11-19
-image: https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Vegging out in Seattle via I-90? These vegan spots plate greens that'll green your drive. Eater and Reddit for compassionate cuisine."
 tags:
   - Seattle vegan

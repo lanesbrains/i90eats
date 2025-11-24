@@ -3,7 +3,7 @@ title: "Best Seafood in George Along I-90: Lake Eats for Columbia Cravings in 20
 slug: best-seafood-george-i90-lake-eats-2025
 author: The Breakfast King
 publishDate: 2025-09-05
-image: https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg
+image: "https://pbs.twimg.com/media/Gv3fYfuWIAAr2E0.jpg"
 excerpt: "George town on I-90? These seafood shacks reel in trout that'll hook your gorge trip. Vantage-view Reddit reels."
 tags:
   - George seafood

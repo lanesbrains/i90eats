@@ -3,7 +3,7 @@ title: "Best Breakfast in Bozeman Along I-90: Top Fuel for Montana Adventures in
 slug: best-breakfast-bozeman-i90-top-fuel-2025
 author: Adventure Appetite
 publishDate: 2025-11-25
-image: https://www.buybozemanhomes.com/uploads/Downtown%20Bozeman%20Breakfast.png
+image: "https://www.buybozemanhomes.com/uploads/Downtown%20Bozeman%20Breakfast.png"
 excerpt: "Tackling I-90 trails near Bozeman? Gear up with these hearty breakfasts for hikers and explorers, drawn from outdoor reviews."
 tags:
   - Bozeman breakfast

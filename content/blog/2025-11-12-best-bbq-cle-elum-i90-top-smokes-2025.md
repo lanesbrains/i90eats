@@ -3,7 +3,7 @@ title: "Best BBQ in Cle Elum Along I-90: Top Smokes for Kittitas County Cravings
 slug: best-bbq-cle-elum-i90-top-smokes-2025
 author: BBQ Boss
 publishDate: 2025-11-18
-image: https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Smokin' through Cle Elum on I-90? These BBQ joints pit-master meats that'll satisfy your pass hunger. Local Reddit and Yelp for saucy selections."
 tags:
   - Cle Elum BBQ

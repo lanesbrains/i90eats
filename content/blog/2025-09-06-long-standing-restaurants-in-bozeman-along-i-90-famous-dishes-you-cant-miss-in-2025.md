@@ -4,7 +4,7 @@ title: "Long-Standing Restaurants in Bozeman Along I-90: Famous Dishes You Can't
 slug: long-standing-restaurants-bozeman-i90-famous-dishes
 author: The Breakfast King
 publishDate: 2025-09-06
-image: https://townsquare.media/site/15/files/2025/06/attachment-Untitled-design-2025-06-26T122935.737.jpg?w=1600&h=1067&q=75
+image: "https://townsquare.media/site/15/files/2025/06/attachment-Untitled-design-2025-06-26T122935.737.jpg?w=1600&h=1067&q=75"
 excerpt: Exploring Bozeman off I-90? Dive into these timeless eateries and their
   iconic dishes, backed by local reviews. From biscuits to burgers, history on a
   plate.

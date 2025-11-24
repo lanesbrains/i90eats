@@ -3,7 +3,7 @@ title: "Best Craft Beer in Bozeman Along I-90: Top Pints for Big Sky Brews in 20
 slug: best-craft-beer-bozeman-i90-top-pints-2025
 author: "Brew Baroness"
 publishDate: 2025-12-01
-image: https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80
+image: "https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
 excerpt: "Brewing through Bozeman on I-90? These craft beer havens tap brews that'll quench your Big Sky thirst. Untappd and Reddit for hoppy selections."
 tags:
   - Bozeman beer

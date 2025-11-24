@@ -3,7 +3,7 @@ title: "Top Vegan Eats in Cle Elum Along I-90: Plant-Based Stops for 2025 Hikers
 slug: top-vegan-cle-elum-i90-plant-based-2025
 author: i90 Easy Rider
 publishDate: 2025-08-22
-image: https://pbs.twimg.com/media/GzeJH0VXUAAsDow.jpg
+image: "https://pbs.twimg.com/media/GzeJH0VXUAAsDow.jpg"
 excerpt: "Cle Elum on I-90? These vegan spots grow greens that'll green your hike guilt-free. Sourdough trail Reddit greens."
 tags:
   - Cle Elum vegan

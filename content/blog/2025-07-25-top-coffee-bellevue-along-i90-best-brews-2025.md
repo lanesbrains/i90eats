@@ -3,7 +3,7 @@ title: "Top Coffee Shops in Bellevue Along I-90: Best Brews for Eastside Road-Tr
 slug: top-coffee-bellevue-i90-best-brews-2025
 author: i90 Easy Rider
 publishDate: 2025-07-25
-image: https://pbs.twimg.com/media/GorHkUAWIAE8ydr.jpg
+image: "https://pbs.twimg.com/media/GorHkUAWIAE8ydr.jpg"
 excerpt: "Stuck in Bellevue traffic on I-90? These coffee shops pour shots that'll jolt you past the merge madness. Real Eastside Reddit raves."
 tags:
   - Bellevue coffee
