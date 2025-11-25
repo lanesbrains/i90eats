@@ -22,14 +22,26 @@
         </p>
         <!-- Hero Section Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <!-- Hide subscribe button if already subscribed -->
-          <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent text-lg px-8 py-4">
-            Subscribe FREE - Unlock All Restaurants
-          </NuxtLink>
-          
-          <NuxtLink to="/directory" class="btn-secondary text-lg px-8 py-4">
-            Browse Restaurants
-          </NuxtLink>
+          <!-- Show different CTAs based on user status -->
+          <template v-if="isBusinessOwner">
+            <NuxtLink to="/business/dashboard" class="btn-accent text-lg px-8 py-4">
+              Manage Your Restaurant
+            </NuxtLink>
+            <NuxtLink to="/directory" class="btn-secondary text-lg px-8 py-4">
+              Browse Directory
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent text-lg px-8 py-4">
+              Subscribe FREE - Unlock All Restaurants
+            </NuxtLink>
+            <NuxtLink to="/directory" class="btn-secondary text-lg px-8 py-4">
+              Browse Restaurants
+            </NuxtLink>
+            <NuxtLink v-if="!isSubscriber" to="/business/signup" class="btn-primary text-lg px-8 py-4">
+              List Your Restaurant
+            </NuxtLink>
+          </template>
         </div>
       </div>
     </section>
@@ -272,14 +284,30 @@
     <!-- CTA Section -->
     <section class="bg-primary-600 text-white py-16">
       <div class="container-max text-center">
-        <h2 class="text-3xl font-bold mb-4">Ready to Start Saving?</h2>
-        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-          Join hundreds of travelers who are already saving money on great food
-          along I-90
-        </p>
-        <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent">
-          Subscribe FREE - Unlock All Restaurants
-        </NuxtLink>
+        <template v-if="isBusinessOwner">
+          <h2 class="text-3xl font-bold mb-4">Manage Your Restaurant</h2>
+          <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            Update your listing, add deals, and reach more customers along I-90
+          </p>
+          <NuxtLink to="/business/dashboard" class="btn-accent">
+            Go to Dashboard
+          </NuxtLink>
+        </template>
+        <template v-else>
+          <h2 class="text-3xl font-bold mb-4">Ready to Start Saving?</h2>
+          <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            Join hundreds of travelers who are already saving money on great food
+            along I-90
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <NuxtLink v-if="!isSubscriber" to="/subscribe" class="btn-accent">
+              Subscribe FREE - Unlock All Restaurants
+            </NuxtLink>
+            <NuxtLink to="/business/signup" class="btn-secondary">
+              List Your Restaurant
+            </NuxtLink>
+          </div>
+        </template>
       </div>
     </section>
   </div>
@@ -288,7 +316,7 @@
 <script setup>
 import { ref } from "vue";
 import { useAuth } from '~/composables/useAuth';
-const { isSubscriber } = useAuth();
+const { isSubscriber, isBusinessOwner } = useAuth();
 
 // Hero background image is now inline in template
 

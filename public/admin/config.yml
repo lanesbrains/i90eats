@@ -1,32 +1,36 @@
-# backend:
-#   name: auth0
-#   auth0:
-#     domain: dev-hwru7mq43np63pk4.us.auth0.com
-#     clientId: BN6lolGjUxfaeqOghS1SpgUghvIQIdod
-#     scope: openid profile email
+# public/admin/config.yml
+
+# Auth0 Authentication
 backend:
-  name: git-gateway
-  branch: main
+  name: auth0
+  auth0:
+    domain: dev-hwru7mq43np63pk4.us.auth0.com
+    clientId: yE80EioGexiahYIPNfcQMM9sAn3MKmgp
+    scope: rich@lanesbrains.com
+    audience: https://i90eats.auth0.com/api/v2/
 
-# Remove auth0 config
-
-# Remove local_backend: true for production/Auth0
+# Enable local backend for development
+local_backend: true
 
 media_folder: "public/images"
 public_folder: "/images"
 
 collections:
-  - name: "restaurants"
-    label: "Restaurants"
+  # 🏪 RESTAURANT OWNER COLLECTIONS
+  - name: "my-restaurants"
+    label: "My Restaurants"
     folder: "content/restaurants"
-    create: true
-    slug: "{{slug}}"
+    create: false
+    filter:
+      field: ownerEmail
+      value: "{{user.user_metadata.email}}"
     fields:
       - { label: "Name", name: "title", widget: "string" }
       - {
           label: "Slug",
           name: "slug",
           widget: "string",
+          required: true,
           pattern:
             [
               "^[a-z0-9]+(?:-[a-z0-9]+)*$",
@@ -134,18 +138,27 @@ collections:
           time_format: false,
           default: "{{now}}",
         }
+      - {
+          label: "Owner Email",
+          name: "ownerEmail",
+          widget: "hidden",
+          default: "{{user.user_metadata.email}}",
+        }
 
-  - name: "deals"
-    label: "Restaurant Deals"
+  # 🍽️ RESTAURANT DEALS (filtered by ownership)
+  - name: "my-deals"
+    label: "My Restaurant Deals"
     folder: "content/deals"
     create: true
-    slug: "{{restaurantSlug}}-{{year}}-{{month}}-{{day}}"
+    filter:
+      field: "restaurantSlug"
+      value: "{{user.user_metadata.restaurant_slug}}"
     fields:
       - {
           label: "Restaurant Slug",
           name: "restaurantSlug",
-          widget: "string",
-          hint: "Must match a restaurant slug exactly",
+          widget: "hidden",
+          default: "{{user.user_metadata.restaurant_slug}}",
         }
       - { label: "Deal Title", name: "title", widget: "string" }
       - {
@@ -175,205 +188,5 @@ collections:
           hint: "Premium deals get priority placement",
         }
       - { label: "Deal Image", name: "image", widget: "image", required: false }
-
-  - name: "blog-posts"
-    label: "Blog Posts"
-    folder: "content/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Slug",
-          name: "slug",
-          widget: "string",
-          pattern:
-            [
-              "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "Lowercase letters, numbers, and hyphens only",
-            ],
-        }
-      - { label: "Author", name: "author", widget: "string" }
-      - {
-          label: "Publish Date",
-          name: "publishDate",
-          widget: "datetime",
-          format: "YYYY-MM-DD",
-        }
-      - {
-          label: "Featured Image",
-          name: "image",
-          widget: "image",
-          required: false,
-        }
-      - {
-          label: "Excerpt",
-          name: "excerpt",
-          widget: "text",
-          hint: "Short description for previews",
-        }
-      - { label: "Content", name: "body", widget: "markdown" }
-      - {
-          label: "Tags",
-          name: "tags",
-          widget: "list",
-          field: { label: "Tag", name: "tag", widget: "string" },
-        }
-      - {
-          label: "Published",
-          name: "published",
-          widget: "boolean",
-          default: false,
-        }
-
-  - name: "newsletters"
-    label: "Newsletters"
-    folder: "content/newsletters"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - {
-          label: "Date",
-          name: "date",
-          widget: "datetime",
-          format: "YYYY-MM-DD",
-        }
-      - { label: "Content", name: "content", widget: "markdown" }
-      - { label: "Sent", name: "sent", widget: "boolean", default: false }
-      - {
-          label: "Recipients",
-          name: "recipients",
-          widget: "number",
-          default: 0,
-        }
-
-  - name: "subscribers"
-    label: "Subscribers"
-    folder: "content/subscribers"
-    create: false
-    fields:
-      - { label: "Email", name: "email", widget: "string" }
-      - label: "Locations"
-        name: "locations"
-        widget: "list"
-        fields:
-          - label: "Location"
-            name: "location"
-            widget: "select"
-            options:
-              - "Seattle, WA"
-              - "Bellevue, WA"
-              - "Issaquah, WA"
-              - "Snoqualmie Pass, WA"
-              - "Cle Elum, WA"
-              - "Ellensburg, WA"
-              - "Spokane, WA"
-              - "Coeur d'Alene, ID"
-              - "Kellogg, ID"
-              - "Wallace, ID"
-              - "Lookout Pass, ID"
-              - "Missoula, MT"
-              - "Butte, MT"
-              - "Bozeman, MT"
-              - "Livingston, MT"
-              - "Big Timber, MT"
-              - "Billings, MT"
-              - "Sheridan, WY"
-              - "Rapid City, SD"
-              - "Wall, SD"
-              - "Kadoka, SD"
-              - "Murdo, SD"
-              - "Chamberlain, SD"
-              - "Mitchell, SD"
-              - "Sioux Falls, SD"
-              - "Luverne, MN"
-              - "Worthington, MN"
-              - "Fairmont, MN"
-              - "Blue Earth, MN"
-              - "Albert Lea, MN"
-              - "Austin, MN"
-              - "Rochester, MN"
-              - "La Crosse, WI"
-              - "Des Moines, IA"
-              - "Newton, IA"
-              - "Grinnell, IA"
-              - "Iowa City, IA"
-              - "Davenport, IA"
-              - "Rock Island, IL"
-              - "Moline, IL"
-              - "Chicago, IL"
-              - "Hammond, IN"
-              - "Toledo, OH"
-              - "Fremont, OH"
-              - "Elyria, OH"
-              - "Cleveland, OH"
-              - "Erie, PA"
-              - "Buffalo, NY"
-              - "Batavia, NY"
-              - "Rochester, NY"
-              - "Syracuse, NY"
-              - "Utica, NY"
-              - "Albany, NY"
-              - "Springfield, MA"
-              - "Worcester, MA"
-              - "Boston, MA"
-      - {
-          label: "Stripe Customer ID",
-          name: "stripeCustomerId",
-          widget: "string",
-        }
-      - {
-          label: "Stripe Subscription ID",
-          name: "stripeSubscriptionId",
-          widget: "string",
-        }
-      - label: "Subscription Status"
-        name: "subscriptionStatus"
-        widget: "select"
-        options: ["active", "past_due", "cancelled", "unpaid"]
-        default: "active"
-      - { label: "Subscribed Date", name: "subscribedAt", widget: "datetime" }
-      - {
-          label: "Current Period End",
-          name: "currentPeriodEnd",
-          widget: "datetime",
-        }
-
-  - name: "restaurant-subscriptions"
-    label: "Restaurant Subscriptions"
-    folder: "content/restaurant-subscriptions"
-    create: false
-    fields:
-      - { label: "Restaurant Slug", name: "restaurantSlug", widget: "string" }
-      - { label: "Owner Email", name: "ownerEmail", widget: "string" }
-      - {
-          label: "Stripe Customer ID",
-          name: "stripeCustomerId",
-          widget: "string",
-        }
-      - {
-          label: "Stripe Subscription ID",
-          name: "stripeSubscriptionId",
-          widget: "string",
-        }
-      - {
-          label: "Subscription Tier",
-          name: "subscriptionTier",
-          widget: "select",
-          options: ["basic", "premium"],
-          default: "basic",
-        }
-      - {
-          label: "Subscription Status",
-          name: "subscriptionStatus",
-          widget: "select",
-          options: ["active", "past_due", "cancelled", "unpaid"],
-          default: "active",
-        }
-      - { label: "Subscribed Date", name: "subscribedAt", widget: "datetime" }
-      - {
-          label: "Current Period End",
-          name: "currentPeriodEnd",
-          widget: "datetime",
-        }
+# 🔒 ADMIN-ONLY COLLECTIONS (hidden from restaurant owners)
+# These will only be visible to users with admin role

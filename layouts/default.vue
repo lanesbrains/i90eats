@@ -341,13 +341,8 @@ useHead({
   __dangerouslyDisableSanitizers: ['script']
 })
 
-// Check if user is a business owner (has business subscription)
-const isBusinessUser = computed(() => {
-  // TODO: Check if user has active business subscription
-  // For now, check if they have business-related localStorage or session
-  if (process.client) {
-    return localStorage.getItem('i90_business_owner') === 'true'
-  }
-  return false
-})
+// Check if user is a business owner using auth composable
+import { useAuth } from '~/composables/useAuth';
+const { isBusinessOwner } = useAuth();
+const isBusinessUser = computed(() => isBusinessOwner.value);
 </script>
