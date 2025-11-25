@@ -4,7 +4,7 @@ slug: "best-pizza-missoula-i90-slices-worth-stopping"
 author: "The Breakfast King"
 publishDate: "2025-11-24"
 excerpt: "Missoula has quietly become a pizza powerhouse. Here’s where to grab a slice that’ll make you extend your road trip by an hour."
-image: "https://images.unsplash.com/photo-1548365328-5c8fdfa5d2c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+image: "https://images.squarespace-cdn.com/content/v1/5a6a2170a803bb535f839f90/1518212771624-SS4ASZI4GJ56VLY1A9XI/_MG_6483.jpg?format=2500w"
 tags:
   - Missoula food
   - best pizza Montana

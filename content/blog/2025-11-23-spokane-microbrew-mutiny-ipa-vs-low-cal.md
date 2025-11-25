@@ -4,7 +4,7 @@ slug: "spokane-microbrew-mutiny-ipa-vs-low-cal-trend"
 author: "The Breakfast King"
 publishDate: "2025-11-23"
 excerpt: "The bitter fight in the Inland Northwest: Classic, high-ABV IPAs are losing tap space to the low-calorie, crisp-drinking craft movement. Is Spokane sacrificing flavor for fitness?"
-image: "https://inlandhops.com/images/spokane-beer-split.jpg"
+image: "https://s3-media0.fl.yelpcdn.com/bphoto/nEi0lBtjMI_EnMFV0ewaxw/1000s.jpg"
 tags:
   - Spokane Beer
   - Craft Beer Wars

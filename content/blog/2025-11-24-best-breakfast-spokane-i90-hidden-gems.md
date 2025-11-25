@@ -4,7 +4,7 @@ slug: "best-breakfast-spokane-i90-hidden-gems"
 author: "The Breakfast King"
 publishDate: "2025-11-24"
 excerpt: "From greasy-spoon greatness to farm‑fresh morning feasts, here are the breakfast spots Spokane locals swear by—ranked and road‑trip ready."
-image: "https://images.unsplash.com/photo-1603048675763-332e44e85224?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+image: "https://s3-media0.fl.yelpcdn.com/bphoto/8XEARtNlNGWf10ZYgEuKWQ/348s.jpg"
 tags:
   - Spokane breakfast
   - I90 restaurants
