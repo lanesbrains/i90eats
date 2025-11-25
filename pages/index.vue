@@ -38,9 +38,6 @@
             <NuxtLink to="/directory" class="btn-secondary text-lg px-8 py-4">
               Browse Restaurants
             </NuxtLink>
-            <NuxtLink v-if="!isSubscriber" to="/business/signup" class="btn-primary text-lg px-8 py-4">
-              List Your Restaurant
-            </NuxtLink>
           </template>
         </div>
       </div>
