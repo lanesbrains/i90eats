@@ -4,7 +4,7 @@ slug: "bozemans-food-culture-clash"
 author: "The Breakfast King"
 publishDate: "2025-11-18"
 excerpt: "The explosive debate dividing Bozeman: Tech money vs. traditional ranching culture in Montana's food scene. Who owns the plate, the local rancher or the artisanal chef?"
-image: "https://montanacowboy.com/images/bozeman-chef-rancher-clash.jpg"
+image: "https://staceysbar.com/wp-content/uploads/2022/02/bozeman-bar-with-good-food.jpg"
 tags:
   - Bozeman
   - Food Culture

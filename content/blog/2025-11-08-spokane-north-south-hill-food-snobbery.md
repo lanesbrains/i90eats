@@ -4,7 +4,7 @@ slug: "spokane-north-south-hill-food-snobbery-divide"
 author: "The Breakfast King"
 publishDate: "2025-11-08"
 excerpt: "The most intense, unspoken food feud in the Inland Northwest isn't between cities—it's between Spokane's North and South Hills. Old money, fine dining, and tradition clash with new development, ethnic cuisine, and craft breweries."
-image: "https://spokaneviews.com/images/hill-divider-food-map.jpg"
+image: "https://s3-media0.fl.yelpcdn.com/bphoto/7peQs-LGjsMpz5Csh6ePuQ/1000s.jpg"
 tags:
   - Spokane Food
   - Spokane Rivalry

@@ -4,7 +4,7 @@ slug: "wisconsin-curd-catastrophe-fresh-vs-deep-fried"
 author: "The Breakfast King"
 publishDate: "2025-11-11"
 excerpt: "The ultimate Wisconsin argument: Is the perfect cheese curd the fresh, squeaky, un-battered variety, or the battered, deep-fried bar appetizer? We track the I-90 curd consumption map."
-image: "https://midwestdairy.com/images/squeak-vs-crunch-curds.jpg"
+image: "https://dfwblobstorage.blob.core.windows.net/ewcmediacontainer/eatwisconsincheese/media/content/blog-content/curd-opener-lg900x600.jpg"
 tags:
   - Wisconsin Cheese
   - Cheese Curd Debate

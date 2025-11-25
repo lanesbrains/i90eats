@@ -4,7 +4,7 @@ slug: "upstate-ny-white-hots-feud-rochester-vs-buffalo"
 author: "The Breakfast King"
 publishDate: "2025-11-14"
 excerpt: "It's the regional sausage war you never knew about: Rochester's unique, pale 'White Hots' vs. Buffalo's classic red-casing dog. An I-90 food battleground that cuts deep into regional identity."
-image: "https://upstatenyfood.com/images/white-red-hot-comparison.jpg"
+image: "https://pyxis.nymag.com/v1/imgs/89b/e8d/465c8d56f75f26be35b788e87699640bc8-bony-hotdogs-katzs.rsocial.w1200.jpg"
 tags:
   - Upstate NY Food
   - White Hots

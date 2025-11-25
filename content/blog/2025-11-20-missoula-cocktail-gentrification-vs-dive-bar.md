@@ -4,7 +4,7 @@ slug: "missoula-cocktail-gentrification-vs-dive-bar-clash"
 author: "The Breakfast King"
 publishDate: "2025-11-20"
 excerpt: "The battle for Missoula's nightlife soul: Traditional, cheap-shot dive bars are fighting for survival against the rise of expensive, velvet-roped mixology lounges that are driving up downtown rent and changing the drinking culture."
-image: "https://missoulascene.com/images/dive-vs-mixology-missoula.jpg"
+image: "https://blog.destinationmissoula.org/wp-content/uploads/2022/04/Create-Art-Bar-.jpeg"
 tags:
   - Missoula Nightlife
   - Dive Bar Culture

@@ -4,7 +4,7 @@ slug: "bozeman-local-only-menu-controversy-sourcing"
 author: "The Breakfast King"
 publishDate: "2025-11-16"
 excerpt: "In a move shaking the food scene, high-end Bozeman restaurants are refusing to serve anything not grown within a 100-mile radius, shunning national suppliers. Is this peak ethical dining or peak price gouging?"
-image: "https://montanafoodscene.com/images/bozeman-locavore-map.jpg"
+image: "https://resizer.otstatic.com/v2/photos/wide-large/3/79915894.jpg"
 tags:
   - Bozeman Food
   - Locavore Movement

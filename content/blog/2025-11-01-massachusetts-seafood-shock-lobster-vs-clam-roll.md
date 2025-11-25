@@ -4,7 +4,7 @@ slug: "massachusetts-seafood-shock-lobster-vs-fried-clam-roll"
 author: "The Breakfast King"
 publishDate: "2025-11-01"
 excerpt: "The Atlantic coast rivalry you didn't see coming: Is the Lobster Roll the true icon, or is the messy, regional genius of the Fried Clam Roll the superior choice? A deep dive into New England's coastal conflict."
-image: "https://coastalviews.com/images/new-england-roll-dilemma-wide.jpg"
+image: "https://images.squarespace-cdn.com/content/v1/5e58395451b3306f1dfe3022/1596056162828-V9725XSF1SRXSF7A4ZBC/SeafoodSams_MA_NECS.jpg"
 tags:
   - Massachusetts Food
   - Seafood Rivalry

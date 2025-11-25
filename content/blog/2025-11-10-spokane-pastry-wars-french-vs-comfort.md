@@ -4,7 +4,7 @@ slug: "spokane-pastry-wars-french-vs-comfort-baking"
 author: "The Breakfast King"
 publishDate: "2025-11-10"
 excerpt: "The Inland Northwest’s morning feud: The rise of expensive, perfect French patisseries in Downtown Spokane is causing a stir with defenders of the massive, cheap, classic American comfort pastry (The Cinnamon Roll)."
-image: "https://inlandnwfood.com/images/pastry-war-comparison-wide.jpg"
+image: "https://bloximages.chicago2.vip.townnews.com/inlander.com/content/tncms/assets/v3/editorial/9/67/96726c19-2a8c-54ac-9480-d1c8ef3ae088/68cc844a35fa0.image.png?crop=1599%2C840%2C0%2C228&resize=1200%2C630&order=crop%2Cresize"
 tags:
   - Spokane Food
   - Pastry War

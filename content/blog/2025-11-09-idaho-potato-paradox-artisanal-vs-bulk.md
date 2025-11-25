@@ -4,7 +4,7 @@ slug: "idaho-potato-paradox-artisanal-vs-bulk-farming-controversy"
 author: "The Breakfast King"
 publishDate: "2025-11-09"
 excerpt: "The battle for Idaho's soul: Traditional bulk farming vs. the new, high-cost artisanal spud movement backed by outside money. Is the potato a commodity or a luxury vegetable?"
-image: "https://idahofarming.com/images/potato-field-contrast-wide.jpg"
+image: "https://npr.brightspotcdn.com/dims4/default/d57fee6/2147483647/strip/true/crop/1382x777+0+129/resize/1200x675!/quality/90/?url=https%3A%2F%2Fmedia.npr.org%2Fassets%2Fimg%2F2013%2F06%2F18%2Fistock_000010770040medium-4a29efb4fae45cc84578e0e6966aa481895f286f.jpg"
 tags:
   - Idaho Agriculture
   - Potato Controversy

@@ -4,7 +4,7 @@ slug: "missoula-vegan-vs-venison-food-identity-crisis-montana"
 author: "The Breakfast King"
 publishDate: "2025-11-06"
 excerpt: "The divide is stark in Missoula: The old guard's hunting and venison culture faces off against the new influx of progressive, plant-based diets. A deep look at the clash between tradition and ethics."
-image: "https://montanaoutfitter.com/images/venison-vs-veggie-clash.jpg"
+image: "https://cdn11.bigcommerce.com/s-unfq9lzvaz/product_images/uploaded_images/package-vegan-connivence-food.jpg"
 tags:
   - Missoula Montana
   - Food Culture Clash
