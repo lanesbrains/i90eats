@@ -9,9 +9,31 @@
     </section>
     
     <section class="py-16">
-      <div class="container-max max-w-4xl mx-auto text-center">
-        <p class="text-gray-600 mb-4">Your restaurant is now part of the I-90 Eats directory!</p>
-        <p class="text-sm text-gray-500">Next steps: Add deals and specials to attract subscribers.</p>
+      <div class="container-max max-w-4xl mx-auto">
+        <div class="card p-8 text-center">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">What's Next?</h2>
+          <p class="text-gray-600 mb-6">Your restaurant is now part of the I-90 Eats directory!</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="p-4 bg-primary-50 rounded-lg">
+              <h3 class="font-semibold text-gray-900 mb-2">Manage Your Listing</h3>
+              <p class="text-sm text-gray-600 mb-3">Edit your restaurant information, add deals, and update your profile.</p>
+              <NuxtLink to="/business/dashboard" class="btn-primary text-sm px-4 py-2">Go to Dashboard</NuxtLink>
+            </div>
+            <div class="p-4 bg-accent-50 rounded-lg">
+              <h3 class="font-semibold text-gray-900 mb-2">View Your Listing</h3>
+              <p class="text-sm text-gray-600 mb-3">See how your restaurant appears to subscribers in the directory.</p>
+              <NuxtLink to="/directory" class="btn-secondary text-sm px-4 py-2">View Directory</NuxtLink>
+            </div>
+          </div>
+          
+          <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <p class="text-sm text-blue-800">
+              <strong>Login Info:</strong> You can access your dashboard anytime by logging in with your email address at 
+              <NuxtLink to="/business/login" class="underline font-medium">/business/login</NuxtLink>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -19,6 +41,7 @@
 
 <script setup>
 const route = useRoute();
+const router = useRouter();
 const { signInBusiness } = useAuth();
 
 // Extract data from URL parameters
@@ -27,10 +50,20 @@ onMounted(async () => {
     const { ownerEmail } = route.query;
     
     if (ownerEmail) {
+      console.log('🔐 Attempting to authenticate business owner:', ownerEmail);
       const result = await signInBusiness(ownerEmail);
       if (result.success) {
         console.log('✅ Business authentication established');
+        // Optionally redirect to dashboard after a short delay
+        setTimeout(() => {
+          // Keep user on success page but they're now authenticated
+        }, 1000);
+      } else {
+        console.error('❌ Business authentication failed:', result.error);
+        // Still show success page, but log the error
       }
+    } else {
+      console.warn('⚠️ No ownerEmail in query params');
     }
   }
 });

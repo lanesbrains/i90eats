@@ -51,22 +51,27 @@ export const useAuth = () => {
   };
 
   // Subscriber authentication
-  const signInSubscriber = async (email) => {
+  const signInSubscriber = async (email, locations = []) => {
     try {
-      // Subscribe user (existing logic)
+      // Validate locations
+      if (!locations || !Array.isArray(locations) || locations.length === 0) {
+        return { success: false, error: 'Please select at least one location' };
+      }
+
+      // Subscribe user with locations
       const subscribeResponse = await $fetch('/api/subscribe', {
         method: 'POST',
-        body: { email, locations: [] }
+        body: { email, locations }
       });
 
       if (subscribeResponse.ok) {
-        // Create JWT token for subscriber
+        // Create JWT token for subscriber with locations
         const tokenResponse = await $fetch('/api/auth/create-token', {
           method: 'POST',
           body: { 
             email, 
             type: 'subscriber',
-            locations: [] 
+            locations 
           }
         });
 
@@ -74,7 +79,7 @@ export const useAuth = () => {
           setAuth(tokenResponse.token, {
             email,
             type: 'subscriber',
-            locations: []
+            locations
           });
           
           isSubscriber.value = true;
@@ -92,10 +97,10 @@ export const useAuth = () => {
   // Business authentication
   const signInBusiness = async (email) => {
     try {
-      // Verify business ownership
+      // Verify business ownership by email (no token needed for new signups)
       const ownershipResult = await verifyBusinessToken(null, email);
       
-      if (ownershipResult.isOwner) {
+      if (ownershipResult.isOwner && ownershipResult.restaurant) {
         // Create JWT token for business
         const tokenResponse = await $fetch('/api/auth/create-token', {
           method: 'POST',
@@ -191,6 +196,7 @@ export const useAuth = () => {
     signInSubscriber,
     signInBusiness,
     signOut,
-    clearAuth
+    clearAuth,
+    loadUserFromStorage
   };
 };

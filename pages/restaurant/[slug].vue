@@ -149,8 +149,8 @@
                   <p class="text-xl text-gray-600">Don't miss these amazing offers!</p>
                 </div>
                 
-                <!-- Paywall for Non-Subscribed Users -->
-                <div v-if="!isSubscriber" class="text-center py-12 px-4">
+                <!-- Paywall for Non-Subscribed Users (but not for business owners viewing their own restaurant) -->
+                <div v-if="!isSubscriber && !(isBusinessOwner && ownedRestaurant && ownedRestaurant.slug === restaurant.slug)" class="text-center py-12 px-4">
                   <div class="w-24 h-24 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                     <svg class="w-12 h-12 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
@@ -168,7 +168,7 @@
                   </NuxtLink>
                 </div>
                 
-                <!-- Full Deals (for Subscribed Users) -->
+                <!-- Full Deals (for Subscribed Users or Business Owners) -->
                 <div v-else class="max-w-3xl mx-auto px-4">
                   <div class="card p-8 shadow-xl">
                     <div class="prose prose-lg max-w-none restaurant-content" v-html="formattedDeals"></div>
@@ -235,7 +235,7 @@
 <script setup>
 import { marked } from 'marked'
 import { useAuth } from '~/composables/useAuth';
-const { isSubscriber } = useAuth();
+const { isSubscriber, isBusinessOwner, ownedRestaurant } = useAuth();
 const route = useRoute()
 const slug = route.params.slug
 

@@ -104,8 +104,8 @@
               class="card hover:shadow-xl transition-shadow duration-300"
               :class="{ 'relative': !isSubscriber && index >= freePreviewCount }"
             >
-              <!-- Lock Overlay for Non-Subscribed Users -->
-              <div v-if="!isSubscriber && index >= freePreviewCount" class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10 rounded-lg">
+              <!-- Lock Overlay for Non-Subscribed Users (but not for business owners viewing their own restaurant) -->
+              <div v-if="!isSubscriber && !isBusinessOwner && index >= freePreviewCount" class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center z-10 rounded-lg">
                 <div class="text-center p-6">
                   <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,8 +171,8 @@
             </div>
           </div>
 
-          <!-- Show More CTA for Non-Subscribed Users -->
-          <div v-if="!isSubscriber && filteredRestaurants.length > previewLimit" class="text-center mt-12">
+          <!-- Show More CTA for Non-Subscribed Users (but not for business owners) -->
+          <div v-if="!isSubscriber && !isBusinessOwner && filteredRestaurants.length > previewLimit" class="text-center mt-12">
             <div class="card p-8 max-w-2xl mx-auto">
               <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +198,7 @@
 import { ref, computed, watch } from "vue";
 import { useI90Locations } from '~/composables/useI90Locations';
 import { useAuth } from '~/composables/useAuth';
-const { isSubscriber } = useAuth();
+const { isSubscriber, isBusinessOwner, ownedRestaurant } = useAuth();
 const { allLocations } = useI90Locations();
 // Watch for changes
 console.log('🔍 Directory loaded - Subscription status:', isSubscriber.value);
@@ -266,15 +266,37 @@ const filteredRestaurants = computed(() => {
 
 // ... rest of existing code ...
 
-// Show different amounts based on subscription status
+// Show different amounts based on subscription status or business ownership
 const visibleRestaurants = computed(() => {
   const filtered = filteredRestaurants.value;
-  if (isSubscriber.value) {
-    return filtered; // Show all for subscribers
-  } else {
-    return filtered.slice(0, previewLimit); // Show limited preview for non-subscribers
+  
+  // Business owners can see all restaurants (their own is not gated)
+  if (isBusinessOwner.value) {
+    return filtered;
   }
+  
+  // Subscribers can see all restaurants
+  if (isSubscriber.value) {
+    return filtered;
+  }
+  
+  // Non-subscribers see limited preview
+  return filtered.slice(0, previewLimit);
 });
+
+// Check if a restaurant should be visible (not gated) for business owners
+const isRestaurantVisible = (restaurant) => {
+  // If user is a business owner and this is their restaurant, always show it
+  if (isBusinessOwner.value && ownedRestaurant.value && ownedRestaurant.value.slug === restaurant.slug) {
+    return true;
+  }
+  // If user is a subscriber, show all
+  if (isSubscriber.value) {
+    return true;
+  }
+  // Otherwise, follow preview limit
+  return true; // Will be filtered by visibleRestaurants computed
+};
 
 const formatDate = (date) => {
   if (!date) return '';

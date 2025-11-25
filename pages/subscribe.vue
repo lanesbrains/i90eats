@@ -134,7 +134,7 @@ const handleSubmit = async () => {
   success.value = false;
   
   try {
-    const result = await signInSubscriber(email.value);
+    const result = await signInSubscriber(email.value, selectedLocations.value);
     
     if (result.success) {
       success.value = true;

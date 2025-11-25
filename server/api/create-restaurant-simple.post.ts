@@ -35,6 +35,7 @@ premium: ${plan === 'premium'}
 createdAt: "${new Date().toISOString()}"
 ownerEmail: "${ownerEmail}"
 deals: []
+subscribed: true
 ---`;
 
   // Write the restaurant file

@@ -61,16 +61,14 @@
 import { onMounted } from 'vue'
 import { useAuth } from '~/composables/useAuth'
 
-// Set subscription status on success page load
-const { signInSubscriber } = useAuth()
+// Load existing auth state (token should already be in localStorage from subscribe flow)
+const { loadUserFromStorage } = useAuth()
 
 onMounted(async () => {
-  // Extract email from URL or localStorage
-  const urlParams = new URLSearchParams(window.location.search)
-  const email = urlParams.get('email') || localStorage.getItem('i90_email')
-  
-  if (email) {
-    await signInSubscriber(email)
+  // Load existing authentication from localStorage
+  // The token was already created during subscription with locations
+  if (process.client) {
+    await loadUserFromStorage()
   }
 })
 </script>

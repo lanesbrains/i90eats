@@ -13,49 +13,70 @@ export default defineEventHandler(async (event) => {
 
   try {
     let decoded;
+    let restaurantSlug = null;
     
     if (token) {
       // Verify JWT token
-      decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
-      
-      if (decoded.email !== email || decoded.type !== 'business') {
-        return { isOwner: false };
-      }
-    }
-
-    // Check if restaurant file exists and owner matches
-    const restaurantSlug = token ? decoded.restaurantSlug : null;
-    
-    if (!restaurantSlug) {
-      // For token-less verification, we'd need to search all restaurants
-      // This is a simplified version
-      return { isOwner: false };
-    }
-
-    const filePath = resolve('content/restaurants', `${restaurantSlug}.md`);
-    
-    try {
-      const content = await fs.readFile(filePath, 'utf8');
-      
-      // Extract ownerEmail from frontmatter
-      const ownerEmailMatch = content.match(/ownerEmail:\s*"([^"]+)"/);
-      if (ownerEmailMatch && ownerEmailMatch[1] === email) {
-        // Parse restaurant data
-        const titleMatch = content.match(/title:\s*"([^"]+)"/);
-        const locationMatch = content.match(/location:\s*"([^"]+)"/);
+      try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
         
-        return {
-          isOwner: true,
-          restaurant: {
-            slug: restaurantSlug,
-            title: titleMatch ? titleMatch[1] : 'Unknown',
-            location: locationMatch ? locationMatch[1] : 'Unknown',
-            ownerEmail: email
-          }
-        };
+        if (decoded.email !== email || decoded.type !== 'business') {
+          return { isOwner: false };
+        }
+        
+        restaurantSlug = decoded.restaurantSlug || null;
+      } catch (tokenError) {
+        // Token invalid or expired, but we can still try email lookup
+        console.log('Token verification failed, trying email lookup:', tokenError.message);
       }
-    } catch (error) {
-      console.error('Restaurant file not found:', filePath);
+    }
+
+    // If we have a slug from token, use it directly
+    if (restaurantSlug) {
+      const filePath = resolve('content/restaurants', `${restaurantSlug}.md`);
+      
+      try {
+        const content = await fs.readFile(filePath, 'utf8');
+        
+        // Extract ownerEmail from frontmatter
+        const ownerEmailMatch = content.match(/ownerEmail:\s*"([^"]+)"/);
+        if (ownerEmailMatch && ownerEmailMatch[1].toLowerCase() === email.toLowerCase()) {
+          // Parse restaurant data
+          const titleMatch = content.match(/title:\s*"([^"]+)"/);
+          const locationMatch = content.match(/location:\s*"([^"]+)"/);
+          
+          return {
+            isOwner: true,
+            restaurant: {
+              slug: restaurantSlug,
+              title: titleMatch ? titleMatch[1] : 'Unknown',
+              location: locationMatch ? locationMatch[1] : 'Unknown',
+              ownerEmail: ownerEmailMatch[1]
+            }
+          };
+        }
+      } catch (error) {
+        console.error('Restaurant file not found:', filePath);
+      }
+    }
+    
+    // If no slug or slug lookup failed, search by email
+    if (email) {
+      try {
+        const findResult = await $fetch('/api/business/find-by-email', {
+          method: 'POST',
+          body: { email }
+        });
+        
+        if (findResult.found && findResult.restaurant) {
+          return {
+            isOwner: true,
+            restaurant: findResult.restaurant
+          };
+        }
+      } catch (error) {
+        console.error('Email lookup failed:', error);
+      }
     }
     
     return { isOwner: false };
