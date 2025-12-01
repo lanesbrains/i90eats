@@ -4,7 +4,7 @@ slug: "m80-chicken-downtown-missoula-permanent-location-open"
 author: "The Breakfast King"
 publishDate: "2025-12-01"
 excerpt: "The legendary M-80 Chicken food truck, known for its seven-level heat scale, has officially moved into a brick-and-mortar shop, ending the chaotic hunt for Missoula’s best hot chicken."
-image: "https://kyssfm.com/fan-favorite-food-truck-opens-up-missoula-storefront-restaurant/"
+image: "https://townsquare.media/site/117/files/2025/06/attachment-Copy-of-Nicks-design.jpg?w=980&q=75"
 tags:
   [
     "Missoula Hot Chicken",

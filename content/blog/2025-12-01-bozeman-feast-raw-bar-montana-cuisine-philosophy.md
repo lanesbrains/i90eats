@@ -4,7 +4,7 @@ slug: "bozeman-feast-raw-bar-montana-cuisine-philosophy"
 author: "The Breakfast King"
 publishDate: "2025-12-01"
 excerpt: "We sit down with Chef Kuntz of Bozeman's Feast Raw Bar & Bistro to explore the rigorous, local-first philosophy that’s elevating the state's traditional cowboy fare into modern fine dining."
-image: "https://feastbozeman.com/feast-weekend-special-mt-pork-chop-black-bean-salsa/"
+image: "https://feastbozeman.com/wp-content/uploads/2024/06/8b21e39a-120c-98a6-814f-9652f806846e.jpeg"
 tags:
   [
     "Bozeman Food Scene",
