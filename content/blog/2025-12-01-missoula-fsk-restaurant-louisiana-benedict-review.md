@@ -4,7 +4,7 @@ slug: "missoula-fsk-restaurant-louisiana-benedict-review"
 author: "The Breakfast King"
 publishDate: "2025-12-01"
 excerpt: "A former Burns St. Bistro chef brings unexpected, complex flavors to Missoula's breakfast scene with a singular dish: the Louisiana Benedict at the newly opened FSK."
-image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+image: "https://thepulp.org/wp-content/uploads/2025/05/FSK_Avo-toast.jpeg"
 tags:
   [
     "FSK Missoula Review",
