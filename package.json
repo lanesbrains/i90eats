@@ -18,6 +18,7 @@
     "@nuxtjs/sitemap": "^7.4.7",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "@stripe/stripe-js": "^2.4.0",
+    "@supabase/supabase-js": "^2.87.3",
     "@types/jsonwebtoken": "^9.0.10",
     "decap-cms": "^3.0.0",
     "decap-cms-app": "^3.0.0",

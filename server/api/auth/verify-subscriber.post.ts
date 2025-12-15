@@ -1,63 +1,54 @@
-// server/api/auth/verify-subscriber.post.ts
-import { defineEventHandler, readBody } from 'h3';
-import Stripe from 'stripe';
+import { defineEventHandler, readBody } from 'h3'
+import { supabase } from '~/server/utils/supabase'
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const { email, stripeCustomerId } = body;
+  const body = await readBody(event)
+  const { email } = body
 
-  if (!email && !stripeCustomerId) {
-    throw createError({ statusCode: 400, message: 'Email or stripeCustomerId required' });
+  if (!email) {
+    throw createError({ statusCode: 400, message: 'Email required' })
   }
 
-  const { stripeSecretKey } = useRuntimeConfig();
-  const stripe = new Stripe(stripeSecretKey);
-
   try {
-    let customer = null;
+    const { data: user } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .eq('user_type', 'subscriber')
+      .single()
 
-    if (stripeCustomerId) {
-      customer = await stripe.customers.retrieve(stripeCustomerId);
-    } else {
-      const customers = await stripe.customers.list({ email, limit: 1 });
-      if (customers.data.length > 0) {
-        customer = customers.data[0];
+    if (!user) {
+      return {
+        isSubscribed: false,
+        message: 'No subscriber found'
       }
     }
 
-    if (!customer) {
-      return { 
-        isSubscribed: false, 
-        message: 'No customer found' 
-      };
-    }
+    const { data: subscription, error } = await supabase
+      .from('subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .eq('tier', 'newsletter')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single()
 
-    const subscriptions = await stripe.subscriptions.list({
-      customer: customer.id,
-      status: 'active',
-      limit: 1
-    });
-
-    if (subscriptions.data.length === 0) {
-      return { 
+    if (error || !subscription) {
+      return {
         isSubscribed: false,
-        customerId: customer.id,
-        message: 'No active subscription' 
-      };
+        message: 'No active newsletter subscription'
+      }
     }
-
-    const subscription = subscriptions.data[0];
 
     return {
       isSubscribed: true,
-      customerId: customer.id,
-      subscriptionId: subscription.id,
+      subscriptionId: subscription.stripe_subscription_id,
       subscriptionStatus: subscription.status,
-      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      plan: subscription.items.data[0]?.price.lookup_key || 'basic'
-    };
+      currentPeriodEnd: subscription.current_period_end
+    }
   } catch (error: any) {
-    console.error('Error verifying subscriber:', error);
-    throw createError({ statusCode: 500, message: error.message });
+    console.error('Error verifying subscriber:', error)
+    throw createError({ statusCode: 500, message: error.message })
   }
-});
+})

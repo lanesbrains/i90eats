@@ -7,7 +7,7 @@
         </div>
   
         <form class="mt-8 space-y-6" @submit.prevent="login">
-          <div class="rounded-md shadow-sm -space-y-px">
+          <div class="rounded-md shadow-sm">
             <div>
               <label for="email" class="sr-only">Email address</label>
               <input
@@ -15,19 +15,8 @@
                 v-model="form.email"
                 type="email"
                 required
-                class="input-field rounded-t-md"
+                class="input-field rounded-md"
                 placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label for="password" class="sr-only">Password</label>
-              <input
-                id="password"
-                v-model="form.password"
-                type="password"
-                required
-                class="input-field rounded-b-md"
-                placeholder="Password"
               />
             </div>
           </div>
@@ -37,9 +26,6 @@
               <NuxtLink to="/business/signup" class="font-medium text-primary-600 hover:text-primary-500">
                 Don't have an account? Sign up
               </NuxtLink>
-            </div>
-            <div class="text-sm">
-              <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Forgot password?</a>
             </div>
           </div>
   

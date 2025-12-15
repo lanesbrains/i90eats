@@ -101,23 +101,18 @@ export default defineNuxtConfig({
     // { src: '~/plugins/prerender.server.js', mode: 'server' }
   ],
   runtimeConfig: {
-    stripe: {
-      secretKey: process.env.STRIPE_SECRET_KEY,
-      publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
-    },
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
     beehiivApiKey: process.env.BEEHIIV_API_KEY,
     beehiivPublicationId: process.env.BEEHIIV_PUBLICATION_ID,
-    resend: {
-      apiKey: process.env.RESEND_API_KEY
-    },
     jwtSecret: process.env.JWT_SECRET,
-    adminEmail: process.env.ADMIN_EMAIL,
+    resendApiKey: process.env.RESEND_API_KEY,
+    supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
       stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      stripeBusinessBasicPriceId: process.env.STRIPE_BUSINESS_BASIC_PRICE_ID,
-      stripeBusinessPremiumPriceId: process.env.STRIPE_BUSINESS_PREMIUM_PRICE_ID,
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
     }
   },
   ssr: true,

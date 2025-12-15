@@ -297,17 +297,17 @@ const saveDeal = async () => {
   if (!dealForm.value.title || !dealForm.value.description) return
   
   try {
-    const dealIndex = editingDeal.value ? deals.value.findIndex(d => d.id === editingDeal.value.id) : -1;
     const action = editingDeal.value ? 'update' : 'add';
     
-    await $fetch('/api/business/restaurant/deals', {
+    const result = await $fetch('/api/business/restaurant/deals', {
       method: 'POST',
       body: {
         restaurantSlug: ownedRestaurant.value.slug,
+        ownerEmail: ownedRestaurant.value.owner_email,
         action,
         deal: {
           ...dealForm.value,
-          ...(dealIndex >= 0 && { index: dealIndex })
+          ...(editingDeal.value && { id: editingDeal.value.id })
         }
       }
     });
@@ -315,20 +315,13 @@ const saveDeal = async () => {
     if (editingDeal.value) {
       const index = deals.value.findIndex(d => d.id === editingDeal.value.id)
       if (index !== -1) {
-        deals.value[index] = {
-          ...editingDeal.value,
-          ...dealForm.value,
-          id: editingDeal.value.id
-        }
+        deals.value[index] = result.deal
       }
     } else {
-      const newDeal = {
-        id: Date.now(),
-        ...dealForm.value
-      }
-      deals.value.push(newDeal)
+      deals.value.push(result.deal)
     }
     
+    stats.value.activeDeals = deals.value.filter(d => d.active).length
     showDealModal.value = false
     editingDeal.value = null
     
@@ -342,18 +335,18 @@ const saveDeal = async () => {
 const deleteDeal = async (dealId) => {
   if (confirm('Are you sure you want to delete this deal?')) {
     try {
-      const dealIndex = deals.value.findIndex(d => d.id === dealId);
-      
       await $fetch('/api/business/restaurant/deals', {
         method: 'POST',
         body: {
           restaurantSlug: ownedRestaurant.value.slug,
+          ownerEmail: ownedRestaurant.value.owner_email,
           action: 'delete',
-          deal: { index: dealIndex }
+          deal: { id: dealId }
         }
       });
 
       deals.value = deals.value.filter(d => d.id !== dealId)
+      stats.value.activeDeals = deals.value.filter(d => d.active).length
       console.log('🗑️ Deal deleted:', dealId)
     } catch (error) {
       console.error('❌ Delete deal error:', error)
