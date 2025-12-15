@@ -1,87 +1,77 @@
 // server/api/auth/verify-business.post.ts
 import { defineEventHandler, readBody } from 'h3';
-import jwt from 'jsonwebtoken';
+import Stripe from 'stripe';
 import { promises as fs } from 'fs';
-import { resolve } from 'path';
+import path from 'path';
 
 export default defineEventHandler(async (event) => {
-  const { token, email } = await readBody(event);
-  
-  if (!token && !email) {
-    return { isOwner: false };
+  const body = await readBody(event);
+  const { email, stripeCustomerId, restaurantSlug } = body;
+
+  if (!email && !stripeCustomerId) {
+    throw createError({ statusCode: 400, message: 'Email or stripeCustomerId required' });
   }
 
+  const { stripeSecretKey } = useRuntimeConfig();
+  const stripe = new Stripe(stripeSecretKey);
+
   try {
-    let decoded;
-    let restaurantSlug = null;
-    
-    if (token) {
-      // Verify JWT token
-      try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret');
-        
-        if (decoded.email !== email || decoded.type !== 'business') {
-          return { isOwner: false };
-        }
-        
-        restaurantSlug = decoded.restaurantSlug || null;
-      } catch (tokenError) {
-        // Token invalid or expired, but we can still try email lookup
-        console.log('Token verification failed, trying email lookup:', tokenError.message);
+    let customer = null;
+
+    if (stripeCustomerId) {
+      customer = await stripe.customers.retrieve(stripeCustomerId);
+    } else {
+      const customers = await stripe.customers.list({ email, limit: 1 });
+      if (customers.data.length > 0) {
+        customer = customers.data[0];
       }
     }
 
-    // If we have a slug from token, use it directly
+    if (!customer) {
+      return { 
+        isVerified: false, 
+        message: 'No customer found' 
+      };
+    }
+
+    const subscriptions = await stripe.subscriptions.list({
+      customer: customer.id,
+      status: 'active',
+      limit: 10
+    });
+
+    if (subscriptions.data.length === 0) {
+      return { 
+        isVerified: false,
+        customerId: customer.id,
+        message: 'No active business subscription' 
+      };
+    }
+
+    const businessSubscription = subscriptions.data[0];
+
+    let restaurantData = null;
     if (restaurantSlug) {
-      const filePath = resolve('content/restaurants', `${restaurantSlug}.md`);
-      
       try {
-        const content = await fs.readFile(filePath, 'utf8');
-        
-        // Extract ownerEmail from frontmatter
-        const ownerEmailMatch = content.match(/ownerEmail:\s*"([^"]+)"/);
-        if (ownerEmailMatch && ownerEmailMatch[1].toLowerCase() === email.toLowerCase()) {
-          // Parse restaurant data
-          const titleMatch = content.match(/title:\s*"([^"]+)"/);
-          const locationMatch = content.match(/location:\s*"([^"]+)"/);
-          
-          return {
-            isOwner: true,
-            restaurant: {
-              slug: restaurantSlug,
-              title: titleMatch ? titleMatch[1] : 'Unknown',
-              location: locationMatch ? locationMatch[1] : 'Unknown',
-              ownerEmail: ownerEmailMatch[1]
-            }
-          };
-        }
-      } catch (error) {
-        console.error('Restaurant file not found:', filePath);
+        const subscriptionFilePath = path.join(process.cwd(), 'data', 'subscriptions', `${customer.id}.json`);
+        const fileContent = await fs.readFile(subscriptionFilePath, 'utf-8');
+        restaurantData = JSON.parse(fileContent);
+      } catch (err) {
+        console.log('No restaurant data found for slug:', restaurantSlug);
       }
     }
-    
-    // If no slug or slug lookup failed, search by email
-    if (email) {
-      try {
-        const findResult = await $fetch('/api/business/find-by-email', {
-          method: 'POST',
-          body: { email }
-        });
-        
-        if (findResult.found && findResult.restaurant) {
-          return {
-            isOwner: true,
-            restaurant: findResult.restaurant
-          };
-        }
-      } catch (error) {
-        console.error('Email lookup failed:', error);
-      }
-    }
-    
-    return { isOwner: false };
-  } catch (error) {
-    console.error('Business token verification failed:', error);
-    return { isOwner: false };
+
+    return {
+      isVerified: true,
+      customerId: customer.id,
+      subscriptionId: businessSubscription.id,
+      subscriptionStatus: businessSubscription.status,
+      subscriptionTier: businessSubscription.items.data[0]?.price.lookup_key || 'basic',
+      currentPeriodEnd: new Date(businessSubscription.current_period_end * 1000),
+      restaurant: restaurantData
+    };
+  } catch (error: any) {
+    console.error('Error verifying business:', error);
+    throw createError({ statusCode: 500, message: error.message });
   }
 });

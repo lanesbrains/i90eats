@@ -115,10 +115,9 @@ export default defineNuxtConfig({
     adminEmail: process.env.ADMIN_EMAIL,
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://i90eats.com',
-      stripe: {
-        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
-      },
-      googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID
+      stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+      stripeBusinessBasicPriceId: process.env.STRIPE_BUSINESS_BASIC_PRICE_ID,
+      stripeBusinessPremiumPriceId: process.env.STRIPE_BUSINESS_PREMIUM_PRICE_ID,
     }
   },
   ssr: true,

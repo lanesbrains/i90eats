@@ -191,6 +191,7 @@ import { ref, computed } from "vue";
 import { useI90Locations } from '~/composables/useI90Locations';
 
 const { allLocations } = useI90Locations();
+const config = useRuntimeConfig();
 
 const selectedPlan = ref("premium");
 const isSubmitting = ref(false);
@@ -227,18 +228,22 @@ const handleSignup = async () => {
   isSubmitting.value = true;
 
   try {
-    const response = await $fetch("/api/join", {
-    method: "POST",
-    body: {
-      ...form.value,
-      plan: selectedPlan.value, 
-      priceId: selectedPlan.value === "premium" ? "price_1SVfPBCNH3O77AidIiQqY2EP" : "price_1SVfN4CNH3O77AideawVMgS6",
-    },
-  });
+    const priceId = selectedPlan.value === "premium" 
+      ? config.public.stripeBusinessPremiumPriceId 
+      : config.public.stripeBusinessBasicPriceId;
 
-  if (response.checkout_url) {
-    window.location.href = response.checkout_url;
-  }
+    const response = await $fetch("/api/join", {
+      method: "POST",
+      body: {
+        ...form.value,
+        plan: selectedPlan.value, 
+        priceId,
+      },
+    });
+
+    if (response.checkout_url) {
+      window.location.href = response.checkout_url;
+    }
   } catch (error) {
     console.error("Business signup error:", error);
     alert("There was an error processing your signup. Please try again.");
