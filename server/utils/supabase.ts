@@ -4,17 +4,19 @@ let supabaseInstance: ReturnType<typeof createClient> | null = null
 
 export const getSupabase = () => {
   if (!supabaseInstance) {
-    const config = useRuntimeConfig()
-    supabaseInstance = createClient(
-      config.public.supabaseUrl,
-      config.supabaseServiceKey,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false
-        }
+    const supabaseUrl = process.env.SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Missing Supabase environment variables')
+    }
+    
+    supabaseInstance = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
       }
-    )
+    })
   }
   return supabaseInstance
 }
