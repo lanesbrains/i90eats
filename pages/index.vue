@@ -307,37 +307,6 @@
         </template>
       </div>
     </section>
-
-    <!-- Organization Schema for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "I-90 Eats",
-      "url": "https://i90eats.com",
-      "logo": "https://i90eats.com/og-image.jpg",
-      "description": "Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "US"
-      },
-      "sameAs": [
-        "https://www.facebook.com/i90eats",
-        "https://twitter.com/i90eats",
-        "https://www.instagram.com/i90eats"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "Customer Service",
-        "email": "support@i90eats.com"
-      },
-      "areaServed": {
-        "@type": "Place",
-        "name": "Interstate 90 Corridor",
-        "description": "From Seattle, WA to Boston, MA"
-      }
-    }
-    </script>
   </div>
 </template>
 
@@ -345,8 +314,6 @@
 import { ref } from "vue";
 import { useAuth } from '~/composables/useAuth';
 const { isSubscriber, isBusinessOwner } = useAuth();
-
-// Hero background image is now inline in template
 
 // Load featured restaurants dynamically
 const { data: featuredRestaurants } = await useAsyncData('featured-restaurants', () =>
@@ -369,15 +336,12 @@ const { data: latestPosts } = await useAsyncData(
   }
 );
 
-// Get post slug from either slug field or _path
 const getPostSlug = (post) => {
   if (post.slug)
     return post.slug
-  // Extract slug from _path (e.g., "/blog/my-post" -> "my-post")
   return post._path?.split('/').pop() || ''
 }
 
-// Methods
 const formatDate = (date) => {
   const dateObj = typeof date === "string" ? new Date(date) : new Date(date);
   return new Intl.DateTimeFormat("en-US", {
@@ -386,4 +350,39 @@ const formatDate = (date) => {
     day: "numeric"
   }).format(dateObj);
 };
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "I-90 Eats",
+        "url": "https://i90eats.com",
+        "logo": "https://i90eats.com/og-image.jpg",
+        "description": "Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/i90eats",
+          "https://twitter.com/i90eats",
+          "https://www.instagram.com/i90eats"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "email": "support@i90eats.com"
+        },
+        "areaServed": {
+          "@type": "Place",
+          "name": "Interstate 90 Corridor",
+          "description": "From Seattle, WA to Boston, MA"
+        }
+      })
+    }
+  ]
+})
 </script>

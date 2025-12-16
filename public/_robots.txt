@@ -1,5 +1,5 @@
 # I-90 Eats - Robots.txt
-# Updated: 2025-12-15
+# Updated: 2025-12-16
 
 User-agent: *
 Allow: /
@@ -8,20 +8,13 @@ Disallow: /admin/*
 Disallow: /business/dashboard
 Disallow: /business/dashboard/*
 Disallow: /api/
-Disallow: /api/*
-
-# Allow crawling of public API routes (if any)
-Allow: /api/sitemap-ping
 
 # Sitemap location
 Sitemap: https://i90eats.com/sitemap.xml
 
-# Crawl delay (optional, helps with server load)
-Crawl-delay: 1
-
-# Block bad bots
+# Specific bot rules (non-standard but commonly supported)
 User-agent: AhrefsBot
-Crawl-delay: 10
+Disallow: /
 
 User-agent: SemrushBot
-Crawl-delay: 10
+Disallow: /

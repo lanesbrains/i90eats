@@ -38,64 +38,6 @@
         </div>
       </div>
     </div>
-
-    <!-- FAQ Schema for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is I-90 Eats?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "I-90 Eats is a platform that curates exclusive restaurant deals along Interstate 90 from Seattle to Boston. We send weekly newsletters with local dining specials and help travelers and locals save money on great food."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the newsletter free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Our newsletter subscription is completely free. You'll receive weekly updates with restaurant deals, food tips, and special promotions along the I-90 corridor."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I use the deals?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simply browse our directory or check your weekly newsletter for deals. Each deal includes specific instructions on how to redeem it at the restaurant. Some may require showing your email, others have specific codes or promotional periods."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can my restaurant join I-90 Eats?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely! We offer two business subscription tiers (Basic and Premium) for restaurants along Interstate 90. Visit our business signup page to get started and reach thousands of potential customers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Which cities are covered?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We cover the entire I-90 corridor from Seattle, WA to Boston, MA, including major cities like Spokane, Missoula, Bozeman, Billings, Rapid City, Sioux Falls, Madison, Chicago, Cleveland, Buffalo, Syracuse, Albany, and more."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How often are deals updated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "New deals are added regularly as restaurants join our platform. Our newsletter goes out every Friday with the latest deals and promotions. Subscribers get first access to new deals and special offers."
-          }
-        }
-      ]
-    }
-    </script>
   </div>
 </template>
 
@@ -134,5 +76,25 @@ useSeoMeta({
   ogDescription: 'Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston',
   ogImage: 'https://i90eats.com/og-image.jpg',
   twitterCard: 'summary_large_image'
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(faq => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      })
+    }
+  ]
 })
 </script>
