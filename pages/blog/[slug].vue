@@ -165,50 +165,48 @@ const route = useRoute()
 const slug = route.params.slug
 const config = useRuntimeConfig()
 
-// Get the blog post
-const { data: post } = await useAsyncData(`blog-${slug}`, async () => {
-  try {
-    // Try multiple methods to find the post
-    let foundPost = null
-    
-    // Method 1: Find by slug field first (most reliable)
+  // Get the blog post
+  const { data: post } = await useAsyncData(`blog-${slug}`, async () => {
     try {
-      const posts = await queryContent('/blog').where({ slug: slug }).find()
-      foundPost = posts[0] || null
-    } catch (e) {
-      console.log('Method 1 failed:', e)
-    }
-    
-    if (!foundPost) {
-      // Method 2: Find by filename (without extension)
+      // Try multiple methods to find the post
+      let foundPost = null
+      
+      // Method 1: Find by slug field first (most reliable)
       try {
-        const allPosts = await queryContent('/blog').find()
-        foundPost = allPosts.find(p => {
-          const filename = p._path?.split('/').pop()
-          // Remove .md extension and compare
-          const filenameWithoutExt = filename?.replace(/\.md$/, '')
-          return filenameWithoutExt === slug
-        })
+        const posts = await queryContent('/blog').where({ slug: slug }).find()
+        foundPost = posts[0] || null
       } catch (e) {
-        console.log('Method 2 failed:', e)
+        // Silent fail in production
       }
-    }
-    
-    if (!foundPost) {
-      // Method 3: Direct path query as fallback
-      try {
-        foundPost = await queryContent(`/blog/${slug}`).findOne()
-      } catch (e) {
-        console.log('Method 3 failed:', e)
+      
+      if (!foundPost) {
+        // Method 2: Find by filename (without extension)
+        try {
+          const allPosts = await queryContent('/blog').find()
+          foundPost = allPosts.find(p => {
+            const filename = p._path?.split('/').pop()
+            const filenameWithoutExt = filename?.replace(/\.md$/, '')
+            return filenameWithoutExt === slug
+          })
+        } catch (e) {
+          // Silent fail in production
+        }
       }
+      
+      if (!foundPost) {
+        // Method 3: Direct path query as fallback
+        try {
+          foundPost = await queryContent(`/blog/${slug}`).findOne()
+        } catch (e) {
+          // Silent fail in production
+        }
+      }
+      
+      return foundPost
+    } catch (error) {
+      return null
     }
-    
-    return foundPost
-  } catch (error) {
-    console.error('Error fetching blog post:', error)
-    return null
-  }
-})
+  })
 
 // Throw 404 if post not found
 if (!post.value) {
