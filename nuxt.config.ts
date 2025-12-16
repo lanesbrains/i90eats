@@ -157,7 +157,8 @@ export default defineNuxtConfig({
     },
     vercel: {
       functions: {
-        'server/api/simple-endpoint.post.ts': { runtime: '@vercel/edge' }
+        'server/api/**/*.ts': { memory: 512 },
+        'server/api/stripe-webhook.post.ts': { memory: 1536 }
       }
     }
   },
