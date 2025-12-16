@@ -154,6 +154,11 @@ export default defineNuxtConfig({
     },
     experimental: {
       wasm: true
+    },
+    vercel: {
+      functions: {
+        'server/api/simple-endpoint.post.ts': { runtime: '@vercel/edge' }
+      }
     }
   },
   sitemap: {
