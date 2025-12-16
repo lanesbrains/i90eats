@@ -1,19 +1,10 @@
-// NEW - Dynamic imports (smaller initial bundle)
 import { defineEventHandler, readRawBody } from 'h3'
 
 export default defineEventHandler(async (event) => {
-// Dynamic imports to reduce bundle size
-const { default: Stripe } = await import('stripe')
-const { supabase } = await import('~/server/utils/supabase')
-const { Resend } = await import('resend')
-
-// Rest of your existing code stays the same...
-const config = useRuntimeConfig()
-const stripe = new Stripe(config.stripeSecretKey)
-const resend = new Resend(config.resendApiKey)
-
-
-export default defineEventHandler(async (event) => {
+  const { default: Stripe } = await import('stripe')
+  const { supabase } = await import('~/server/utils/supabase')
+  const { Resend } = await import('resend')
+  
   const config = useRuntimeConfig()
   const stripe = new Stripe(config.stripeSecretKey)
   const resend = new Resend(config.resendApiKey)
