@@ -307,6 +307,37 @@
         </template>
       </div>
     </section>
+
+    <!-- Organization Schema for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "I-90 Eats",
+      "url": "https://i90eats.com",
+      "logo": "https://i90eats.com/og-image.jpg",
+      "description": "Discover exclusive restaurant deals along Interstate 90 from Seattle to Boston. Get weekly newsletters with local dining specials and save money on great food.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.facebook.com/i90eats",
+        "https://twitter.com/i90eats",
+        "https://www.instagram.com/i90eats"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "email": "support@i90eats.com"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Interstate 90 Corridor",
+        "description": "From Seattle, WA to Boston, MA"
+      }
+    }
+    </script>
   </div>
 </template>
 

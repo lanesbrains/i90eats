@@ -1,6 +1,37 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content', '@nuxtjs/sitemap', '@nuxtjs/robots'],  // Keep yours
+  modules: ['@nuxt/image', '@nuxtjs/tailwindcss', 'nuxt-gtag', '@nuxt/content', '@nuxtjs/sitemap', '@nuxtjs/robots', 'nuxt-security'],
+  
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': ["'self'", 'data:', 'https:', 'blob:'],
+        'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://www.googletagmanager.com', 'https://www.google-analytics.com'],
+        'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+        'font-src': ["'self'", 'https://fonts.gstatic.com'],
+        'connect-src': ["'self'", 'https://www.google-analytics.com', 'https://vefeeibahvcymatjirpc.supabase.co', 'https://api.stripe.com'],
+      },
+      xFrameOptions: 'SAMEORIGIN',
+      xContentTypeOptions: 'nosniff',
+      xXSSProtection: '1; mode=block',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+      strictTransportSecurity: {
+        maxAge: 31536000,
+        includeSubdomains: true,
+        preload: true
+      }
+    },
+    rateLimiter: {
+      tokensPerInterval: 100,
+      interval: 60000,
+      headers: true,
+      driver: {
+        name: 'memory'
+      },
+      throwError: true
+    }
+  },
+
   css: ['~/assets/css/main.css'],
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID,
