@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody, createError } from 'h3';
-import Stripe from 'stripe';
 
 export default defineEventHandler(async (event) => {
+  const { default: Stripe } = await import('stripe');
   console.log('🚀 JOIN API: Request received');
   
   try {

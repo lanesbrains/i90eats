@@ -1,7 +1,7 @@
 import { defineEventHandler, readBody } from 'h3'
-import { supabase } from '~/server/utils/supabase'
 
 export default defineEventHandler(async (event) => {
+  const { supabase } = await import('~/server/utils/supabase');
   const body = await readBody(event)
   const { email } = body
 
